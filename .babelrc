@@ -1,0 +1,31 @@
+{
+    "presets": [
+        "next/babel"
+    ],
+    "plugins": [
+        // [
+        //     "module-resolver",
+        //     {
+        //         "alias": {
+        //             "dva": "dva-no-router"
+        //         }
+        //     }
+        // ],
+        [
+            "import",
+            {
+                "libraryName": "antd",
+                "style": true
+            },
+        ],
+        [
+            "@babel/plugin-proposal-decorators",
+            {
+                "legacy": true
+            }
+        ]
+    ],
+    "ignore": [
+        "node_modules"
+    ],
+}

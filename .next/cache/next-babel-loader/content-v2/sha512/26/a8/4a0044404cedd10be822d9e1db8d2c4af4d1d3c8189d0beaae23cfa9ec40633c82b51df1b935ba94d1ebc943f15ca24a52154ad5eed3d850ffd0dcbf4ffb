@@ -1,0 +1,1 @@
+{"ast":null,"code":"import React from 'react'; // 创建全局上下文\n\nvar GlobalContext = /*#__PURE__*/React.createContext({});\nexport default {\n  GlobalContext: GlobalContext\n};","map":null,"metadata":{},"sourceType":"module"}
