@@ -19,12 +19,12 @@ import { withRouter } from 'next/router';
 import Link from 'next/link';
 
 import { ContainerQuery } from 'react-container-query';
-import classNames from '@/layouts/PageHeader/node_modules/classnames';
+import classNames from 'classnames';
 import Debounce from 'lodash-decorators/debounce';
-import GlobalFooter from '@/layouts/GlobalFooter';
-import CopyRight from '@/layouts/CopyRight';
+import GlobalFooter from '@/components/GlobalFooter';
+import CopyRight from '@/components/CopyRight';
 
-import UpdatePasswordDialog from '@/layouts/UpdatePasswordDialog';
+import UpdatePasswordDialog from '@/components/UpdatePasswordDialog';
 
 import context from '@/utils/context';
 
@@ -197,8 +197,8 @@ class AdminLayout extends React.PureComponent {
                   <span>{item.name}</span>
                 </span>
               ) : (
-                item.name
-              )
+                  item.name
+                )
             }
             key={item.id}
           >
@@ -223,13 +223,13 @@ class AdminLayout extends React.PureComponent {
               <span>{item.name}</span>
             </a>
           ) : (
-            <Link href={router} replace={router === pathname}>
-              <div>
-                {/* {icon} */}
-                <span>{item.name}</span>
-              </div>
-            </Link>
-          )}
+              <Link href={router} replace={router === pathname}>
+                <div>
+                  {/* {icon} */}
+                  <span>{item.name}</span>
+                </div>
+              </Link>
+            )}
         </Menu.Item>
       );
     });
@@ -340,8 +340,8 @@ class AdminLayout extends React.PureComponent {
                   </span>
                 </Dropdown>
               ) : (
-                <Spin size="small" style={{ marginLeft: 8 }} />
-              )}
+                  <Spin size="small" style={{ marginLeft: 8 }} />
+                )}
             </div>
           </Header>
           <Content className={classNames('content')}>

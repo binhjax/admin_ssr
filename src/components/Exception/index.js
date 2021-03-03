@@ -1,5 +1,5 @@
 import React, { createElement } from 'react';
-import classNames from '@/layouts/GlobalFooter/node_modules/@/layouts/PageHeader/node_modules/classnames';
+import classNames from 'classnames';
 import { Button } from 'antd';
 import config from './typeConfig';
 import styles from './index.less';
