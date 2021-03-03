@@ -10,11 +10,9 @@ import styles from './index.less';
 
 import WithDva from '../../utils/store';
 
-
 // @connect(({ login }) => ({
 //   login,
 // }))
-
 
 @Form.create()
 class Login extends PureComponent {
@@ -80,14 +78,14 @@ class Login extends PureComponent {
               rules: [
                 {
                   required: true,
-                  message: '请输入用户名！',
+                  message: 'Please enter username',
                 },
               ],
             })(
               <Input
                 size="large"
                 prefix={<UserOutlined className={styles.prefixIcon} />}
-                placeholder="请输入用户名"
+                placeholder="Please enter username"
               />
             )}
           </Form.Item>
@@ -96,7 +94,7 @@ class Login extends PureComponent {
               rules: [
                 {
                   required: true,
-                  message: '请输入密码！',
+                  message: 'Please enter password',
                 },
               ],
             })(
@@ -104,7 +102,7 @@ class Login extends PureComponent {
                 size="large"
                 prefix={<LockOutlined className={styles.prefixIcon} />}
                 type="password"
-                placeholder="请输入密码"
+                placeholder="Please enter password"
               />
             )}
           </Form.Item>
@@ -114,7 +112,7 @@ class Login extends PureComponent {
                 rules: [
                   {
                     required: true,
-                    message: '请输入验证码！',
+                    message: 'Please enter verification code!',
                   },
                 ],
               })(
@@ -122,7 +120,7 @@ class Login extends PureComponent {
                   style={{ width: '60%', marginRight: 10 }}
                   size="large"
                   prefix={<CodeOutlined className={styles.prefixIcon} />}
-                  placeholder="请输入验证码"
+                  placeholder="Please enter verification code!"
                 />
               )}
               <div
@@ -134,7 +132,7 @@ class Login extends PureComponent {
                 <img
                   style={{ maxWidth: '100%', maxHeight: '100%' }}
                   src={login.captcha}
-                  alt="验证码"
+                  alt="Verification Code"
                   onClick={() => {
                     this.reloadCaptcha();
                   }}

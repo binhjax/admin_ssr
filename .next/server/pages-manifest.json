@@ -1,6 +1,14 @@
 {
+  "/404": "pages/404.html",
   "/_app": "pages/_app.js",
+  "/dashboard": "pages/dashboard.js",
+  "/example/demo": "pages/example/demo.js",
+  "/login": "pages/login.js",
+  "/restaurant": "pages/restaurant.js",
+  "/survey/creator": "pages/survey/creator.js",
+  "/system/menu": "pages/system/menu.js",
+  "/system/role": "pages/system/role.js",
+  "/system/user": "pages/system/user.js",
   "/_error": "pages/_error.js",
-  "/_document": "pages/_document.js",
-  "/menu/MenuList": "pages/menu/MenuList.js"
+  "/_document": "pages/_document.js"
 }

@@ -1,1 +1,0 @@
-{"ast":null,"code":"import global from './global';\nimport demo from './demo';\nimport login from './login';\nimport menu from './menu';\nimport role from './role';\nimport user from './user';\nconst model = [global, user, demo, login, menu, role];\nexport default model;","map":null,"metadata":{},"sourceType":"module"}

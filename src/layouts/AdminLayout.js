@@ -11,23 +11,20 @@ import { Layout, Menu, Avatar, Dropdown, Spin } from 'antd';
 import DocumentTitle from 'react-document-title';
 // import { connect } from 'dva';
 import WithDva from '../utils/store';
-import { withRouter } from 'next/router'
+import { withRouter } from 'next/router';
 // import { useRouter } from 'next/router'
-
 
 // eslint-disable-next-line import/no-extraneous-dependencies
 
 import Link from 'next/link';
 
-
-
 import { ContainerQuery } from 'react-container-query';
-import classNames from 'classnames';
+import classNames from '@/layouts/PageHeader/node_modules/classnames';
 import Debounce from 'lodash-decorators/debounce';
-import GlobalFooter from '@/components/GlobalFooter';
-import CopyRight from '@/components/CopyRight';
+import GlobalFooter from '@/layouts/GlobalFooter';
+import CopyRight from '@/layouts/CopyRight';
 
-import UpdatePasswordDialog from '@/components/UpdatePasswordDialog';
+import UpdatePasswordDialog from '@/layouts/UpdatePasswordDialog';
 
 import context from '@/utils/context';
 
@@ -58,42 +55,29 @@ const query = {
   },
 };
 
-// @connect(state => ({
-//   title: state.global.title,
-//   copyRight: state.global.copyRight,
-//   collapsed: state.global.collapsed,
-//   openKeys: state.global.openKeys,
-//   selectedKeys: state.global.selectedKeys,
-//   user: state.global.user,
-//   menuPaths: state.global.menuPaths,
-//   menuMap: state.global.menuMap,
-//   menus: state.global.menus,
-//   global: state.global,
-// }))
 class AdminLayout extends React.PureComponent {
-
   static async getInitialProps(props) {
     // first time run in server side
     // other times run in client side ( client side init with default props
     // console.log('get init props', props);
-    const {
-      pathname, query, isServer, store,
-    } = props;
+    const { pathname, query, isServer, store } = props;
     // dispatch effects to fetch data here
 
     return {
       // dont use store as property name, it will confilct with initial store
-      pathname, query, isServer, dvaStore: store,
+      pathname,
+      query,
+      isServer,
+      dvaStore: store,
     };
   }
-
 
   state = {
     updatePwdVisible: false,
   };
 
   componentDidMount() {
-    console.log("componentDidMount: ", this.props);
+    console.log('componentDidMount: ', this.props);
 
     const {
       router: { pathname },
@@ -213,8 +197,8 @@ class AdminLayout extends React.PureComponent {
                   <span>{item.name}</span>
                 </span>
               ) : (
-                  item.name
-                )
+                item.name
+              )
             }
             key={item.id}
           >
@@ -239,28 +223,26 @@ class AdminLayout extends React.PureComponent {
               <span>{item.name}</span>
             </a>
           ) : (
-              <Link href={router} replace={router === pathname}>
-                <div>
-                  {/* {icon} */}
-                  <span>{item.name}</span>
-                </div>
-              </Link>
-
-            )}
+            <Link href={router} replace={router === pathname}>
+              <div>
+                {/* {icon} */}
+                <span>{item.name}</span>
+              </div>
+            </Link>
+          )}
         </Menu.Item>
       );
     });
   }
 
   renderPageTitle() {
-
     const {
       router: { pathname },
       menuPaths,
       title,
     } = this.props;
 
-    console.log("renderPageTitle: pathname", pathname);
+    console.log('renderPageTitle: pathname', pathname);
 
     let ptitle = title;
     const item = menuPaths[pathname];
@@ -349,14 +331,17 @@ class AdminLayout extends React.PureComponent {
                 <Dropdown overlay={menu}>
                   <span className={classNames(['action', 'account'])}>
                     <Avatar size="small" className={classNames('avatar')} icon={<UserOutlined />} />
-                    {user.real_name !== ''
-                      ? `${user.user_name}(${user.real_name})`
-                      : user.user_name}
+                    {
+                      // user.real_name !== ''
+                      // ? `${user.user_name}(${user.real_name})`
+                      // : user.user_name
+                      user.user_name
+                    }
                   </span>
                 </Dropdown>
               ) : (
-                  <Spin size="small" style={{ marginLeft: 8 }} />
-                )}
+                <Spin size="small" style={{ marginLeft: 8 }} />
+              )}
             </div>
           </Header>
           <Content className={classNames('content')}>

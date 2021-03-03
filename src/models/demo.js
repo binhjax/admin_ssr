@@ -65,7 +65,7 @@ export default {
         }),
         put({
           type: 'saveFormTitle',
-          payload: '新建基础示例',
+          payload: 'New Basic Example',
         }),
         put({
           type: 'saveFormID',
@@ -81,7 +81,7 @@ export default {
         yield [
           put({
             type: 'saveFormTitle',
-            payload: '编辑基础示例',
+            payload: 'Edit Basic Example',
           }),
           put({
             type: 'saveFormID',
@@ -144,7 +144,7 @@ export default {
     *del({ payload }, { call, put }) {
       const response = yield call(demoService.del, payload.id);
       if (response.status === 'OK') {
-        message.success('删除成功');
+        message.success('Delete successfully');
         yield put({ type: 'fetch' });
       }
     },
@@ -157,9 +157,9 @@ export default {
       }
 
       if (response.status === 'OK') {
-        let msg = '启用成功';
+        let msg = 'Enable successfully';
         if (payload.status === 2) {
-          msg = '停用成功';
+          msg = 'Deactivated successfully';
         }
         message.success(msg);
         const data = yield select(state => state.demo.data);

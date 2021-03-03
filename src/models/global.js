@@ -4,15 +4,15 @@ export default {
   namespace: 'global',
 
   state: {
-    title: '权限管理脚手架',
-    copyRight: '2020 LyricTian',
+    title: 'System Management',
+    copyRight: '2020 Vnpay',
     defaultURL: '/dashboard',
     collapsed: false,
     openKeys: [],
     selectedKeys: [],
     user: {
       user_name: 'admin',
-      real_name: '管理员',
+      real_name: 'Administrator',
       role_names: [],
     },
     menuPaths: {},
@@ -127,7 +127,7 @@ export default {
   },
   subscriptions: {
     setup({ dispatch, history }) {
-      if (typeof history !== "undefined") {
+      if (typeof history !== 'undefined') {
         history.listen(({ pathname }) => {
           dispatch({
             type: 'menuEvent',
@@ -135,7 +135,6 @@ export default {
           });
         });
       }
-
     },
   },
 };

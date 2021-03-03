@@ -164,7 +164,7 @@ export default {
     *del({ payload }, { call, put }) {
       const response = yield call(roleService.del, payload.id);
       if (response.status === 'OK') {
-        message.success('删除成功');
+        message.success('successfully deleted');
         yield put({ type: 'fetch' });
       }
     },
@@ -184,9 +184,9 @@ export default {
       }
 
       if (response.status === 'OK') {
-        let msg = '启用成功';
+        let msg = 'Successfully activated';
         if (payload.status === 2) {
-          msg = '停用成功';
+          msg = 'Deactivated successfully';
         }
         message.success(msg);
         const data = yield select(state => state.role.data);

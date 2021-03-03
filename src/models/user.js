@@ -64,7 +64,7 @@ export default {
         }),
         put({
           type: 'saveFormTitle',
-          payload: '新建用户',
+          payload: 'New User',
         }),
         put({
           type: 'saveFormID',
@@ -80,7 +80,7 @@ export default {
         yield [
           put({
             type: 'saveFormTitle',
-            payload: '编辑用户',
+            payload: 'Edit user',
           }),
           put({
             type: 'saveFormID',
@@ -128,7 +128,7 @@ export default {
       });
 
       if (success) {
-        message.success('保存成功');
+        message.success('Saved successfully');
         yield put({
           type: 'changeFormVisible',
           payload: false,
@@ -141,7 +141,7 @@ export default {
     *del({ payload }, { call, put }) {
       const response = yield call(userService.del, payload.id);
       if (response.status === 'OK') {
-        message.success('删除成功');
+        message.success('successfully deleted');
         yield put({ type: 'fetch' });
       }
     },
@@ -154,9 +154,9 @@ export default {
       }
 
       if (response.status === 'OK') {
-        let msg = '启用成功';
+        let msg = 'Successfully activated';
         if (payload.status === 2) {
-          msg = '停用成功';
+          msg = 'Deactivated successfully';
         }
         message.success(msg);
         const data = yield select(state => state.user.data);

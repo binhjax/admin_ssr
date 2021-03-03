@@ -4,7 +4,6 @@ import { history } from 'next/link';
 import { stringify, parse } from 'qs';
 import { notification } from 'antd';
 
-
 import store, { storeKeys } from './persistent-store';
 
 let refreshTimeout;
@@ -32,17 +31,17 @@ export const methods = {
   OPTIONS: 'OPTIONS',
 };
 
-// 获取访问令牌
+// Get access token
 export function getAccessToken() {
   const token = store.get(storeKeys.AccessToken);
   if (!token) {
     return '';
   }
   return token.access_token;
-  return "";
+  return '';
 }
 
-// 包装带有令牌的URL
+// Wrap the URL with the token
 export function wrapURLWithToken(url) {
   const ss = url.split('?');
   const query = parse(ss[1]);
@@ -81,7 +80,7 @@ function requestInterceptors(c) {
 
 // ajax请求
 export default function request(url, options = {}) {
-  console.log("AccessToken: ", storeKeys.AccessToken);
+  console.log('AccessToken: ', storeKeys.AccessToken);
   const oldToken = store.get(storeKeys.AccessToken);
   // console.log("oldToken: ", oldToken);
   if (oldToken && oldToken.expires_at - lastAccessTime <= 0) {
@@ -136,7 +135,7 @@ export default function request(url, options = {}) {
     .request({ url })
     .then(res => {
       const { data } = res;
-      console.log("Data", data);
+      console.log('Data', data, 'url', url);
       return data;
     })
     .catch(error => {
