@@ -36,10 +36,13 @@ export default {
       });
     },
     *submit({ payload }, { call, put }) {
+      //binhnt: Change button 
       yield put({
         type: 'changeSubmitting',
         payload: true,
       });
+
+      //binhnt: Call service to submit login 
       const response = yield call(loginService.login, payload);
       if (response.data && response.data.error) {
         const {
@@ -68,7 +71,7 @@ export default {
         return;
       }
 
-      // 保存访问令牌
+      // Save the access token
       setToken(response);
 
       yield [
@@ -92,13 +95,15 @@ export default {
         window.location.href = redirect;
         return;
       }
-      // history.replace('/');
+      history.replace('/');
     },
     *logout(_, { call }) {
-      const response = yield call(loginService.logout);
-      if (response.status === 'OK') {
-        logout();
-      }
+      console.log("Model process logout")
+      logout();
+      // const response = yield call(loginService.logout);
+      // if (response.status === 'OK') {
+      // logout();
+      // }
     },
   },
 

@@ -3,6 +3,7 @@ import moment from 'moment';
 import { history } from 'next/link';
 import { stringify, parse } from 'qs';
 import { notification } from 'antd';
+import jsCookie from 'js-cookie';
 
 import store, { storeKeys } from './persistent-store';
 
@@ -51,10 +52,14 @@ export function wrapURLWithToken(url) {
 
 // 登出
 export function logout() {
+  console.log("Logout event")
   if (refreshTimeout) {
     clearTimeout(refreshTimeout);
   }
+  //binhnt: Remove cookie 
+  jsCookie.remove('token');
 
+  //Remove AccessToken 
   store.remove(storeKeys.AccessToken);
   const { redirect } = parse(window.location.href.split('?')[1]);
   if (window.location.pathname !== '/login' && !redirect) {
@@ -73,6 +78,7 @@ function requestInterceptors(c) {
   const config = { ...c };
   const token = store.get(storeKeys.AccessToken);
   if (token) {
+    console.log("binhnt.requestInterceptors: Token = ", token.access_token, headerKeys.Authorization);
     config.headers[headerKeys.Authorization] = `${token.token_type} ${token.access_token}`;
   }
   return config;
@@ -164,15 +170,19 @@ export default function request(url, options = {}) {
     });
 }
 
-// 放入访问令牌
+// Put in the access token
 export function setToken(token) {
+  //binhnt: 1. Add cookies to access nextjs
+  jsCookie.set('token', token.access_token);
+
+  //binhnt: 2. Add Token to access Backend
   lastAccessTime = token.expires_at;
   store.set(storeKeys.AccessToken, token);
   if (refreshTimeout) {
     clearTimeout(refreshTimeout);
   }
 
-  // 提前10分钟更新令牌
+  // Renew the token 10 minutes in advance
   const timeout = token.expires_at - moment().unix() - 10;
   if (timeout > 0) {
     refreshTimeout = setTimeout(() => {

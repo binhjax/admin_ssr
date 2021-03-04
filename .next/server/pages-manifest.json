@@ -1,5 +1,5 @@
 {
-  "/404": "pages/404.html",
+  "/404": "pages/404.js",
   "/_app": "pages/_app.js",
   "/dashboard": "pages/dashboard.js",
   "/example/demo": "pages/example/demo.js",

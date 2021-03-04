@@ -29,8 +29,12 @@ if (typeof require !== 'undefined') {
 //         return config;
 //     }
 // }
-
-module.exports = withPWA({
+const settings = {
+  env: {
+    },
+   devIndicators: {
+    autoPrerender: false,
+  },
   pwa: {
     dest: 'public',
   },
@@ -50,20 +54,20 @@ module.exports = withPWA({
               strictMath: false,
             },
           },
-          rewrites: async function() {
-            return [
-              {
-                source: '/',
-                destination: '/dashboard',
-                permanent: true,
-              },
-              {
-                source: '/index',
-                destination: '/dashboard',
-                permanent: true,
-              },
-            ];
-          },
+          // rewrites: async function() {
+          //   return [
+          //     {
+          //       source: '/',
+          //       destination: '/dashboard',
+          //       permanent: true,
+          //     },
+          //     {
+          //       source: '/index',
+          //       destination: '/dashboard',
+          //       permanent: true,
+          //     },
+          //   ];
+          // },
           rewrites: async function() {
             return [
               {
@@ -79,15 +83,8 @@ module.exports = withPWA({
           exportPathMap: async function(defaultPathMap, { dev, dir, outDir, distDir, buildId }) {
             console.log('exportPathMap is called.');
             return {
-              '/': { page: '/dashboard/home' },
-              '/dashboard': { page: '/dashboard/home' },
-              '/user': { page: '/login' },
+              '/': { page: '/dashboard' },
               '/user/login': { page: '/login' },
-              '/example': { page: '/demo/DemoList' },
-              '/example/demo': { page: '/demo/DemoList' },
-              '/system/menu': { page: '/menu/MenuList' },
-              '/system/role': { page: '/role/RoleList' },
-              '/system/user': { page: '/user/UserList' },
             };
           },
           webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
@@ -128,4 +125,5 @@ module.exports = withPWA({
       })
     )
   ),
-});
+}
+module.exports =  process.env.NODE_ENV === 'development' ? settings : withPWA(settings);

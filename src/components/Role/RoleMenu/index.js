@@ -9,12 +9,12 @@ export default class RoleMenu extends PureComponent {
 
     this.columns = [
       {
-        title: '菜单名称',
+        title: 'Menu name',
         dataIndex: 'name',
         width: '35%',
       },
       {
-        title: '动作权限',
+        title: 'Action permission',
         dataIndex: 'actions',
         editable: true,
       },

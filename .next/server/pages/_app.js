@@ -544,7 +544,7 @@ function global_defineProperty(obj, key, value) { if (key in obj) { Object.defin
       call,
       put
     }) {
-      const response = yield call(login["f" /* queryMenuTree */]);
+      const response = yield call(login["e" /* queryMenuTree */]);
       const menuData = response.list || [];
       yield put({
         type: 'saveMenus',
@@ -1084,10 +1084,12 @@ function login_defineProperty(obj, key, value) { if (key in obj) { Object.define
       call,
       put
     }) {
+      //binhnt: Change button 
       yield put({
         type: 'changeSubmitting',
         payload: true
-      });
+      }); //binhnt: Call service to submit login 
+
       const response = yield call(login["d" /* login */], payload);
 
       if (response.data && response.data.error) {
@@ -1112,7 +1114,7 @@ function login_defineProperty(obj, key, value) { if (key in obj) { Object.define
           type: 'loadCaptcha'
         })];
         return;
-      } // 保存访问令牌
+      } // Save the access token
 
 
       Object(request["e" /* setToken */])(response);
@@ -1134,18 +1136,19 @@ function login_defineProperty(obj, key, value) { if (key in obj) { Object.define
       if (redirect) {
         window.location.href = redirect;
         return;
-      } // history.replace('/');
+      }
 
+      history.replace('/');
     },
 
     *logout(_, {
       call
     }) {
-      const response = yield call(login["e" /* logout */]);
-
-      if (response.status === 'OK') {
-        Object(request["c" /* logout */])();
-      }
+      console.log("Model process logout");
+      Object(request["c" /* logout */])(); // const response = yield call(loginService.logout);
+      // if (response.status === 'OK') {
+      // logout();
+      // }
     }
 
   },
@@ -3679,6 +3682,9 @@ module.exports = require("antd/lib/dropdown");
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, "redirectUser", function() { return /* binding */ redirectUser; });
+
 // EXTERNAL MODULE: external "react"
 var external_react_ = __webpack_require__("cDcd");
 var external_react_default = /*#__PURE__*/__webpack_require__.n(external_react_);
@@ -3832,6 +3838,7 @@ var external_react_document_title_default = /*#__PURE__*/__webpack_require__.n(e
 
 // EXTERNAL MODULE: external "next/router"
 var router_ = __webpack_require__("4Q3z");
+var router_default = /*#__PURE__*/__webpack_require__.n(router_);
 
 // EXTERNAL MODULE: ./node_modules/next/link.js
 var next_link = __webpack_require__("YFqc");
@@ -3925,7 +3932,7 @@ let UpdatePasswordDialog_UpdatePasswordDialog = (_dec = compatible_["Form"].crea
           old_password: Object(utils["b" /* md5Hash */])(values.old_password),
           new_password: Object(utils["b" /* md5Hash */])(values.new_password)
         };
-        Object(login["g" /* updatePwd */])(formData).then(res => {
+        Object(login["f" /* updatePwd */])(formData).then(res => {
           if (res.status === 'OK') {
             message_default.a.success('密码更新成功！');
 
@@ -4442,6 +4449,13 @@ let AdminLayout_AdminLayout = (AdminLayout_dec = debounce_default()(600), (Admin
   menus: state.global.menus,
   global: state.global
 }))(Object(router_["withRouter"])(AdminLayout_AdminLayout)));
+// EXTERNAL MODULE: external "cookie"
+var external_cookie_ = __webpack_require__("rlPI");
+var external_cookie_default = /*#__PURE__*/__webpack_require__.n(external_cookie_);
+
+// EXTERNAL MODULE: ./src/pages/styles.css
+var styles = __webpack_require__("gqNJ");
+
 // CONCATENATED MODULE: ./src/pages/_app.js
 var _app_jsx = external_react_default.a.createElement;
 
@@ -4451,12 +4465,97 @@ function _objectWithoutProperties(source, excluded) { if (source == null) return
 
 function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _app_defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _app_defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
 
 
+
+
+
+
+function redirectUser(ctx, location) {
+  if (ctx.req) {
+    console.log("redirectUser from server: ", location);
+    ctx.res.writeHead(302, {
+      Location: location
+    });
+    ctx.res.end();
+  } else {
+    console.log("redirectUser from client");
+    router_default.a.push(location);
+  }
+}
 
 class _app_MyApp extends app_default.a {
+  static async getInitialProps({
+    Component,
+    ctx
+  }) {
+    const {
+      req
+    } = ctx;
+    const isServer = !!req;
+    const isBrowser = !req;
+    let initProps = {};
+    console.log("Query pathname: ", ctx.pathname);
+
+    if (isServer) {
+      console.log("From server");
+
+      if (req == undefined) {
+        console.log("req is undefined ", ctx);
+      }
+
+      if (req && req.headers) {
+        const cookies = req.headers.cookie;
+
+        if (typeof cookies === 'string') {
+          console.log("cookies = ", cookies);
+          const cookiesJSON = external_cookie_default.a.parse(cookies);
+          console.log("cookiesJSON = ", cookiesJSON);
+          initProps.token = cookiesJSON.token;
+        } else if (cookies == undefined) {
+          console.log("No find cookies");
+        } else {
+          console.log("cookies is not string ");
+        }
+      } else {
+        console.log("req.headers: ", req);
+      } // Redirect route 
+
+
+      if (initProps.token === undefined) {
+        console.log("initProps.token  not found ");
+
+        if (ctx.pathname != '/user/login' && ctx.pathname !== '/login' && ctx.pathname !== '/_error' && ctx.pathname !== '/404') {
+          console.log(" 1. Redirect to signin from ", ctx.pathname, initProps.token);
+          redirectUser(ctx, '/login');
+        }
+      } else {
+        console.log("initProps.token  = ", initProps.token);
+
+        if (ctx.pathname == '/user/login' || ctx.pathname == '/login') {
+          redirectUser(ctx, "/");
+        }
+      }
+    } else {
+      console.log("In client");
+    } //Init component 
+
+
+    if (Component.getInitialProps) {
+      initProps = await Component.getInitialProps(ctx);
+    }
+
+    console.log("Loggin to ", ctx.pathname);
+    return _objectSpread({}, initProps);
+  }
+
   render() {
     const _this$props = this.props,
           {
@@ -4466,14 +4565,12 @@ class _app_MyApp extends app_default.a {
     } = _this$props,
           arg = _objectWithoutProperties(_this$props, ["Component", "pageProps", "router"]);
 
-    console.log("pathname: ", router.pathname);
-
     if (router.pathname.startsWith('/user/login')) {
       return _app_jsx(src_layouts_UserLayout, null, _app_jsx(Component, _app_extends({}, pageProps, arg)));
     }
 
-    if (router.pathname.startsWith('/login')) {
-      return _app_jsx(Component, pageProps);
+    if (router.pathname.startsWith("/login") || router.pathname.startsWith("/404")) {
+      return _app_jsx(Component, _app_extends({}, pageProps, arg));
     }
 
     return _app_jsx(src_layouts_AdminLayout, null, _app_jsx(Component, pageProps));
@@ -5273,10 +5370,10 @@ module.exports = require("@ant-design/compatible");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return captchaID; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return captcha; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return login; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return logout; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return updatePwd; });
+/* unused harmony export logout */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return updatePwd; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return getCurrentUser; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return queryMenuTree; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return queryMenuTree; });
 /* harmony import */ var _utils_request__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("t3Un");
  // 验证码ID
 
@@ -6843,6 +6940,13 @@ function getRouteMatcher(routeRegex) {
 
 /***/ }),
 
+/***/ "gqNJ":
+/***/ (function(module, exports) {
+
+
+
+/***/ }),
+
 /***/ "h74D":
 /***/ (function(module, exports) {
 
@@ -7150,6 +7254,13 @@ function remove(key, ...options) {
 
 /***/ }),
 
+/***/ "rlPI":
+/***/ (function(module, exports) {
+
+module.exports = require("cookie");
+
+/***/ }),
+
 /***/ "t3Un":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -7175,7 +7286,9 @@ function remove(key, ...options) {
 /* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var qs__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__("eW3l");
 /* harmony import */ var qs__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(qs__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _persistent_store__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__("oyVS");
+/* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__("vmXh");
+/* harmony import */ var js_cookie__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(js_cookie__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _persistent_store__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__("oyVS");
 
 
 
@@ -7184,6 +7297,7 @@ function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (O
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -7212,7 +7326,7 @@ const methods = {
 }; // Get access token
 
 function getAccessToken() {
-  const token = _persistent_store__WEBPACK_IMPORTED_MODULE_6__[/* default */ "a"].get(_persistent_store__WEBPACK_IMPORTED_MODULE_6__[/* storeKeys */ "b"].AccessToken);
+  const token = _persistent_store__WEBPACK_IMPORTED_MODULE_7__[/* default */ "a"].get(_persistent_store__WEBPACK_IMPORTED_MODULE_7__[/* storeKeys */ "b"].AccessToken);
 
   if (!token) {
     return '';
@@ -7230,11 +7344,16 @@ function wrapURLWithToken(url) {
 } // 登出
 
 function logout() {
+  console.log("Logout event");
+
   if (refreshTimeout) {
     clearTimeout(refreshTimeout);
-  }
+  } //binhnt: Remove cookie 
 
-  _persistent_store__WEBPACK_IMPORTED_MODULE_6__[/* default */ "a"].remove(_persistent_store__WEBPACK_IMPORTED_MODULE_6__[/* storeKeys */ "b"].AccessToken);
+
+  js_cookie__WEBPACK_IMPORTED_MODULE_6___default.a.remove('token'); //Remove AccessToken 
+
+  _persistent_store__WEBPACK_IMPORTED_MODULE_7__[/* default */ "a"].remove(_persistent_store__WEBPACK_IMPORTED_MODULE_7__[/* storeKeys */ "b"].AccessToken);
   const {
     redirect
   } = Object(qs__WEBPACK_IMPORTED_MODULE_5__["parse"])(window.location.href.split('?')[1]);
@@ -7252,9 +7371,10 @@ function logout() {
 function requestInterceptors(c) {
   const config = _objectSpread({}, c);
 
-  const token = _persistent_store__WEBPACK_IMPORTED_MODULE_6__[/* default */ "a"].get(_persistent_store__WEBPACK_IMPORTED_MODULE_6__[/* storeKeys */ "b"].AccessToken);
+  const token = _persistent_store__WEBPACK_IMPORTED_MODULE_7__[/* default */ "a"].get(_persistent_store__WEBPACK_IMPORTED_MODULE_7__[/* storeKeys */ "b"].AccessToken);
 
   if (token) {
+    console.log("binhnt.requestInterceptors: Token = ", token.access_token, headerKeys.Authorization);
     config.headers[headerKeys.Authorization] = `${token.token_type} ${token.access_token}`;
   }
 
@@ -7263,8 +7383,8 @@ function requestInterceptors(c) {
 
 
 function request(url, options = {}) {
-  console.log('AccessToken: ', _persistent_store__WEBPACK_IMPORTED_MODULE_6__[/* storeKeys */ "b"].AccessToken);
-  const oldToken = _persistent_store__WEBPACK_IMPORTED_MODULE_6__[/* default */ "a"].get(_persistent_store__WEBPACK_IMPORTED_MODULE_6__[/* storeKeys */ "b"].AccessToken); // console.log("oldToken: ", oldToken);
+  console.log('AccessToken: ', _persistent_store__WEBPACK_IMPORTED_MODULE_7__[/* storeKeys */ "b"].AccessToken);
+  const oldToken = _persistent_store__WEBPACK_IMPORTED_MODULE_7__[/* default */ "a"].get(_persistent_store__WEBPACK_IMPORTED_MODULE_7__[/* storeKeys */ "b"].AccessToken); // console.log("oldToken: ", oldToken);
 
   if (oldToken && oldToken.expires_at - lastAccessTime <= 0) {
     if (refreshTimeout) {
@@ -7354,22 +7474,25 @@ function request(url, options = {}) {
 
     return response;
   });
-} // 放入访问令牌
+} // Put in the access token
 
 function setToken(token) {
+  //binhnt: 1. Add cookies to access nextjs
+  js_cookie__WEBPACK_IMPORTED_MODULE_6___default.a.set('token', token.access_token); //binhnt: 2. Add Token to access Backend
+
   lastAccessTime = token.expires_at;
-  _persistent_store__WEBPACK_IMPORTED_MODULE_6__[/* default */ "a"].set(_persistent_store__WEBPACK_IMPORTED_MODULE_6__[/* storeKeys */ "b"].AccessToken, token);
+  _persistent_store__WEBPACK_IMPORTED_MODULE_7__[/* default */ "a"].set(_persistent_store__WEBPACK_IMPORTED_MODULE_7__[/* storeKeys */ "b"].AccessToken, token);
 
   if (refreshTimeout) {
     clearTimeout(refreshTimeout);
-  } // 提前10分钟更新令牌
+  } // Renew the token 10 minutes in advance
 
 
   const timeout = token.expires_at - moment__WEBPACK_IMPORTED_MODULE_3___default()().unix() - 10;
 
   if (timeout > 0) {
     refreshTimeout = setTimeout(() => {
-      const oldToken = _persistent_store__WEBPACK_IMPORTED_MODULE_6__[/* default */ "a"].get(_persistent_store__WEBPACK_IMPORTED_MODULE_6__[/* storeKeys */ "b"].AccessToken);
+      const oldToken = _persistent_store__WEBPACK_IMPORTED_MODULE_7__[/* default */ "a"].get(_persistent_store__WEBPACK_IMPORTED_MODULE_7__[/* storeKeys */ "b"].AccessToken);
 
       if (oldToken && oldToken.expires_at - lastAccessTime <= 0) {
         if (refreshTimeout) {
@@ -7511,6 +7634,13 @@ function createObserver(options) {
   });
   return instance;
 }
+
+/***/ }),
+
+/***/ "vmXh":
+/***/ (function(module, exports) {
+
+module.exports = require("js-cookie");
 
 /***/ }),
 
