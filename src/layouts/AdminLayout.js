@@ -30,7 +30,9 @@ import context from '@/utils/context';
 
 import './AdminLayout.less';
 import logo from '../assets/logo.svg';
+import dynamic from 'next/dynamic';
 
+const Editor = dynamic(() => import('../components/Editor'), { ssr: false });
 const { Header, Sider, Content } = Layout;
 const { SubMenu } = Menu;
 
@@ -197,8 +199,8 @@ class AdminLayout extends React.PureComponent {
                   <span>{item.name}</span>
                 </span>
               ) : (
-                  item.name
-                )
+                item.name
+              )
             }
             key={item.id}
           >
@@ -223,13 +225,13 @@ class AdminLayout extends React.PureComponent {
               <span>{item.name}</span>
             </a>
           ) : (
-              <Link href={router} replace={router === pathname}>
-                <div>
-                  {/* {icon} */}
-                  <span>{item.name}</span>
-                </div>
-              </Link>
-            )}
+            <Link href={router} replace={router === pathname}>
+              <div>
+                {/* {icon} */}
+                <span>{item.name}</span>
+              </div>
+            </Link>
+          )}
         </Menu.Item>
       );
     });
@@ -283,7 +285,7 @@ class AdminLayout extends React.PureComponent {
 
     // Don't show popup menu when it is been collapsed
     const menuProps = collapsed ? {} : { openKeys };
-    const siderWidth = 256;
+    const siderWidth = 400;
 
     const layout = (
       <Layout>
@@ -304,16 +306,7 @@ class AdminLayout extends React.PureComponent {
               </div>
             </Link>
           </div>
-          <Menu
-            theme="dark"
-            mode="inline"
-            {...menuProps}
-            onOpenChange={this.onMenuOpenChange}
-            selectedKeys={selectedKeys}
-            style={{ margin: '16px 0', width: '100%' }}
-          >
-            {this.renderNavMenuItems(menus)}
-          </Menu>
+          <Editor />
         </Sider>
         <Layout>
           <Header
@@ -340,8 +333,8 @@ class AdminLayout extends React.PureComponent {
                   </span>
                 </Dropdown>
               ) : (
-                  <Spin size="small" style={{ marginLeft: 8 }} />
-                )}
+                <Spin size="small" style={{ marginLeft: 8 }} />
+              )}
             </div>
           </Header>
           <Content className={classNames('content')}>

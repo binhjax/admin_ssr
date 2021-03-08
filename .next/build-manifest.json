@@ -26,10 +26,10 @@
       "static/chunks/webpack.js",
       "static/chunks/pages/_error.js"
     ],
-    "/diagram": [
+    "/test": [
       "static/chunks/main.js",
       "static/chunks/webpack.js",
-      "static/chunks/pages/diagram.js"
+      "static/chunks/pages/test.js"
     ]
   },
   "ampFirstPages": []

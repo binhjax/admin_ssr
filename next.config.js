@@ -29,15 +29,13 @@ if (typeof require !== 'undefined') {
 //         return config;
 //     }
 // }
-
-module.exports = withPWA({
+const setting = {
   pwa: {
     dest: 'public',
   },
   ...withImages(
     withCSS(
       withSass({
-        cssModules: true,
         ...withLess({
           cssLoaderOptions: {
             esModule: true,
@@ -50,46 +48,46 @@ module.exports = withPWA({
               strictMath: false,
             },
           },
-          rewrites: async function() {
-            return [
-              {
-                source: '/',
-                destination: '/dashboard',
-                permanent: true,
-              },
-              {
-                source: '/index',
-                destination: '/dashboard',
-                permanent: true,
-              },
-            ];
-          },
-          rewrites: async function() {
-            return [
-              {
-                source: '/api/:path*',
-                destination: 'http://localhost:10088/api/:path*', // Matched parameters can be used in the destination
-              },
-              {
-                source: '/cms/:path*',
-                destination: 'http://localhost:1337/:path*', // Matched parameters can be used in the destination
-              },
-            ];
-          },
-          exportPathMap: async function(defaultPathMap, { dev, dir, outDir, distDir, buildId }) {
-            console.log('exportPathMap is called.');
-            return {
-              '/': { page: '/dashboard/home' },
-              '/dashboard': { page: '/dashboard/home' },
-              '/user': { page: '/login' },
-              '/user/login': { page: '/login' },
-              '/example': { page: '/demo/DemoList' },
-              '/example/demo': { page: '/demo/DemoList' },
-              '/system/menu': { page: '/menu/MenuList' },
-              '/system/role': { page: '/role/RoleList' },
-              '/system/user': { page: '/user/UserList' },
-            };
-          },
+          // rewrites: async function() {
+          //   return [
+          //     {
+          //       source: '/',
+          //       destination: '/dashboard',
+          //       permanent: true,
+          //     },
+          //     {
+          //       source: '/index',
+          //       destination: '/dashboard',
+          //       permanent: true,
+          //     },
+          //   ];
+          // },
+          // rewrites: async function() {
+          //   return [
+          //     {
+          //       source: '/api/:path*',
+          //       destination: 'http://localhost:10088/api/:path*', // Matched parameters can be used in the destination
+          //     },
+          //     {
+          //       source: '/cms/:path*',
+          //       destination: 'http://localhost:1337/:path*', // Matched parameters can be used in the destination
+          //     },
+          //   ];
+          // },
+          // exportPathMap: async function(defaultPathMap, { dev, dir, outDir, distDir, buildId }) {
+          //   console.log('exportPathMap is called.');
+          //   return {
+          //     '/': { page: '/dashboard/home' },
+          //     '/dashboard': { page: '/dashboard/home' },
+          //     '/user': { page: '/login' },
+          //     '/user/login': { page: '/login' },
+          //     '/example': { page: '/demo/DemoList' },
+          //     '/example/demo': { page: '/demo/DemoList' },
+          //     '/system/menu': { page: '/menu/MenuList' },
+          //     '/system/role': { page: '/role/RoleList' },
+          //     '/system/user': { page: '/user/UserList' },
+          //   };
+          // },
           webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
             if (isServer) {
               const antStyles = /antd\/.*?\/style.*?/;
@@ -128,4 +126,6 @@ module.exports = withPWA({
       })
     )
   ),
-});
+};
+// module.exports = withPWA(setting);
+module.exports = setting;
