@@ -39,7 +39,7 @@ export class EditableCell extends PureComponent {
                     rules: [
                       {
                         required: true,
-                        message: `请输入${title}`,
+                        message: `Please enter ${title}`,
                       },
                     ],
                     initialValue: record[dataIndex],
@@ -62,5 +62,5 @@ export class EditableCell extends PureComponent {
     );
   }
 }
-const Test = () => {};
+const Test = () => { };
 export default Test;

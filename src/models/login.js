@@ -36,13 +36,13 @@ export default {
       });
     },
     *submit({ payload }, { call, put }) {
-      //binhnt: Change button 
+      //binhnt: Change button
       yield put({
         type: 'changeSubmitting',
         payload: true,
       });
 
-      //binhnt: Call service to submit login 
+      //binhnt: Call service to submit login
       const response = yield call(loginService.login, payload);
       if (response.data && response.data.error) {
         const {
@@ -98,7 +98,7 @@ export default {
       history.replace('/');
     },
     *logout(_, { call }) {
-      console.log("Model process logout")
+      console.log('Model process logout');
       logout();
       // const response = yield call(loginService.logout);
       // if (response.status === 'OK') {

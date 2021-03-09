@@ -180,10 +180,10 @@ class RoleList extends PureComponent {
           <Col span={8}>
             <div style={{ overflow: 'hidden', paddingTop: 4 }}>
               <Button type="primary" htmlType="submit">
-                查询
+                Search
               </Button>
               <Button style={{ marginLeft: 8 }} onClick={this.onResetFormClick}>
-                重置
+                Reset
               </Button>
             </div>
           </Col>
@@ -240,7 +240,7 @@ class RoleList extends PureComponent {
     };
 
     const breadcrumbList = [
-      { title: 'System Management' },
+      { title: 'Teko Landing Admin' },
       { title: 'Role Management', href: '/system/role' },
     ];
 

@@ -4,6 +4,7 @@ import { history } from 'next/link';
 import { stringify, parse } from 'qs';
 import { notification } from 'antd';
 import jsCookie from 'js-cookie';
+import { startURL } from '../config/constant';
 
 import store, { storeKeys } from './persistent-store';
 
@@ -52,18 +53,18 @@ export function wrapURLWithToken(url) {
 
 // 登出
 export function logout() {
-  console.log("Logout event")
+  console.log('Logout event');
   if (refreshTimeout) {
     clearTimeout(refreshTimeout);
   }
-  //binhnt: Remove cookie 
+  //binhnt: Remove cookie
   jsCookie.remove('token');
 
-  //Remove AccessToken 
+  //Remove AccessToken
   store.remove(storeKeys.AccessToken);
   const { redirect } = parse(window.location.href.split('?')[1]);
-  if (window.location.pathname !== '/login' && !redirect) {
-    window.location = '/login';
+  if (window.location.pathname !== startURL + '/login' && !redirect) {
+    window.location = startURL + '/login';
     // window.history.replace({
     //   pathname: '/user/login',
     //   search: stringify({
@@ -78,7 +79,11 @@ function requestInterceptors(c) {
   const config = { ...c };
   const token = store.get(storeKeys.AccessToken);
   if (token) {
-    console.log("binhnt.requestInterceptors: Token = ", token.access_token, headerKeys.Authorization);
+    // console.log(
+    //   'binhnt.requestInterceptors: Token = ',
+    //   token.access_token,
+    //   headerKeys.Authorization
+    // );
     config.headers[headerKeys.Authorization] = `${token.token_type} ${token.access_token}`;
   }
   return config;
@@ -86,7 +91,7 @@ function requestInterceptors(c) {
 
 // ajax请求
 export default function request(url, options = {}) {
-  console.log('AccessToken: ', storeKeys.AccessToken);
+  // console.log('AccessToken: ', storeKeys.AccessToken);
   const oldToken = store.get(storeKeys.AccessToken);
   // console.log("oldToken: ", oldToken);
   if (oldToken && oldToken.expires_at - lastAccessTime <= 0) {
@@ -141,7 +146,7 @@ export default function request(url, options = {}) {
     .request({ url })
     .then(res => {
       const { data } = res;
-      console.log('Data', data, 'url', url);
+      // console.log('request.request: Data: ', data, 'url', url);
       return data;
     })
     .catch(error => {

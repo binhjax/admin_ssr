@@ -1,4 +1,6 @@
 import React, { PureComponent } from 'react';
+// React.useLayoutEffect = React.useEffect;
+
 import { Form } from '@ant-design/compatible';
 import '@ant-design/compatible/assets/index.css';
 import { Row, Col, Card, Input, Button, Table, Modal, Layout, Tree, Badge } from 'antd';
@@ -214,16 +216,18 @@ class MenuList extends PureComponent {
         <Row gutter={16}>
           <Col span={8}>
             <Form.Item>
-              {getFieldDecorator('queryValue')(<Input placeholder="请输入需要查询的内容" />)}
+              {
+                getFieldDecorator('queryValue')(<Input placeholder="Please enter keyword" />)
+              }
             </Form.Item>
           </Col>
           <Col span={8}>
             <div style={{ overflow: 'hidden', paddingTop: 4 }}>
               <Button type="primary" htmlType="submit">
-                查询
+                Searcn
               </Button>
               <Button style={{ marginLeft: 8 }} onClick={this.onResetFormClick}>
-                重置
+                Reset
               </Button>
             </div>
           </Col>
@@ -302,7 +306,7 @@ class MenuList extends PureComponent {
     };
 
     const breadcrumbList = [
-      { title: 'System Management' },
+      { title: 'Teko Landing Admin' },
       { title: 'Menu management', href: '/system/menu' },
     ];
 

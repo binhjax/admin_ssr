@@ -58,11 +58,13 @@ export default class RoleSelect extends PureComponent {
         placeholder="Please choose a role"
         style={{ width: '100%' }}
       >
-        {data.map(item => (
-          <Select.Option key={item.id} value={item.id}>
-            {item.name}
-          </Select.Option>
-        ))}
+        {
+          data.map(item => (
+            <Select.Option key={item.id} value={item.id}>
+              {item.name}
+            </Select.Option>
+          ))
+        }
       </Select>
     );
   }

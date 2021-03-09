@@ -1,14 +1,10 @@
 import React, { PureComponent } from 'react';
-// import { connect } from 'dva';
 import WithDva from '../../utils/store';
 
 import { Form } from '@ant-design/compatible';
 import '@ant-design/compatible/assets/index.css';
 import { Input, Modal, Radio } from 'antd';
 
-// @connect(state => ({
-//   demo: state.demo,
-// }))
 @Form.create()
 class DemoCard extends PureComponent {
   onOKClick = () => {
@@ -60,40 +56,40 @@ class DemoCard extends PureComponent {
         bodyStyle={{ maxHeight: 'calc( 100vh - 158px )', overflowY: 'auto' }}
       >
         <Form>
-          <Form.Item {...formItemLayout} label="编号">
+          <Form.Item {...formItemLayout} label="Code">
             {getFieldDecorator('code', {
               initialValue: formData.code,
               rules: [
                 {
                   required: true,
-                  message: '请输入编号',
+                  message: 'Please enter the number',
                 },
               ],
-            })(<Input placeholder="请输入编号" />)}
+            })(<Input placeholder="Please enter the number" />)}
           </Form.Item>
-          <Form.Item {...formItemLayout} label="名称">
+          <Form.Item {...formItemLayout} label="Name">
             {getFieldDecorator('name', {
               initialValue: formData.name,
               rules: [
                 {
                   required: true,
-                  message: '请输入名称',
+                  message: 'Please enter a name',
                 },
               ],
-            })(<Input placeholder="请输入名称" />)}
+            })(<Input placeholder="Please enter a name" />)}
           </Form.Item>
-          <Form.Item {...formItemLayout} label="备注">
+          <Form.Item {...formItemLayout} label="Menu">
             {getFieldDecorator('memo', {
               initialValue: formData.memo,
-            })(<Input.TextArea rows={2} placeholder="请输入备注" />)}
+            })(<Input.TextArea rows={2} placeholder="Please enter a name" />)}
           </Form.Item>
-          <Form.Item {...formItemLayout} label="状态">
+          <Form.Item {...formItemLayout} label="Status">
             {getFieldDecorator('status', {
               initialValue: formData.status ? formData.status.toString() : '1',
             })(
               <Radio.Group>
-                <Radio value="1">正常</Radio>
-                <Radio value="2">停用</Radio>
+                <Radio value="1">Active</Radio>
+                <Radio value="2">Deactive</Radio>
               </Radio.Group>
             )}
           </Form.Item>
@@ -105,4 +101,3 @@ class DemoCard extends PureComponent {
 export default WithDva(state => {
   return { demo: state.demo };
 })(DemoCard);
-// export default DemoCard;

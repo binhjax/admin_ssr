@@ -6,10 +6,6 @@ import styles from './UserLayout.less';
 import logo from '../assets/logo.svg';
 import WithDva from '../utils/store';
 
-// @connect(state => ({
-//   global: state.global,
-// }))
-
 class UserLayout extends React.PureComponent {
   render() {
     const {

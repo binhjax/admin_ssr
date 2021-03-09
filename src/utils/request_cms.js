@@ -80,7 +80,7 @@ function requestInterceptors(c) {
 
 // ajax request
 export default function request(url, options = {}) {
-  console.log('AccessToken: ', storeKeys.AccessToken);
+  // console.log('request_cms.request: AccessToken: ', storeKeys.AccessToken);
   const oldToken = store.get(storeKeys.AccessToken);
   // console.log("oldToken: ", oldToken);
   if (oldToken && oldToken.expires_at - lastAccessTime <= 0) {
@@ -135,7 +135,7 @@ export default function request(url, options = {}) {
     .request({ url })
     .then(res => {
       const { data } = res;
-      console.log('Data', data);
+      // console.log('request_cms.request: Data', data);
       return data;
     })
     .catch(error => {

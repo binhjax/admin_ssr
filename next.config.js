@@ -16,7 +16,7 @@ const FilterWarningsPlugin = require('webpack-filter-warnings-plugin');
 
 // fix: prevents error when .less files are required by node
 if (typeof require !== 'undefined') {
-  require.extensions['.less'] = file => {};
+  require.extensions['.less'] = file => { };
 }
 
 // const nextCSSConfig = {
@@ -30,14 +30,14 @@ if (typeof require !== 'undefined') {
 //     }
 // }
 const settings = {
-  env: {
-    },
-   devIndicators: {
+  env: {},
+  devIndicators: {
     autoPrerender: false,
   },
   pwa: {
-    dest: 'public',
+    dest: 'pwa',
   },
+  assetPrefix: '/admin/static',
   ...withImages(
     withCSS(
       withSass({
@@ -68,25 +68,25 @@ const settings = {
           //     },
           //   ];
           // },
-          rewrites: async function() {
-            return [
-              {
-                source: '/api/:path*',
-                destination: 'http://localhost:10088/api/:path*', // Matched parameters can be used in the destination
-              },
-              {
-                source: '/cms/:path*',
-                destination: 'http://localhost:1337/:path*', // Matched parameters can be used in the destination
-              },
-            ];
-          },
-          exportPathMap: async function(defaultPathMap, { dev, dir, outDir, distDir, buildId }) {
-            console.log('exportPathMap is called.');
-            return {
-              '/': { page: '/dashboard' },
-              '/user/login': { page: '/login' },
-            };
-          },
+          // rewrites: async function () {
+          //   return [
+          //     {
+          //       source: '/api/:path*',
+          //       destination: 'http://localhost:10088/api/:path*', // Matched parameters can be used in the destination
+          //     },
+          //     {
+          //       source: '/cms/:path*',
+          //       destination: 'http://localhost:1337/:path*', // Matched parameters can be used in the destination
+          //     },
+          //   ];
+          // },
+          // exportPathMap: async function (defaultPathMap, { dev, dir, outDir, distDir, buildId }) {
+          //   console.log('exportPathMap is called.');
+          //   return {
+          //     '/admin': { page: '/dashboard' },
+          //     '/admin/login': { page: '/login' },
+          //   };
+          // },
           webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
             if (isServer) {
               const antStyles = /antd\/.*?\/style.*?/;
@@ -125,5 +125,6 @@ const settings = {
       })
     )
   ),
-}
-module.exports =  process.env.NODE_ENV === 'development' ? settings : withPWA(settings);
+};
+// module.exports = process.env.NODE_ENV === 'development' ? settings : withPWA(settings);
+module.exports = settings

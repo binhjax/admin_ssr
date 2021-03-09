@@ -1,5 +1,8 @@
 /* eslint-disable no-console */
 const express = require('express')
+const { parse } = require('url')
+const { join } = require('path')
+
 const next = require('next')
 
 const devProxy = {
@@ -11,7 +14,8 @@ const devProxy = {
 }
 
 const port = parseInt(process.env.PORT, 10) || 3000
-const env = process.env.NODE_ENV
+// const env = process.env.NODE_ENV
+const env = 'production'
 const dev = env !== 'production'
 const app = next({
     dir: '.', // base directory where everything is, could move to src later
@@ -21,8 +25,7 @@ const app = next({
 const handle = app.getRequestHandler()
 
 let server
-app
-    .prepare()
+app.prepare()
     .then(() => {
         server = express()
 
@@ -35,7 +38,19 @@ app
         }
 
         // Default catch-all handler to allow Next.js to handle all other routes
-        server.all('*', (req, res) => handle(req, res))
+        server.all('*', (req, res) => {
+
+            const parsedUrl = parse(req.url, true)
+            const { pathname } = parsedUrl
+
+            if (pathname === '/sw.js' || pathname.startsWith('/workbox-')) {
+                const filePath = join(__dirname, 'pwa', pathname)
+                app.serveStatic(req, res, filePath)
+            } else {
+                console.log("express handle; " + pathname);
+                handle(req, res, parsedUrl)
+            }
+        })
 
         server.listen(port, (err) => {
             if (err) {

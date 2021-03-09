@@ -32,6 +32,7 @@ import context from '@/utils/context';
 
 import './AdminLayout.less';
 import logo from '../assets/logo.svg';
+import { startURL } from '../config/constant';
 
 const { Header, Sider, Content } = Layout;
 const { SubMenu } = Menu;
@@ -79,7 +80,7 @@ class AdminLayout extends React.PureComponent {
   };
 
   componentDidMount() {
-    console.log('componentDidMount: ', this.props);
+    // console.log('componentDidMount: ', this.props);
 
     const {
       router: { pathname },
@@ -119,6 +120,7 @@ class AdminLayout extends React.PureComponent {
   };
 
   onMenuOpenChange = openKeys => {
+    // console.log("AdminLayout.onMenuOpenChange: Open menu ")
     const { menuMap } = this.props;
     if (openKeys.length > 1) {
       const lastKey = openKeys[openKeys.length - 1];
@@ -145,6 +147,7 @@ class AdminLayout extends React.PureComponent {
       }
 
       if (!isParent) {
+        // console.log("AdminLayout.onMenuOpenChange: not isParent => call global/changeOpenKeys ")
         this.dispatch({
           type: 'global/changeOpenKeys',
           payload: [lastKey],
@@ -199,8 +202,8 @@ class AdminLayout extends React.PureComponent {
                   <span>{item.name}</span>
                 </span>
               ) : (
-                  item.name
-                )
+                item.name
+              )
             }
             key={item.id}
           >
@@ -212,7 +215,7 @@ class AdminLayout extends React.PureComponent {
       const { router } = item;
       // const icon = item.icon && <LegacyIcon type={item.icon} />;
 
-      // console.log("renderNavMenuItems: ", this.props);
+      // console.log("AdminLayout.renderNavMenuItems:  router = ", router);
       const {
         router: { pathname },
       } = this.props;
@@ -225,13 +228,13 @@ class AdminLayout extends React.PureComponent {
               <span>{item.name}</span>
             </a>
           ) : (
-              <Link href={router} replace={router === pathname}>
-                <div>
-                  {/* {icon} */}
-                  <span>{item.name}</span>
-                </div>
-              </Link>
-            )}
+            <Link href={startURL + router} replace={router === pathname}>
+              <div>
+                {/* {icon} */}
+                <span>{item.name}</span>
+              </div>
+            </Link>
+          )}
         </Menu.Item>
       );
     });
@@ -244,7 +247,7 @@ class AdminLayout extends React.PureComponent {
       title,
     } = this.props;
 
-    console.log('renderPageTitle: pathname', pathname);
+    // console.log('AdminLayout: => renderPageTitle: pathname', pathname);
 
     let ptitle = title;
     const item = menuPaths[pathname];
@@ -267,6 +270,7 @@ class AdminLayout extends React.PureComponent {
       global,
     } = this.props;
 
+    // console.log("AdminLayout.render: menus = ", menus);
     const { updatePwdVisible } = this.state;
 
     const menu = (
@@ -287,6 +291,8 @@ class AdminLayout extends React.PureComponent {
     const menuProps = collapsed ? {} : { openKeys };
     const siderWidth = 256;
 
+    const homePage = startURL;
+
     const layout = (
       <Layout>
         <Sider
@@ -299,7 +305,7 @@ class AdminLayout extends React.PureComponent {
           className="sider"
         >
           <div className="logo">
-            <Link href="/">
+            <Link href={homePage} >
               <div>
                 <img src={logo} alt="logo" />
                 <h1>{title}</h1>
@@ -342,8 +348,8 @@ class AdminLayout extends React.PureComponent {
                   </span>
                 </Dropdown>
               ) : (
-                  <Spin size="small" style={{ marginLeft: 8 }} />
-                )}
+                <Spin size="small" style={{ marginLeft: 8 }} />
+              )}
             </div>
           </Header>
           <Content className={classNames('content')}>

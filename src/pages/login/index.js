@@ -10,32 +10,33 @@ import { setToken } from '../../utils/request';
 import styles from './index.less';
 
 import WithDva from '../../utils/store';
-import Router from "next/router";
+import Router from 'next/router';
 
 @Form.create()
 class Login extends PureComponent {
   componentDidMount() {
     // window.addEventListener('token', this.handleToken);
-    window.addEventListener("message", this.handleToken);
+    window.addEventListener('message', this.handleToken);
 
     this.dispatch({
       type: 'login/loadCaptcha',
     });
-
   }
-  handleToken = (event) => {
-    console.log("Binht. on message  = ", event)
+  handleToken = event => {
+    console.log('Binht. on message  = ', event);
 
-    const { data: { token } } = event;
+    const {
+      data: { token },
+    } = event;
 
     // alert(event.data);
     if (token != 'undefined' && token !== undefined && token != null) {
       setToken(token);
-      Router.back()
+      Router.back();
     } else {
-      console.log("Cannot find token ")
+      console.log('Cannot find token ');
     }
-  }
+  };
   reloadCaptcha = () => {
     this.dispatch({
       type: 'login/reloadCaptcha',
@@ -60,13 +61,14 @@ class Login extends PureComponent {
       }
     });
   };
-  handleClick = (e) => {
-    console.log("Login by google ")
-    window.open('http://localhost:10088',
+  handleClick = e => {
+    console.log('Login by google ');
+    window.open(
+      'http://localhost:10088',
       'Popup',
       'location,status,scrollbars,resizable,width=600, height=600'
-    )
-  }
+    );
+  };
   dispatch = action => {
     const { dispatch } = this.props;
     dispatch(action);
@@ -83,10 +85,9 @@ class Login extends PureComponent {
     } = this.props;
 
     return (
-      <Row type="flex" justify="center" align="middle" style={{ minHeight: '100vh' }} >
-        <Col span={6}  >
+      <Row type="flex" justify="center" align="middle" style={{ minHeight: '100vh' }}>
+        <Col span={6}>
           <div className={styles.main}>
-
             <Form onSubmit={this.handleSubmit} className="login-form">
               {login.status === 'FAIL' &&
                 login.submitting === false &&
@@ -95,7 +96,6 @@ class Login extends PureComponent {
               {login.status === 'ERROR' &&
                 login.submitting === false &&
                 this.renderMessage('error', login.tip)}
-
 
               <Form.Item>
                 {getFieldDecorator('user_name', {
@@ -134,24 +134,21 @@ class Login extends PureComponent {
 
               <Form.Item>
                 <Input.Group compact>
-                  {
-                    getFieldDecorator('captcha_code', {
-                      rules: [
-                        {
-                          required: true,
-                          message: 'Please enter verification code!',
-                        },
-                      ],
-                    })
-                      (
-                        <Input
-                          style={{ width: '50%', marginRight: 10 }}
-                          size="large"
-                          prefix={<CodeOutlined className={styles.prefixIcon} />}
-                          placeholder="Please enter verification code!"
-                        />
-                      )
-                  }
+                  {getFieldDecorator('captcha_code', {
+                    rules: [
+                      {
+                        required: true,
+                        message: 'Please enter verification code!',
+                      },
+                    ],
+                  })(
+                    <Input
+                      style={{ width: '50%', marginRight: 10 }}
+                      size="large"
+                      prefix={<CodeOutlined className={styles.prefixIcon} />}
+                      placeholder="Please enter verification code!"
+                    />
+                  )}
                   <div
                     style={{
                       width: 120,
@@ -178,7 +175,7 @@ class Login extends PureComponent {
                   htmlType="submit"
                 >
                   Login
-              </Button>
+                </Button>
                 <Button
                   size="large"
                   loading={login.submitting}
@@ -192,7 +189,8 @@ class Login extends PureComponent {
               </Form.Item>
             </Form>
           </div>
-        </Col> </Row >
+        </Col>{' '}
+      </Row>
     );
   }
 }

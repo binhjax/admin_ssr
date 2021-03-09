@@ -4,7 +4,7 @@ export default {
   namespace: 'global',
 
   state: {
-    title: 'System Management',
+    title: 'Teko landing admin',
     copyRight: '2020 Vnpay',
     defaultURL: '/dashboard',
     collapsed: false,
