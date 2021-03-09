@@ -121,7 +121,7 @@
       "file": "static/css/styles.chunk.css"
     },
     {
-      "id": 20,
+      "id": 21,
       "file": "static/css/styles.chunk.css"
     },
     {
@@ -133,7 +133,7 @@
       "file": "static/css/styles.chunk.css"
     },
     {
-      "id": 18,
+      "id": 19,
       "file": "static/css/styles.chunk.css"
     },
     {
@@ -141,7 +141,7 @@
       "file": "static/css/styles.chunk.css"
     },
     {
-      "id": 19,
+      "id": 20,
       "file": "static/css/styles.chunk.css"
     },
     {
@@ -157,7 +157,7 @@
       "file": "static/css/styles.chunk.css"
     },
     {
-      "id": 21,
+      "id": 22,
       "file": "static/css/styles.chunk.css"
     },
     {
@@ -281,7 +281,7 @@
       "file": "static/chunks/styles.js"
     },
     {
-      "id": 20,
+      "id": 21,
       "file": "static/chunks/styles.js"
     },
     {
@@ -293,7 +293,7 @@
       "file": "static/chunks/styles.js"
     },
     {
-      "id": 18,
+      "id": 19,
       "file": "static/chunks/styles.js"
     },
     {
@@ -301,7 +301,7 @@
       "file": "static/chunks/styles.js"
     },
     {
-      "id": 19,
+      "id": 20,
       "file": "static/chunks/styles.js"
     },
     {
@@ -317,7 +317,7 @@
       "file": "static/chunks/styles.js"
     },
     {
-      "id": 21,
+      "id": 22,
       "file": "static/chunks/styles.js"
     },
     {
@@ -7533,7 +7533,7 @@
       "file": "static/chunks/2.js"
     },
     {
-      "id": "./node_modules/@projectstorm/react-diagrams/dist/index.js",
+      "id": "./node_modules/@projectstorm/react-diagrams/dist/es/index.js",
       "file": "static/chunks/2.js"
     },
     {
@@ -9950,26 +9950,6 @@
     },
     {
       "id": "./node_modules/uuid/v4.js",
-      "file": "static/chunks/2.js"
-    },
-    {
-      "id": "./src/components/CustomNode/CustomLinkFactory.tsx",
-      "file": "static/chunks/2.js"
-    },
-    {
-      "id": "./src/components/CustomNode/CustomLinkModel.ts",
-      "file": "static/chunks/2.js"
-    },
-    {
-      "id": "./src/components/CustomNode/CustomLinkWidget.tsx",
-      "file": "static/chunks/2.js"
-    },
-    {
-      "id": "./src/components/CustomNode/CustomNodeModel.tsx",
-      "file": "static/chunks/2.js"
-    },
-    {
-      "id": "./src/components/CustomNode/CustomPortModel.tsx",
       "file": "static/chunks/2.js"
     },
     {

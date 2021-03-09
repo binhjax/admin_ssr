@@ -119,30 +119,28 @@ const Editor = props => {
   });
 
   return (
-    <div>
-      <AceEditor
-        placeholder="Placeholder Text"
-        mode="mysql"
-        theme="monokai"
-        name="blah2"
-        width="100%"
-        height="100vh"
-        //   onLoad={this.onLoad}
-        //   onChange={this.onChange}
-        fontSize={14}
-        showPrintMargin={true}
-        showGutter={true}
-        highlightActiveLine={true}
-        value={testData}
-        setOptions={{
-          enableBasicAutocompletion: true,
-          enableLiveAutocompletion: true,
-          enableSnippets: true,
-          showLineNumbers: true,
-          tabSize: 2,
-        }}
-      />
-    </div>
+    <AceEditor
+      placeholder="Placeholder Text"
+      mode="mysql"
+      theme="monokai"
+      name="blah2"
+      width="100%"
+      height="100%"
+      //   onLoad={this.onLoad}
+      //   onChange={this.onChange}
+      fontSize={14}
+      showPrintMargin={true}
+      showGutter={true}
+      highlightActiveLine={true}
+      value={testData}
+      setOptions={{
+        enableBasicAutocompletion: true,
+        enableLiveAutocompletion: true,
+        enableSnippets: true,
+        showLineNumbers: true,
+        tabSize: 2,
+      }}
+    />
   );
 };
 export default Editor;

@@ -338,12 +338,12 @@ class AdminLayout extends React.PureComponent {
             </div>
           </Header>
           <Content className={classNames('content')}>
-            <div style={{ minHeight: 'calc(100vh - 150px)' }}>
+            <div style={{ minHeight: 'calc(100vh - 65px)', height: '100%' }}>
               <context.GlobalContext.Provider value={global}>
                 {children}
               </context.GlobalContext.Provider>
             </div>
-            <GlobalFooter copyright={<CopyRight title={copyRight} />} />
+            {/* <GlobalFooter copyright={<CopyRight title={copyRight} />} /> */}
           </Content>
         </Layout>
         <UpdatePasswordDialog visible={updatePwdVisible} onCancel={this.handleUpdatePwdCancel} />

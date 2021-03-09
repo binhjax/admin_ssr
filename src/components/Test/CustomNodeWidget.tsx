@@ -1,13 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { CustomNodeModel } from './CustomNodeModel';
 import { TYPE } from '../../const';
 
-import {
-  DiagramEngine,
-  PortModel,
-  PortModelAlignment,
-  PortWidget,
-} from '@projectstorm/react-diagrams';
+import { DiagramEngine, PortModel, PortWidget } from '@projectstorm/react-diagrams';
 import styled from '@emotion/styled';
 
 import {
@@ -17,11 +12,8 @@ import {
   MoreOutlined,
   DeleteOutlined,
   DeleteRowOutlined,
-  PlaySquareOutlined,
-  PlusSquareOutlined,
-  PlusCircleFilled,
 } from '@ant-design/icons';
-import { Col, Modal, Input, Button, Typography, Row, Popover, AutoComplete, Select } from 'antd';
+import { Modal, Input, Button, Row, Popover, AutoComplete, Select } from 'antd';
 
 export interface CustomNodeWidgetProps {
   node: CustomNodeModel;
@@ -29,52 +21,9 @@ export interface CustomNodeWidgetProps {
   size?: number;
 }
 
-const styles = {
-  rightPort: {
-    width: '25px',
-    height: '25px',
-    position: 'absolute',
-    right: '0px',
-  },
-
-  leftPort: {
-    width: '25px',
-    height: '25px',
-    position: 'absolute',
-    left: '0',
-  },
-  tableHeader: {
-    display: 'flex',
-    alignItems: 'center',
-    color: 'white',
-    fontWeight: 900,
-    fontSize: '18px',
-    background: '#316896',
-    marginBottom: '-2px',
-  },
-  tableHeadText: {
-    fill: '#fff',
-    fontWeight: 700,
-    border: ' 0 solid #e2e8f0',
-    padding: '7px 30px 7px ',
-  },
-  tableRow: {
-    fontSize: '16px',
-    display: 'flex',
-    width: '100%',
-    flexBasis: 100,
-    justifyContent: 'space-between',
-    background: '#f6f6f6',
-    padding: '5px 0px 5px 0px',
-  },
-};
 export const Port = styled.div`
   height: 25px;
   cursor: pointer;
-
-  &:hover {
-    background: #deecf3;
-  }
 `;
 
 export const CustomNodeWidget: React.FC<CustomNodeWidgetProps> = props => {
@@ -82,7 +31,30 @@ export const CustomNodeWidget: React.FC<CustomNodeWidgetProps> = props => {
   const [tableName, setTableName] = useState('');
   const [hover, setHover] = useState('');
   const [ports, setPorts] = useState<{ [s: string]: PortModel }>({});
+  const styles = {
+    port: {
+      width: '100%',
+      height: '25px',
+      position: 'absolute',
+      right: '0px',
+    },
 
+    tableHeader: {
+      display: 'flex',
+      alignItems: 'center',
+      color: 'white',
+      fontWeight: 900,
+      fontSize: '18px',
+      background: '#316896',
+      marginBottom: '-2px',
+    },
+    tableHeadText: {
+      fill: '#fff',
+      fontWeight: 700,
+      border: ' 0 solid #e2e8f0',
+      padding: '7px 30px 7px ',
+    },
+  };
   useEffect(() => {
     setTableName(props.node.getOptions().extras);
     setPorts(props.node.getPorts());
@@ -164,63 +136,65 @@ export const CustomNodeWidget: React.FC<CustomNodeWidgetProps> = props => {
           </Button>
         </div>
         <div style={{ marginTop: 5, fontWeight: 700 }}>Columns:</div>
-        {Object.entries(ports).map(([key, value], index: any) => (
-          <div
-            key={index}
-            style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              marginTop: 5,
-            }}
-          >
-            <Input
-              id="name"
-              value={value.getOptions().extras.name}
-              name={key}
-              key={index}
-              onChange={handleChangePort}
-            />
-
-            <AutoComplete
-              style={{ width: 250 }}
-              options={TYPE}
-              filterOption={(inputValue, option) =>
-                option.value.toLowerCase().indexOf(inputValue.toLowerCase()) !== -1
-              }
-              value={value.getOptions().extras.type}
-              onChange={type => {
-                value.getOptions().extras.type = type;
-                setPorts({ ...ports });
-              }}
-              onSelect={type => {
-                value.getOptions().extras.type = type;
-              }}
-            ></AutoComplete>
-
-            <Select
-              defaultValue={value.getOptions().extras.key}
-              style={{ width: 120 }}
-              onChange={key => {
-                value.getOptions().extras.key = key;
-                setPorts({ ...ports });
-              }}
-            >
-              <Select.Option value="PK">PK</Select.Option>
-              <Select.Option value="null">Null</Select.Option>
-            </Select>
-            <DeleteRowOutlined
-              onClick={() => confirmDeletePort(value)}
-              style={{ fontSize: 20, cursor: 'pointer', color: 'red' }}
-            />
-          </div>
-        ))}
+        <table style={{ width: '100%' }}>
+          {Object.entries(ports).map(([key, value], index: any) => (
+            <tr>
+              <td style={{ width: '40%' }}>
+                <Input
+                  id="name"
+                  value={value.getOptions().extras.name}
+                  name={key}
+                  key={index}
+                  onChange={handleChangePort}
+                />
+              </td>
+              <td style={{ width: '30%' }}>
+                <AutoComplete
+                  style={{ width: '100%' }}
+                  options={TYPE}
+                  filterOption={(inputValue, option) =>
+                    option.value.toLowerCase().indexOf(inputValue.toLowerCase()) !== -1
+                  }
+                  value={value.getOptions().extras.type}
+                  onChange={type => {
+                    value.getOptions().extras.type = type;
+                    setPorts({ ...ports });
+                  }}
+                  onSelect={type => {
+                    value.getOptions().extras.type = type;
+                  }}
+                ></AutoComplete>
+              </td>
+              <td style={{ width: '20%' }}>
+                <Select
+                  style={{ width: '100%' }}
+                  defaultValue={value.getOptions().extras.key}
+                  onChange={key => {
+                    value.getOptions().extras.key = key;
+                    setPorts({ ...ports });
+                  }}
+                >
+                  <Select.Option value="PK">PK</Select.Option>
+                  <Select.Option value="null">Null</Select.Option>
+                  <Select.Option value="null">Not Null</Select.Option>
+                </Select>
+              </td>
+              <td>
+                <DeleteRowOutlined
+                  onClick={() => confirmDeletePort(value)}
+                  style={{ fontSize: 20, cursor: 'pointer', color: 'red' }}
+                />
+              </td>
+            </tr>
+          ))}
+        </table>
       </Modal>
       <div
         style={{
           minWidth: props.size * 2,
           height: 'auto',
         }}
+        onClick={() => props.node.setSelected(false)}
       >
         <div style={{ position: 'absolute', top: '0', right: '0' }}>
           <Popover placement="rightBottom" content={content} trigger="focus">
@@ -233,17 +207,33 @@ export const CustomNodeWidget: React.FC<CustomNodeWidgetProps> = props => {
             />
           </Popover>
         </div>
-        <div style={styles.tableHeader}>
+        <div
+          style={styles.tableHeader}
+          onDoubleClick={() => {
+            openEdit();
+          }}
+        >
           <div style={styles.tableHeadText}>{tableName}</div>
         </div>
         {Object.entries(props.node.getPorts()).map(([key, value], index: any) => (
-          <div style={styles.tableRow} key={index}>
-            <PortWidget port={value} engine={props.engine} style={styles.leftPort}>
+          <div
+            style={{
+              fontSize: '16px',
+              display: 'flex',
+              width: '100%',
+              flexBasis: 100,
+              justifyContent: 'space-between',
+              background: hover === key ? '#deecf3' : '#f6f6f6',
+              padding: '5px 0px 5px 0px',
+            }}
+            key={index}
+            onMouseEnter={() => setHover(key)}
+            onMouseLeave={() => setHover('')}
+          >
+            <PortWidget port={value} engine={props.engine} style={styles.port}>
               <Port />
             </PortWidget>
-            <PortWidget port={value} engine={props.engine} style={styles.rightPort}>
-              <Port />
-            </PortWidget>
+
             <div
               style={{
                 paddingLeft: 30,

@@ -8,18 +8,17 @@ export interface DemoCanvasWidgetProps {
 
 export const Container = styled.div<{ color: string; background: string }>`
   height: 100%;
-  background-color: ${(p) => p.background};
+  background-color: ${p => p.background};
   display: flex;
 
   > * {
-    height: 100%;
-    min-height: 1000px;
+    height: calc(100vh - 125px);
     width: 100%;
     overflow: auto;
   }
 `;
 
-const DemoCanvasWidget: React.FC<DemoCanvasWidgetProps> = (props) => {
+const DemoCanvasWidget: React.FC<DemoCanvasWidgetProps> = props => {
   return (
     <Container
       background={props.background || 'rgba(0, 0, 0, 0.08)'}

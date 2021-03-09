@@ -51,7 +51,7 @@ export class CustomLinkWidget extends React.Component<CustomLinkProps, CustomLin
 
   componentDidUpdate(): void {
     this.props.link.setRenderedPaths(
-      this.refPaths.map((ref) => {
+      this.refPaths.map(ref => {
         return ref.current;
       })
     );
@@ -59,7 +59,7 @@ export class CustomLinkWidget extends React.Component<CustomLinkProps, CustomLin
 
   componentDidMount(): void {
     this.props.link.setRenderedPaths(
-      this.refPaths.map((ref) => {
+      this.refPaths.map(ref => {
         return ref.current;
       })
     );
@@ -81,7 +81,7 @@ export class CustomLinkWidget extends React.Component<CustomLinkProps, CustomLin
         factory={this.props.diagramEngine.getFactoryForLink(this.props.link)}
         link={this.props.link}
         forwardRef={ref}
-        onSelection={(selected) => {
+        onSelection={selected => {
           this.setState({ selected: selected });
         }}
         extras={extraProps}
@@ -184,11 +184,11 @@ export class CustomLinkWidget extends React.Component<CustomLinkProps, CustomLin
     this.props.link.setFirstAndLastPathsDirection();
   }
 
-  handleMove = function (event: MouseEvent) {
+  handleMove = function(event: MouseEvent) {
     this.draggingEvent(event, this.dragging_index);
   }.bind(this);
 
-  handleUp = function (event: MouseEvent) {
+  handleUp = function(event: MouseEvent) {
     // Unregister handlers to avoid multiple event handlers for other links
     this.setState({ canDrag: false, selected: false });
     window.removeEventListener('mousemove', this.handleMove);
@@ -213,7 +213,7 @@ export class CustomLinkWidget extends React.Component<CustomLinkProps, CustomLin
 
     // When new link add one middle point to get everywhere 90° angle
     if (this.props.link.getTargetPort() === null && points.length === 2) {
-      [...Array(2)].forEach((item) => {
+      [...Array(2)].forEach(item => {
         this.props.link.addPoint(
           new PointModel({
             link: this.props.link,
@@ -277,7 +277,7 @@ export class CustomLinkWidget extends React.Component<CustomLinkProps, CustomLin
           {
             'data-linkid': this.props.link.getID(),
             'data-point': j,
-            'onMouseDown': (event: MouseEvent) => {
+            onMouseDown: (event: MouseEvent) => {
               if (event.button === 0) {
                 this.setState({ canDrag: true });
                 this.dragging_index = j;
@@ -287,7 +287,7 @@ export class CustomLinkWidget extends React.Component<CustomLinkProps, CustomLin
                 window.addEventListener('mouseup', this.handleUp);
               }
             },
-            'onMouseEnter': (event: MouseEvent) => {
+            onMouseEnter: (event: MouseEvent) => {
               this.setState({ selected: true });
               this.props.link.lastHoverIndexOfPath = j;
             },

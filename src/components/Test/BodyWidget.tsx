@@ -1,27 +1,24 @@
 import React, { useEffect } from 'react';
-import TrayWidget from './components/TrayWidget';
 import ActionMenu from './components/ActionMenu';
-import LinkDetail from './components/LinkDetail';
-import TableDetail from './components/TableDetail';
-import PortDetail from './components/PortDetail';
 
 import { Application } from './Application';
 import { CanvasWidget } from '@projectstorm/react-canvas-core';
 import DemoCanvasWidget from '../helpers/DemoCanvasWidget';
-import { CustomNodeModel } from '../CustomNode/CustomNodeModel';
+import { CustomNodeModel } from './CustomNodeModel';
 import styled from '@emotion/styled';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import { Card, Col, Row, Modal } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
 import { PortModel } from '@projectstorm/react-diagrams';
-import { CustomPortModel } from '../CustomNode/CustomPortModel';
+import { CustomPortModel } from './CustomPortModel';
 // import * as action from '../../actions/node';
-import { CustomLinkModel } from '../CustomNode/CustomLinkModel';
+import { CustomLinkModel } from './CustomLinkModel';
 export interface BodyWidgetProps {
   app: Application;
 }
 
 export const Layer = styled.div`
+  height: 100%;
   position: relative;
   flex-grow: 1;
 `;
@@ -94,7 +91,7 @@ const BodyWidget: React.FC<BodyWidgetProps> = props => {
   //   );
   // };
   return (
-    <div>
+    <div style={{ height: '100%' }}>
       <div
         style={{
           display: 'flex',

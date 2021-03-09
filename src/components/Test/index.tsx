@@ -5,9 +5,5 @@ import { Application } from './Application';
 
 export default () => {
   var app = new Application();
-  return (
-    <div>
-      <BodyWidget app={app} />
-    </div>
-  );
+  return <BodyWidget app={app} />;
 };

@@ -8,9 +8,7 @@ import { CustomLinkModel } from './CustomLinkModel';
 import { CustomLinkFactory } from './CustomLinkFactory';
 
 // import db from '../../.firebase/firebase';
-import { message } from 'antd';
 import { CustomNodeModel } from './CustomNodeModel';
-import withDva from '@/utils/store';
 import { useDispatch } from 'react-redux';
 // import store from '../../store';
 // import * as action from '../../actions/node';
@@ -21,13 +19,12 @@ export class RightAnglePortModel extends SRD.DefaultPortModel {
   }
 }
 
-export class Application extends React.Component {
+export class Application {
   protected activeModel: SRD.DiagramModel;
   protected diagramEngine: SRD.DiagramEngine;
   protected engine: SRD.DagreEngine;
 
-  constructor(props) {
-    super(props);
+  constructor() {
     this.diagramEngine = SRD.default({ registerDefaultZoomCanvasAction: false });
     this.activeModel = new SRD.DiagramModel();
     this.engine = new SRD.DagreEngine({
