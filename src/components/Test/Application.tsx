@@ -131,10 +131,10 @@ export class Application {
     if (state instanceof DefaultDiagramState) {
       state.dragNewLink.config.allowLooseLinks = false;
     }
-    const node = new CustomNodeModel('Quang');
+    const node = new CustomNodeModel('employee');
     const port1 = node.addCustomPort('quang', 'char', 'pk');
     node.addPort(new CustomPortModel('test', 'char', ''));
-    const node2 = new CustomNodeModel('Test');
+    const node2 = new CustomNodeModel('company');
     const port2 = node2.addCustomPort('test', 'char', 'pk');
     node2.addPort(new CustomPortModel('test', 'char', ''));
     this.activeModel.addAll(node, node2);

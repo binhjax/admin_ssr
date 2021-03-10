@@ -1,6 +1,6 @@
-import * as React from "react";
-import styled from "@emotion/styled";
-import { Tooltip } from "antd";
+import * as React from 'react';
+import styled from '@emotion/styled';
+import { Tooltip } from 'antd';
 export interface TrayItemWidgetProps {
   model: any;
   color?: string;
@@ -10,29 +10,24 @@ export interface TrayItemWidgetProps {
 export const Tray = styled.div<{ color: string }>`
   color: black;
   font-family: Helvetica, Arial;
-  padding: 5px;
-  margin: 0px 10px;
-  border: solid 3px ${(p) => p.color};
+  border: solid 3px ${p => p.color};
   border-radius: 5px;
   margin-bottom: 2px;
   cursor: pointer;
 `;
 
-const TrayItemWidget: React.FC<TrayItemWidgetProps> = (props) => {
+const TrayItemWidget: React.FC<TrayItemWidgetProps> = props => {
   return (
     <Tooltip placement="bottom" color="blue" title="Drag to add table">
       <Tray
         color={props.color}
         draggable={true}
-        onDragStart={(event) => {
-          event.dataTransfer.setData(
-            "storm-diagram-node",
-            JSON.stringify(props.model)
-          );
+        onDragStart={event => {
+          event.dataTransfer.setData('storm-diagram-node', JSON.stringify(props.model));
         }}
         className="tray-item"
       >
-        {props.name}
+        <div style={{ padding: 5, fontSize: 11 }}>{props.name}</div>
       </Tray>
     </Tooltip>
   );

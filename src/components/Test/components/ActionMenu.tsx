@@ -18,72 +18,82 @@ export interface ActionmenuProps {
 }
 const style = {
   border: 'none',
-  marginLeft: '20px',
+  marginLeft: '25px',
 };
-const ActionMenu: React.FC<ActionmenuProps> = (props) => {
+const ActionMenu: React.FC<ActionmenuProps> = props => {
   return (
     <Row>
-      <TrayItemWidget model={{ type: 'custom' }} name='Table' color='rgb(0,192,255)' />
-      <Tooltip placement='bottom' color='blue' title='Auto distribute'>
+      <TrayItemWidget model={{ type: 'custom' }} name="Table" color="rgb(0,192,255)" />
+      <Tooltip placement="bottom" color="blue" title="Auto distribute">
         <Button
           onClick={() => props.app.autoDistribute()}
-          icon={<ApartmentOutlined style={{ fontSize: 30 }} />}
+          icon={<ApartmentOutlined style={{ fontSize: 25 }} />}
           style={style}
         />
       </Tooltip>
-      <Tooltip placement='bottom' color='blue' title='Zoom to fit'>
+      <Tooltip placement="bottom" color="blue" title="Zoom to fit">
         <Button
           onClick={() => props.app.zoomToFit()}
-          icon={<ShrinkOutlined style={{ fontSize: 30 }} />}
+          icon={<ShrinkOutlined style={{ fontSize: 25 }} />}
           style={style}
         />
       </Tooltip>
-      <Tooltip placement='bottom' color='blue' title='Zoom node'>
+      <Tooltip placement="bottom" color="blue" title="Zoom node">
         <Button
           onClick={() => props.app.zoomNode()}
-          icon={<ArrowsAltOutlined style={{ fontSize: 30 }} />}
+          icon={<ArrowsAltOutlined style={{ fontSize: 25 }} />}
           style={style}
         />
       </Tooltip>
-      <Tooltip placement='bottom' color='blue' title='Lock drag'>
+      <Tooltip placement="bottom" color="blue" title="Lock drag">
         <Button
-          onClick={() => props.app.getDiagramEngine().getModel().setLocked(true)}
-          icon={<LockOutlined style={{ fontSize: 30 }} />}
+          onClick={() =>
+            props.app
+              .getDiagramEngine()
+              .getModel()
+              .setLocked(true)
+          }
+          icon={<LockOutlined style={{ fontSize: 25 }} />}
           style={style}
         />
       </Tooltip>
-      <Tooltip placement='bottom' color='blue' title='Unlock drag'>
+      <Tooltip placement="bottom" color="blue" title="Unlock drag">
         <Button
-          onClick={() => props.app.getDiagramEngine().getModel().setLocked(false)}
-          icon={<UnlockOutlined style={{ fontSize: 30 }} />}
+          onClick={() =>
+            props.app
+              .getDiagramEngine()
+              .getModel()
+              .setLocked(false)
+          }
+          icon={<UnlockOutlined style={{ fontSize: 25 }} />}
           style={style}
         />
       </Tooltip>
-      <Tooltip placement='bottom' color='blue' title='Save'>
+      <Tooltip placement="bottom" color="blue" title="Save">
         <Button
           onClick={() => props.app.saveNode()}
-          icon={<SaveOutlined style={{ fontSize: 30 }} />}
+          icon={<SaveOutlined style={{ fontSize: 25 }} />}
           style={style}
         />
       </Tooltip>
-      <Tooltip placement='bottom' color='blue' title='Convert to Json'>
+      <Tooltip placement="bottom" color="blue" title="Convert to Json">
         <Button
           onClick={() => props.app.toJson()}
-          icon={<ConsoleSqlOutlined style={{ fontSize: 30 }} />}
+          icon={<ConsoleSqlOutlined style={{ fontSize: 25 }} />}
           style={style}
         />
       </Tooltip>
-      <Tooltip placement='bottom' color='blue' title='Zoom in'>
+      <Tooltip placement="bottom" color="blue" title="Zoom in">
         <Button
           onClick={() => props.app.zoomIn()}
-          icon={<ZoomInOutlined style={{ fontSize: 30 }} />}
+          icon={<ZoomInOutlined style={{ fontSize: 25 }} />}
           style={style}
         />
       </Tooltip>
-      <Tooltip placement='bottom' color='blue' title='Zoom out'>
+      <Tooltip placement="bottom" color="blue" title="Zoom out">
         <Button
           onClick={() => props.app.zoomOut()}
-          icon={<ZoomOutOutlined style={{ fontSize: 30 }} />}
+          icon={<ZoomOutOutlined style={{ fontSize: 25 }} />}
           style={style}
         />
       </Tooltip>
