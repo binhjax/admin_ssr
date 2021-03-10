@@ -955,6 +955,17 @@ eval("module.exports = require(\"@ant-design/icons\");//# sourceURL=[module]\n//
 
 /***/ }),
 
+/***/ "ace-builds/src-noconflict/ext-language_tools":
+/*!***************************************************************!*\
+  !*** external "ace-builds/src-noconflict/ext-language_tools" ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("module.exports = require(\"ace-builds/src-noconflict/ext-language_tools\");//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vZXh0ZXJuYWwgXCJhY2UtYnVpbGRzL3NyYy1ub2NvbmZsaWN0L2V4dC1sYW5ndWFnZV90b29sc1wiPzE5N2UiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEiLCJmaWxlIjoiYWNlLWJ1aWxkcy9zcmMtbm9jb25mbGljdC9leHQtbGFuZ3VhZ2VfdG9vbHMuanMiLCJzb3VyY2VzQ29udGVudCI6WyJtb2R1bGUuZXhwb3J0cyA9IHJlcXVpcmUoXCJhY2UtYnVpbGRzL3NyYy1ub2NvbmZsaWN0L2V4dC1sYW5ndWFnZV90b29sc1wiKTsiXSwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///ace-builds/src-noconflict/ext-language_tools\n");
+
+/***/ }),
+
 /***/ "ace-builds/src-noconflict/mode-mysql":
 /*!*******************************************************!*\
   !*** external "ace-builds/src-noconflict/mode-mysql" ***!

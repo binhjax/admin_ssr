@@ -298,16 +298,7 @@ export class CustomLinkWidget extends React.Component<CustomLinkProps, CustomLin
     }
 
     this.refPaths = [];
-    return (
-      <g
-        onClick={() => {
-          // store.dispatch(action.setLink(this.props.link));
-          // store.dispatch(action.setActive('link'));
-        }}
-        data-default-link-test={this.props.link.getOptions().testName}
-      >
-        {paths}
-      </g>
-    );
+
+    return <g data-default-link-test={this.props.link.getOptions().testName}>{paths}</g>;
   }
 }

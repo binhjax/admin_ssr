@@ -10019,6 +10019,10 @@
       "file": "static/chunks/0.js"
     },
     {
+      "id": "./node_modules/ace-builds/src-noconflict/ext-language_tools.js",
+      "file": "static/chunks/0.js"
+    },
+    {
       "id": "./node_modules/ace-builds/src-noconflict/ext-split.js",
       "file": "static/chunks/0.js"
     },

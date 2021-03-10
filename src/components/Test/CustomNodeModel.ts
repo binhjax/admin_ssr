@@ -1,4 +1,4 @@
-import { NodeModel, NodeModelGenerics, PortModel } from '@projectstorm/react-diagrams';
+import { NodeModel, NodeModelGenerics, PortModel } from '@projectstorm/react-diagrams-core';
 import { CustomPortModel } from './CustomPortModel';
 
 export interface CustomNodeModelGenerics {
@@ -20,8 +20,8 @@ export class CustomNodeModel extends NodeModel<NodeModelGenerics & CustomNodeMod
     let port: CustomPortModel = this.getPort(name) as CustomPortModel;
     return port;
   }
-  addCustomPort(name: string, type: string, key: string): PortModel {
-    return this.addPort(new CustomPortModel(name, type, key));
+  addCustomPort(name: string, type: string, key: string): CustomPortModel {
+    return this.addPort(new CustomPortModel(name, type, key)) as CustomPortModel;
   }
   setPorts(ports: { [s: string]: PortModel }) {
     this.ports = ports;

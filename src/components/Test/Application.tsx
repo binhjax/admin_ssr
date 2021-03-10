@@ -10,6 +10,7 @@ import { CustomLinkFactory } from './CustomLinkFactory';
 // import db from '../../.firebase/firebase';
 import { CustomNodeModel } from './CustomNodeModel';
 import { useDispatch } from 'react-redux';
+import { DefaultDiagramState, DefaultLabelFactory } from '@projectstorm/react-diagrams';
 // import store from '../../store';
 // import * as action from '../../actions/node';
 // import * as sql from '../../actions/sql';
@@ -54,41 +55,47 @@ export class Application {
     // this.diagramEngine.repaintCanvas();
   };
   public toJson = () => {
-    let tables = [];
-    let relationships = [];
+    let diagram = '';
     this.activeModel.getNodes().forEach(node => {
-      let table = {
-        name: node.getOptions().extras,
-        columns: [],
-      };
+      let table = 'Table ' + node.getOptions().extras + ' {';
       Object.values(node.getPorts()).forEach(port => {
-        table.columns.push({
-          name: port.getOptions().extras.name,
-          type: port.getOptions().extras.type,
-          key: port.getOptions().extras.key,
-        });
+        table =
+          table + ' \n \t' + port.getOptions().extras.name + ' ' + port.getOptions().extras.type;
+        if (port.getOptions().extras.key == 'pk') {
+          table = table + ' [' + port.getOptions().extras.key + '] ';
+        }
       });
-      tables.push(table);
+      diagram = diagram + table + '\n}\n \n';
     });
+
     this.activeModel.getLinks().forEach(link => {
-      let relationship = {
-        parentTable: link
-          .getSourcePort()
-          .getNode()
-          .getOptions().extras,
-        parentColumn: link.getSourcePort().getOptions().extras.name,
-        childTable: link
+      diagram =
+        diagram +
+        '\nRef: ' +
+        link
           .getTargetPort()
           .getNode()
-          .getOptions().extras,
-        childColumn: link.getTargetPort().getOptions().extras.name,
-      };
-      relationships.push(relationship);
+          .getOptions().extras +
+        '.' +
+        link.getTargetPort().getOptions().extras.name +
+        ' > ' +
+        link
+          .getSourcePort()
+          .getNode()
+          .getOptions().extras +
+        '.' +
+        link.getSourcePort().getOptions().extras.name +
+        '\n';
     });
-    tables.push(relationships);
-    localStorage.setItem('json-diagram', JSON.stringify(tables, null, 2));
-    window.postMessage(tables, '*');
+
+    localStorage.setItem('json-diagram', diagram);
+    window.postMessage(diagram, '*');
   };
+  // public toJson = () => {
+  //   const text = localStorage.getItem('json-diagram');
+  //   const test = text.split('\n');
+  //   console.log(test);
+  // };
   public zoomToFit = () => {
     this.diagramEngine.zoomToFit();
   };
@@ -101,7 +108,6 @@ export class Application {
     this.engine.redistribute(this.activeModel);
 
     // only happens if pathfing is enabled (check line 25)
-    this.reroute();
     this.diagramEngine.repaintCanvas();
   };
   public zoomIn = () => {
@@ -112,12 +118,6 @@ export class Application {
     this.activeModel.setZoomLevel(this.activeModel.getZoomLevel() - 10);
     this.diagramEngine.repaintCanvas();
   };
-  reroute() {
-    this.diagramEngine
-      .getLinkFactories()
-      .getFactory<SRD.PathFindingLinkFactory>(SRD.PathFindingLinkFactory.NAME)
-      .calculateRoutingMatrix();
-  }
 
   public async newModel() {
     this.activeModel = new SRD.DiagramModel();
@@ -127,12 +127,15 @@ export class Application {
       .getPortFactories()
       .registerFactory(new CustomPortFactory('custom', () => new CustomPortModel('', '', '')));
     this.diagramEngine.getLinkFactories().registerFactory(new CustomLinkFactory());
-
+    const state = this.diagramEngine.getStateMachine().getCurrentState();
+    if (state instanceof DefaultDiagramState) {
+      state.dragNewLink.config.allowLooseLinks = false;
+    }
     const node = new CustomNodeModel('Quang');
-    node.addPort(new CustomPortModel('quang', 'char', 'PK'));
+    const port1 = node.addCustomPort('quang', 'char', 'pk');
     node.addPort(new CustomPortModel('test', 'char', ''));
     const node2 = new CustomNodeModel('Test');
-    node2.addPort(new CustomPortModel('test', 'char', 'PK'));
+    const port2 = node2.addCustomPort('test', 'char', 'pk');
     node2.addPort(new CustomPortModel('test', 'char', ''));
     this.activeModel.addAll(node, node2);
 

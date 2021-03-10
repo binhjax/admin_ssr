@@ -1,4 +1,4 @@
-import { PortModel } from '@projectstorm/react-diagrams';
+import { PortModel } from '@projectstorm/react-diagrams-core';
 import { CustomLinkModel } from './CustomLinkModel';
 import v4 from 'uuid';
 export class CustomPortModel extends PortModel {
@@ -12,6 +12,8 @@ export class CustomPortModel extends PortModel {
   }
   link(target: CustomPortModel) {
     let link = new CustomLinkModel();
+    this.reportPosition();
+    target.reportPosition();
     link.setSourcePort(this);
     link.setTargetPort(target);
 
@@ -19,7 +21,6 @@ export class CustomPortModel extends PortModel {
   }
   createLinkModel() {
     let link = new CustomLinkModel();
-    link.registerListener({});
     return link;
   }
 }

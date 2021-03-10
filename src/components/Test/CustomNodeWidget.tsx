@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { CustomNodeModel } from './CustomNodeModel';
 import { TYPE } from '../../const';
 
-import { DiagramEngine, PortModel, PortWidget } from '@projectstorm/react-diagrams';
+import { DiagramEngine, PortModel, PortWidget } from '@projectstorm/react-diagrams-core';
 import styled from '@emotion/styled';
 
 import {
@@ -12,6 +12,7 @@ import {
   MoreOutlined,
   DeleteOutlined,
   DeleteRowOutlined,
+  KeyOutlined,
 } from '@ant-design/icons';
 import { Modal, Input, Button, Row, Popover, AutoComplete, Select } from 'antd';
 
@@ -34,9 +35,10 @@ export const CustomNodeWidget: React.FC<CustomNodeWidgetProps> = props => {
   const styles = {
     port: {
       width: '100%',
-      height: '25px',
+      height: '35px',
       position: 'absolute',
       right: '0px',
+      margin: '-5px 0px -5px 0px',
     },
 
     tableHeader: {
@@ -90,6 +92,7 @@ export const CustomNodeWidget: React.FC<CustomNodeWidgetProps> = props => {
     });
   };
   const openEdit = () => {
+    setPorts(props.node.getPorts());
     setEditNode(true);
   };
   const closeEdit = () => {
@@ -137,56 +140,59 @@ export const CustomNodeWidget: React.FC<CustomNodeWidgetProps> = props => {
         </div>
         <div style={{ marginTop: 5, fontWeight: 700 }}>Columns:</div>
         <table style={{ width: '100%' }}>
-          {Object.entries(ports).map(([key, value], index: any) => (
-            <tr>
-              <td style={{ width: '40%' }}>
-                <Input
-                  id="name"
-                  value={value.getOptions().extras.name}
-                  name={key}
-                  key={index}
-                  onChange={handleChangePort}
-                />
-              </td>
-              <td style={{ width: '30%' }}>
-                <AutoComplete
-                  style={{ width: '100%' }}
-                  options={TYPE}
-                  filterOption={(inputValue, option) =>
-                    option.value.toLowerCase().indexOf(inputValue.toLowerCase()) !== -1
-                  }
-                  value={value.getOptions().extras.type}
-                  onChange={type => {
-                    value.getOptions().extras.type = type;
-                    setPorts({ ...ports });
-                  }}
-                  onSelect={type => {
-                    value.getOptions().extras.type = type;
-                  }}
-                ></AutoComplete>
-              </td>
-              <td style={{ width: '20%' }}>
-                <Select
-                  style={{ width: '100%' }}
-                  defaultValue={value.getOptions().extras.key}
-                  onChange={key => {
-                    value.getOptions().extras.key = key;
-                    setPorts({ ...ports });
-                  }}
-                >
-                  <Select.Option value="PK">PK</Select.Option>
-                  <Select.Option value="null">Null</Select.Option>
-                  <Select.Option value="null">Not Null</Select.Option>
-                </Select>
-              </td>
-              <td>
-                <DeleteRowOutlined
-                  onClick={() => confirmDeletePort(value)}
-                  style={{ fontSize: 20, cursor: 'pointer', color: 'red' }}
-                />
-              </td>
-            </tr>
-          ))}
+          <tbody>
+            {Object.entries(ports).map(([key, value], index: any) => (
+              <tr key={index}>
+                <td style={{ width: '40%' }}>
+                  <Input
+                    id="name"
+                    value={value.getOptions().extras.name}
+                    name={key}
+                    key={index}
+                    onChange={handleChangePort}
+                  />
+                </td>
+                <td style={{ width: '30%' }}>
+                  <AutoComplete
+                    style={{ width: '100%' }}
+                    options={TYPE}
+                    filterOption={(inputValue, option) =>
+                      option.value.toLowerCase().indexOf(inputValue.toLowerCase()) !== -1
+                    }
+                    value={value.getOptions().extras.type}
+                    onChange={type => {
+                      value.getOptions().extras.type = type;
+                      setPorts({ ...ports });
+                    }}
+                    onSelect={type => {
+                      value.getOptions().extras.type = type;
+                    }}
+                  ></AutoComplete>
+                </td>
+                <td style={{ width: '20%' }}>
+                  <Select
+                    style={{ width: '100%' }}
+                    defaultValue={value.getOptions().extras.key}
+                    onChange={key => {
+                      value.getOptions().extras.key = key;
+                      setPorts({ ...ports });
+                    }}
+                  >
+                    <Select.Option value="pk">pk</Select.Option>
+                    <Select.Option value="fk">fk</Select.Option>
+                    <Select.Option value="null">null</Select.Option>
+                    <Select.Option value="not null">not null</Select.Option>
+                  </Select>
+                </td>
+                <td>
+                  <DeleteRowOutlined
+                    onClick={() => confirmDeletePort(value)}
+                    style={{ fontSize: 20, cursor: 'pointer', color: 'red' }}
+                  />
+                </td>
+              </tr>
+            ))}
+          </tbody>
         </table>
       </Modal>
       <div
@@ -237,8 +243,8 @@ export const CustomNodeWidget: React.FC<CustomNodeWidgetProps> = props => {
             <div
               style={{
                 paddingLeft: 30,
-                fontWeight: value.getOptions().extras.key === 'PK' ? 700 : 500,
-                color: value.getOptions().extras.key === 'PK' ? '#000' : '#999',
+                fontWeight: value.getOptions().extras.key === 'pk' ? 700 : 500,
+                color: value.getOptions().extras.key === 'pk' ? '#000' : '#999',
               }}
             >
               {value.getOptions().extras.name}
@@ -248,10 +254,23 @@ export const CustomNodeWidget: React.FC<CustomNodeWidgetProps> = props => {
               style={{
                 paddingRight: 30,
                 color: '#999',
-                fontWeight: value.getOptions().extras.key === 'PK' ? 700 : 500,
+                fontWeight: value.getOptions().extras.key === 'pk' ? 700 : 500,
               }}
             >
               {value.getOptions().extras.type}
+            </div>
+            <div
+              style={{
+                paddingRight: 15,
+                visibility:
+                  value.getOptions().extras.key === 'pk' || value.getOptions().extras.key === 'fk'
+                    ? 'visible'
+                    : 'hidden',
+              }}
+            >
+              <KeyOutlined
+                style={{ color: value.getOptions().extras.key === 'pk' ? '#cbb202' : '' }}
+              />
             </div>
           </div>
         ))}
