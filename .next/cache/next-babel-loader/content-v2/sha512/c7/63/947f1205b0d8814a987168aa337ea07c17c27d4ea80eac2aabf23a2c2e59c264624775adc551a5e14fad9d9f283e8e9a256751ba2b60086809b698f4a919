@@ -1,0 +1,1 @@
+{"ast":null,"code":"export var startURL = '/admin';","map":{"version":3,"sources":["/Volumes/ExternalData/Work/vnshop/admin/src/config/constant.js"],"names":["startURL"],"mappings":"AAAA,OAAO,IAAMA,QAAQ,GAAG,QAAjB","sourcesContent":["export const startURL = '/admin';\n"]},"metadata":{},"sourceType":"module"}

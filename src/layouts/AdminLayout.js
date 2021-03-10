@@ -305,7 +305,7 @@ class AdminLayout extends React.PureComponent {
           className="sider"
         >
           <div className="logo">
-            <Link href={homePage} >
+            <Link href={homePage}>
               <div>
                 <img src={logo} alt="logo" />
                 <h1>{title}</h1>

@@ -31,13 +31,11 @@ export default class EditableCell extends PureComponent {
         onChange={this.handleChange}
       >
         <Row>
-          {
-            record.actions.map(v => (
-              <Col key={v.id}>
-                <Checkbox value={v.id}>{v.name}</Checkbox>
-              </Col>
-            ))
-          }
+          {record.actions.map(v => (
+            <Col key={v.id}>
+              <Checkbox value={v.id}>{v.name}</Checkbox>
+            </Col>
+          ))}
         </Row>
       </Checkbox.Group>
     );

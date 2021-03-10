@@ -1,0 +1,1 @@
+{"ast":null,"code":"export const startURL = '/';","map":{"version":3,"sources":["/Volumes/ExternalData/Work/vnshop/admin/src/config/constant.js"],"names":["startURL"],"mappings":"AAAA,OAAO,MAAMA,QAAQ,GAAG,GAAjB","sourcesContent":["export const startURL = '/';\n"]},"metadata":{},"sourceType":"module"}

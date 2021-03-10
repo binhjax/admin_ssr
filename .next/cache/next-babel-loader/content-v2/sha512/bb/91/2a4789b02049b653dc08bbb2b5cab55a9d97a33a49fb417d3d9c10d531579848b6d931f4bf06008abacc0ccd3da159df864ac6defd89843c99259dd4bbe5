@@ -1,0 +1,1 @@
+{"ast":null,"code":"// export const startURL = '/admin';\nexport var startURL = '';","map":null,"metadata":{},"sourceType":"module"}

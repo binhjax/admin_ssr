@@ -1,0 +1,1 @@
+{"ast":null,"code":"var isPro = true;\nexport var startURL = isPro ? '/admin' : '';","map":null,"metadata":{},"sourceType":"module"}

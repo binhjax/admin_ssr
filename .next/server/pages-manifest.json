@@ -10,6 +10,7 @@
   "/system/menu": "pages/system/menu.js",
   "/system/role": "pages/system/role.js",
   "/system/user": "pages/system/user.js",
+  "/test": "pages/test.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js"
 }

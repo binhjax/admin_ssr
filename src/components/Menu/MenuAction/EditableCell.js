@@ -62,5 +62,5 @@ export class EditableCell extends PureComponent {
     );
   }
 }
-const Test = () => { };
+const Test = () => {};
 export default Test;

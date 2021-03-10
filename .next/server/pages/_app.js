@@ -4323,9 +4323,10 @@ function _app_defineProperty(obj, key, value) { if (key in obj) { Object.defineP
 
 
 
- //Check development environment or production to change baseUrl 
+ //Check development environment or production to change baseUrl
 // const baseUrl = '/admin'
 
+const enableRedirect = false;
 function redirectUser(ctx, location) {
   if (ctx.req) {
     console.log('app.redirectUser: redirectUser from server: ', location);
@@ -4340,61 +4341,72 @@ function redirectUser(ctx, location) {
 }
 
 class _app_MyApp extends app_default.a {
+  constructor(...args) {
+    super(...args);
+
+    _app_defineProperty(this, "checkLogin", ctx => {
+      const {
+        req
+      } = ctx;
+      const isServer = !!req;
+      const isBrowser = !req;
+      console.log('app.getInitialProps: Query pathname: ', ctx.pathname);
+
+      if (isServer) {
+        console.log('app.getInitialProps:  From server');
+
+        if (req == undefined) {
+          console.log('app.getInitialProps: req is undefined ', ctx);
+        }
+
+        if (req && req.headers) {
+          const cookies = req.headers.cookie;
+
+          if (typeof cookies === 'string') {
+            console.log('app.getInitialProps: cookies = ', cookies);
+            const cookiesJSON = external_cookie_default.a.parse(cookies);
+            console.log('app.getInitialProps: cookiesJSON = ', cookiesJSON);
+            initProps.token = cookiesJSON.token;
+          } else if (cookies == undefined) {
+            console.log('app.getInitialProps: No find cookies');
+          } else {
+            console.log('app.getInitialProps: cookies is not string ');
+          }
+        } else {
+          console.log('app.getInitialProps: req.headers: ', req);
+        } // Redirect route
+
+
+        if (initProps.token === undefined) {
+          console.log('app.getInitialProps: initProps.token  not found  => redirect to login if not /login');
+
+          if (!ctx.pathname.startsWith('/login') || !ctx.pathname.startsWith('/test')) {
+            console.log(' app.getInitialProps: Redirect to signin from ', ctx.pathname);
+            redirectUser(ctx, '/login');
+          } else {
+            console.log(' app.getInitialProps: Current ', ctx.pathname, ' keep pathname. ');
+          }
+        } else {
+          console.log('app.getInitialProps: initProps.token  = ', initProps.token);
+
+          if (ctx.pathname == '/login') {
+            redirectUser(ctx, '/dashboard');
+          }
+        }
+      } else {
+        console.log('app.getInitialProps: In client');
+      }
+    });
+  }
+
   static async getInitialProps({
     Component,
     ctx
   }) {
-    const {
-      req
-    } = ctx;
-    const isServer = !!req;
-    const isBrowser = !req;
     let initProps = {};
-    console.log('app.getInitialProps: Query pathname: ', ctx.pathname);
 
-    if (isServer) {
-      console.log('app.getInitialProps:  From server');
-
-      if (req == undefined) {
-        console.log('app.getInitialProps: req is undefined ', ctx);
-      }
-
-      if (req && req.headers) {
-        const cookies = req.headers.cookie;
-
-        if (typeof cookies === 'string') {
-          console.log('app.getInitialProps: cookies = ', cookies);
-          const cookiesJSON = external_cookie_default.a.parse(cookies);
-          console.log('app.getInitialProps: cookiesJSON = ', cookiesJSON);
-          initProps.token = cookiesJSON.token;
-        } else if (cookies == undefined) {
-          console.log('app.getInitialProps: No find cookies');
-        } else {
-          console.log('app.getInitialProps: cookies is not string ');
-        }
-      } else {
-        console.log('app.getInitialProps: req.headers: ', req);
-      } // Redirect route
-
-
-      if (initProps.token === undefined) {
-        console.log('app.getInitialProps: initProps.token  not found  => redirect to login if not /login');
-
-        if (!ctx.pathname.startsWith("/login")) {
-          console.log(' app.getInitialProps: Redirect to signin from ', ctx.pathname);
-          redirectUser(ctx, '/login');
-        } else {
-          console.log(' app.getInitialProps: Current ', ctx.pathname, ' keep pathname. ');
-        }
-      } else {
-        console.log('app.getInitialProps: initProps.token  = ', initProps.token);
-
-        if (ctx.pathname == '/login') {
-          redirectUser(ctx, '/dashboard');
-        }
-      }
-    } else {
-      console.log('app.getInitialProps: In client');
+    if (enableRedirect) {
+      checkLogin(ctx);
     } //Init component
 
 
@@ -4451,7 +4463,8 @@ module.exports = require("classnames");
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return startURL; });
-const startURL = '/admin';
+const isPro = true;
+const startURL = isPro ? '/admin' : '';
 
 /***/ }),
 

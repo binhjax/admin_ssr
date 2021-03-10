@@ -10,8 +10,10 @@ import Router from 'next/router';
 import './styles.css';
 import { startURL } from '../config/constant';
 
-//Check development environment or production to change baseUrl 
+//Check development environment or production to change baseUrl
 // const baseUrl = '/admin'
+
+const enableRedirect = false;
 
 export function redirectUser(ctx, location) {
   if (ctx.req) {
@@ -26,11 +28,25 @@ export function redirectUser(ctx, location) {
 
 class MyApp extends App {
   static async getInitialProps({ Component, ctx }) {
+
+    let initProps = {};
+
+    if (enableRedirect) {
+      checkLogin(ctx)
+    }
+
+    //Init component
+    if (Component.getInitialProps) {
+      initProps = await Component.getInitialProps(ctx);
+    }
+    console.log('app.getInitialProps: Loggin to ', ctx.pathname);
+    return { ...initProps };
+  }
+
+  checkLogin = (ctx) => {
     const { req } = ctx;
     const isServer = !!req;
     const isBrowser = !req;
-
-    let initProps = {};
 
     console.log('app.getInitialProps: Query pathname: ', ctx.pathname);
     if (isServer) {
@@ -54,11 +70,12 @@ class MyApp extends App {
       } else {
         console.log('app.getInitialProps: req.headers: ', req);
       }
-
       // Redirect route
       if (initProps.token === undefined) {
-        console.log('app.getInitialProps: initProps.token  not found  => redirect to login if not /login');
-        if (!ctx.pathname.startsWith("/login")) {
+        console.log(
+          'app.getInitialProps: initProps.token  not found  => redirect to login if not /login'
+        );
+        if (!ctx.pathname.startsWith('/login') || !ctx.pathname.startsWith('/test')) {
           console.log(' app.getInitialProps: Redirect to signin from ', ctx.pathname);
           redirectUser(ctx, '/login');
         } else {
@@ -73,12 +90,6 @@ class MyApp extends App {
     } else {
       console.log('app.getInitialProps: In client');
     }
-    //Init component
-    if (Component.getInitialProps) {
-      initProps = await Component.getInitialProps(ctx);
-    }
-    console.log('app.getInitialProps: Loggin to ', ctx.pathname);
-    return { ...initProps };
   }
   render() {
     const { Component, pageProps, router, ...arg } = this.props;

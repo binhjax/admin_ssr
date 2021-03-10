@@ -7,7 +7,6 @@ import { md5Hash } from '../../utils/utils';
 import RoleSelect from './RoleSelect';
 import WithDva from '../../utils/store';
 
-
 @Form.create()
 class UserCard extends PureComponent {
   onOKClick = () => {

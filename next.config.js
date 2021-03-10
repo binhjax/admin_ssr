@@ -29,6 +29,10 @@ if (typeof require !== 'undefined') {
 //         return config;
 //     }
 // }
+
+const assetPrefix = isProd ? '/admin/static' : '';
+
+
 const settings = {
   env: {},
   devIndicators: {
@@ -37,7 +41,7 @@ const settings = {
   pwa: {
     dest: 'pwa',
   },
-  assetPrefix: '/admin/static',
+  assetPrefix: assetPrefix,
   ...withImages(
     withCSS(
       withSass({
@@ -127,4 +131,4 @@ const settings = {
   ),
 };
 // module.exports = process.env.NODE_ENV === 'development' ? settings : withPWA(settings);
-module.exports = settings
+module.exports = settings;

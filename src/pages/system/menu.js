@@ -216,9 +216,7 @@ class MenuList extends PureComponent {
         <Row gutter={16}>
           <Col span={8}>
             <Form.Item>
-              {
-                getFieldDecorator('queryValue')(<Input placeholder="Please enter keyword" />)
-              }
+              {getFieldDecorator('queryValue')(<Input placeholder="Please enter keyword" />)}
             </Form.Item>
           </Col>
           <Col span={8}>

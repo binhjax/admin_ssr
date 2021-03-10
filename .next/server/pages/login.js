@@ -3372,7 +3372,8 @@ module.exports = require("antd/lib/notification");
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return startURL; });
-const startURL = '/admin';
+const isPro = true;
+const startURL = isPro ? '/admin' : '';
 
 /***/ }),
 
