@@ -53,7 +53,7 @@ export class Application {
     //   });
     // this.diagramEngine.repaintCanvas();
   };
-  public toDia = () => {
+  public toJson = () => {
     let diagram = '';
     this.activeModel.getNodes().forEach(node => {
       let table = 'Table ' + node.getOptions().extras + ' {';
@@ -91,11 +91,11 @@ export class Application {
     window.postMessage(diagram, '*');
   };
 
-  public toJson = () => {
-    const text = localStorage.getItem('json-diagram');
-    const test = text.split('\n');
-    console.log(test);
-  };
+  // public toJson = () => {
+  //   const text = localStorage.getItem('json-diagram');
+  //   const test = text.split('\n');
+  //   console.log(test);
+  // };
   public zoomToFit = () => {
     this.diagramEngine.zoomToFit();
   };
