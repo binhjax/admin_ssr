@@ -49,6 +49,7 @@ export const CustomNodeWidget: React.FC<CustomNodeWidgetProps> = props => {
       fontSize: '18px',
       background: '#316896',
       marginBottom: '-2px',
+      width: '100%',
     },
     tableHeadText: {
       fill: '#fff',
@@ -129,7 +130,7 @@ export const CustomNodeWidget: React.FC<CustomNodeWidgetProps> = props => {
     </Row>
   );
   return (
-    <div>
+    <>
       <Modal visible={editNode} onCancel={() => closeEdit()} centered={true} footer={false}>
         <div style={{ marginBottom: 5, fontWeight: 700 }}>Table:</div>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -195,13 +196,7 @@ export const CustomNodeWidget: React.FC<CustomNodeWidgetProps> = props => {
           </tbody>
         </table>
       </Modal>
-      <div
-        style={{
-          minWidth: props.size * 2,
-          height: 'auto',
-        }}
-        onClick={() => props.node.setSelected(false)}
-      >
+      <div onClick={() => props.node.setSelected(false)} style={{ width: props.size * 2 }}>
         <div style={{ position: 'absolute', top: '0', right: '0' }}>
           <Popover placement="rightBottom" content={content} trigger="focus">
             <Button
@@ -226,8 +221,6 @@ export const CustomNodeWidget: React.FC<CustomNodeWidgetProps> = props => {
             style={{
               fontSize: '16px',
               display: 'flex',
-              width: '100%',
-              flexBasis: 100,
               justifyContent: 'space-between',
               background: hover === key ? '#deecf3' : '#f6f6f6',
               padding: '5px 0px 5px 0px',
@@ -236,20 +229,19 @@ export const CustomNodeWidget: React.FC<CustomNodeWidgetProps> = props => {
             onMouseEnter={() => setHover(key)}
             onMouseLeave={() => setHover('')}
           >
-            <PortWidget port={value} engine={props.engine} style={styles.port}>
-              <Port />
-            </PortWidget>
+            <PortWidget port={value} engine={props.engine} style={styles.port}></PortWidget>
 
             <div
               style={{
                 paddingLeft: 30,
                 fontWeight: value.getOptions().extras.key === 'pk' ? 700 : 500,
                 color: value.getOptions().extras.key === 'pk' ? '#000' : '#999',
+                maxWidth: 150,
+                wordWrap: 'break-word',
               }}
             >
               {value.getOptions().extras.name}
             </div>
-            <div style={{ flex: '1 0 100px' }}></div>
             <div
               style={{
                 paddingRight: 30,
@@ -261,7 +253,8 @@ export const CustomNodeWidget: React.FC<CustomNodeWidgetProps> = props => {
             </div>
             <div
               style={{
-                paddingRight: 15,
+                position: 'absolute',
+                right: 5,
                 visibility:
                   value.getOptions().extras.key === 'pk' || value.getOptions().extras.key === 'fk'
                     ? 'visible'
@@ -275,6 +268,6 @@ export const CustomNodeWidget: React.FC<CustomNodeWidgetProps> = props => {
           </div>
         ))}
       </div>
-    </div>
+    </>
   );
 };

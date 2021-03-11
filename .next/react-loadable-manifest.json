@@ -1,83 +1,7 @@
 {
   "../../components/Test": [
     {
-      "id": "./node_modules/antd/lib/auto-complete/style/index.less",
-      "file": "static/css/styles.chunk.css"
-    },
-    {
-      "id": "./node_modules/antd/lib/avatar/style/index.less",
-      "file": "static/css/styles.chunk.css"
-    },
-    {
-      "id": "./node_modules/antd/lib/button/style/index.less",
-      "file": "static/css/styles.chunk.css"
-    },
-    {
-      "id": "./node_modules/antd/lib/dropdown/style/index.less",
-      "file": "static/css/styles.chunk.css"
-    },
-    {
-      "id": "./node_modules/antd/lib/empty/style/index.less",
-      "file": "static/css/styles.chunk.css"
-    },
-    {
-      "id": "./node_modules/antd/lib/grid/style/index.less",
-      "file": "static/css/styles.chunk.css"
-    },
-    {
-      "id": "./node_modules/antd/lib/input/style/index.less",
-      "file": "static/css/styles.chunk.css"
-    },
-    {
-      "id": "./node_modules/antd/lib/layout/style/index.less",
-      "file": "static/css/styles.chunk.css"
-    },
-    {
-      "id": "./node_modules/antd/lib/menu/style/index.less",
-      "file": "static/css/styles.chunk.css"
-    },
-    {
-      "id": "./node_modules/antd/lib/message/style/index.less",
-      "file": "static/css/styles.chunk.css"
-    },
-    {
-      "id": "./node_modules/antd/lib/modal/style/index.less",
-      "file": "static/css/styles.chunk.css"
-    },
-    {
-      "id": "./node_modules/antd/lib/notification/style/index.less",
-      "file": "static/css/styles.chunk.css"
-    },
-    {
-      "id": "./node_modules/antd/lib/popover/style/index.less",
-      "file": "static/css/styles.chunk.css"
-    },
-    {
-      "id": "./node_modules/antd/lib/select/style/index.less",
-      "file": "static/css/styles.chunk.css"
-    },
-    {
-      "id": "./node_modules/antd/lib/spin/style/index.less",
-      "file": "static/css/styles.chunk.css"
-    },
-    {
-      "id": "./node_modules/antd/lib/style/index.less",
-      "file": "static/css/styles.chunk.css"
-    },
-    {
-      "id": "./node_modules/antd/lib/tooltip/style/index.less",
-      "file": "static/css/styles.chunk.css"
-    },
-    {
-      "id": 10,
-      "file": "static/css/styles.chunk.css"
-    },
-    {
-      "id": 6,
-      "file": "static/css/styles.chunk.css"
-    },
-    {
-      "id": 11,
+      "id": "./src/components/GlobalFooter/index.less",
       "file": "static/css/styles.chunk.css"
     },
     {
@@ -85,23 +9,7 @@
       "file": "static/css/styles.chunk.css"
     },
     {
-      "id": 12,
-      "file": "static/css/styles.chunk.css"
-    },
-    {
-      "id": 4,
-      "file": "static/css/styles.chunk.css"
-    },
-    {
-      "id": 13,
-      "file": "static/css/styles.chunk.css"
-    },
-    {
-      "id": 7,
-      "file": "static/css/styles.chunk.css"
-    },
-    {
-      "id": 14,
+      "id": "./src/layouts/UserLayout.less",
       "file": "static/css/styles.chunk.css"
     },
     {
@@ -109,23 +17,15 @@
       "file": "static/css/styles.chunk.css"
     },
     {
-      "id": 15,
+      "id": "./node_modules/antd/lib/style/index.less",
       "file": "static/css/styles.chunk.css"
     },
     {
-      "id": 8,
+      "id": 4,
       "file": "static/css/styles.chunk.css"
     },
     {
-      "id": 16,
-      "file": "static/css/styles.chunk.css"
-    },
-    {
-      "id": 20,
-      "file": "static/css/styles.chunk.css"
-    },
-    {
-      "id": 17,
+      "id": "./node_modules/antd/lib/notification/style/index.less",
       "file": "static/css/styles.chunk.css"
     },
     {
@@ -133,7 +33,31 @@
       "file": "static/css/styles.chunk.css"
     },
     {
-      "id": 18,
+      "id": "./node_modules/antd/lib/message/style/index.less",
+      "file": "static/css/styles.chunk.css"
+    },
+    {
+      "id": 6,
+      "file": "static/css/styles.chunk.css"
+    },
+    {
+      "id": "./node_modules/antd/lib/spin/style/index.less",
+      "file": "static/css/styles.chunk.css"
+    },
+    {
+      "id": 7,
+      "file": "static/css/styles.chunk.css"
+    },
+    {
+      "id": "./node_modules/antd/lib/dropdown/style/index.less",
+      "file": "static/css/styles.chunk.css"
+    },
+    {
+      "id": 8,
+      "file": "static/css/styles.chunk.css"
+    },
+    {
+      "id": "./node_modules/antd/lib/button/style/index.less",
       "file": "static/css/styles.chunk.css"
     },
     {
@@ -141,11 +65,59 @@
       "file": "static/css/styles.chunk.css"
     },
     {
-      "id": 19,
+      "id": "./node_modules/antd/lib/avatar/style/index.less",
       "file": "static/css/styles.chunk.css"
     },
     {
-      "id": "./src/components/GlobalFooter/index.less",
+      "id": 10,
+      "file": "static/css/styles.chunk.css"
+    },
+    {
+      "id": "./node_modules/antd/lib/popover/style/index.less",
+      "file": "static/css/styles.chunk.css"
+    },
+    {
+      "id": 11,
+      "file": "static/css/styles.chunk.css"
+    },
+    {
+      "id": "./node_modules/antd/lib/menu/style/index.less",
+      "file": "static/css/styles.chunk.css"
+    },
+    {
+      "id": 12,
+      "file": "static/css/styles.chunk.css"
+    },
+    {
+      "id": "./node_modules/antd/lib/tooltip/style/index.less",
+      "file": "static/css/styles.chunk.css"
+    },
+    {
+      "id": 13,
+      "file": "static/css/styles.chunk.css"
+    },
+    {
+      "id": "./node_modules/antd/lib/layout/style/index.less",
+      "file": "static/css/styles.chunk.css"
+    },
+    {
+      "id": 14,
+      "file": "static/css/styles.chunk.css"
+    },
+    {
+      "id": "./node_modules/antd/lib/modal/style/index.less",
+      "file": "static/css/styles.chunk.css"
+    },
+    {
+      "id": 15,
+      "file": "static/css/styles.chunk.css"
+    },
+    {
+      "id": "./node_modules/antd/lib/input/style/index.less",
+      "file": "static/css/styles.chunk.css"
+    },
+    {
+      "id": 16,
       "file": "static/css/styles.chunk.css"
     },
     {
@@ -153,7 +125,27 @@
       "file": "static/css/styles.chunk.css"
     },
     {
-      "id": "./src/layouts/UserLayout.less",
+      "id": 17,
+      "file": "static/css/styles.chunk.css"
+    },
+    {
+      "id": "./node_modules/antd/lib/table/style/index.less",
+      "file": "static/css/styles.chunk.css"
+    },
+    {
+      "id": 19,
+      "file": "static/css/styles.chunk.css"
+    },
+    {
+      "id": "./node_modules/antd/lib/empty/style/index.less",
+      "file": "static/css/styles.chunk.css"
+    },
+    {
+      "id": 20,
+      "file": "static/css/styles.chunk.css"
+    },
+    {
+      "id": "./node_modules/antd/lib/radio/style/index.less",
       "file": "static/css/styles.chunk.css"
     },
     {
@@ -161,83 +153,55 @@
       "file": "static/css/styles.chunk.css"
     },
     {
-      "id": "./node_modules/antd/lib/auto-complete/style/index.less",
-      "file": "static/chunks/styles.js"
+      "id": "./node_modules/antd/lib/checkbox/style/index.less",
+      "file": "static/css/styles.chunk.css"
     },
     {
-      "id": "./node_modules/antd/lib/avatar/style/index.less",
-      "file": "static/chunks/styles.js"
+      "id": 22,
+      "file": "static/css/styles.chunk.css"
     },
     {
-      "id": "./node_modules/antd/lib/button/style/index.less",
-      "file": "static/chunks/styles.js"
+      "id": "./node_modules/antd/lib/pagination/style/index.less",
+      "file": "static/css/styles.chunk.css"
     },
     {
-      "id": "./node_modules/antd/lib/dropdown/style/index.less",
-      "file": "static/chunks/styles.js"
-    },
-    {
-      "id": "./node_modules/antd/lib/empty/style/index.less",
-      "file": "static/chunks/styles.js"
-    },
-    {
-      "id": "./node_modules/antd/lib/grid/style/index.less",
-      "file": "static/chunks/styles.js"
-    },
-    {
-      "id": "./node_modules/antd/lib/input/style/index.less",
-      "file": "static/chunks/styles.js"
-    },
-    {
-      "id": "./node_modules/antd/lib/layout/style/index.less",
-      "file": "static/chunks/styles.js"
-    },
-    {
-      "id": "./node_modules/antd/lib/menu/style/index.less",
-      "file": "static/chunks/styles.js"
-    },
-    {
-      "id": "./node_modules/antd/lib/message/style/index.less",
-      "file": "static/chunks/styles.js"
-    },
-    {
-      "id": "./node_modules/antd/lib/modal/style/index.less",
-      "file": "static/chunks/styles.js"
-    },
-    {
-      "id": "./node_modules/antd/lib/notification/style/index.less",
-      "file": "static/chunks/styles.js"
-    },
-    {
-      "id": "./node_modules/antd/lib/popover/style/index.less",
-      "file": "static/chunks/styles.js"
+      "id": 23,
+      "file": "static/css/styles.chunk.css"
     },
     {
       "id": "./node_modules/antd/lib/select/style/index.less",
-      "file": "static/chunks/styles.js"
+      "file": "static/css/styles.chunk.css"
     },
     {
-      "id": "./node_modules/antd/lib/spin/style/index.less",
-      "file": "static/chunks/styles.js"
+      "id": 24,
+      "file": "static/css/styles.chunk.css"
     },
     {
-      "id": "./node_modules/antd/lib/style/index.less",
-      "file": "static/chunks/styles.js"
+      "id": "./src/pages/join/index.less",
+      "file": "static/css/styles.chunk.css"
     },
     {
-      "id": "./node_modules/antd/lib/tooltip/style/index.less",
-      "file": "static/chunks/styles.js"
+      "id": 18,
+      "file": "static/css/styles.chunk.css"
     },
     {
-      "id": 10,
-      "file": "static/chunks/styles.js"
+      "id": "./node_modules/antd/lib/grid/style/index.less",
+      "file": "static/css/styles.chunk.css"
     },
     {
-      "id": 6,
-      "file": "static/chunks/styles.js"
+      "id": 27,
+      "file": "static/css/styles.chunk.css"
     },
     {
-      "id": 11,
+      "id": "./node_modules/antd/lib/auto-complete/style/index.less",
+      "file": "static/css/styles.chunk.css"
+    },
+    {
+      "id": 26,
+      "file": "static/css/styles.chunk.css"
+    },
+    {
+      "id": "./src/components/GlobalFooter/index.less",
       "file": "static/chunks/styles.js"
     },
     {
@@ -245,23 +209,7 @@
       "file": "static/chunks/styles.js"
     },
     {
-      "id": 12,
-      "file": "static/chunks/styles.js"
-    },
-    {
-      "id": 4,
-      "file": "static/chunks/styles.js"
-    },
-    {
-      "id": 13,
-      "file": "static/chunks/styles.js"
-    },
-    {
-      "id": 7,
-      "file": "static/chunks/styles.js"
-    },
-    {
-      "id": 14,
+      "id": "./src/layouts/UserLayout.less",
       "file": "static/chunks/styles.js"
     },
     {
@@ -269,23 +217,15 @@
       "file": "static/chunks/styles.js"
     },
     {
-      "id": 15,
+      "id": "./node_modules/antd/lib/style/index.less",
       "file": "static/chunks/styles.js"
     },
     {
-      "id": 8,
+      "id": 4,
       "file": "static/chunks/styles.js"
     },
     {
-      "id": 16,
-      "file": "static/chunks/styles.js"
-    },
-    {
-      "id": 20,
-      "file": "static/chunks/styles.js"
-    },
-    {
-      "id": 17,
+      "id": "./node_modules/antd/lib/notification/style/index.less",
       "file": "static/chunks/styles.js"
     },
     {
@@ -293,7 +233,31 @@
       "file": "static/chunks/styles.js"
     },
     {
-      "id": 18,
+      "id": "./node_modules/antd/lib/message/style/index.less",
+      "file": "static/chunks/styles.js"
+    },
+    {
+      "id": 6,
+      "file": "static/chunks/styles.js"
+    },
+    {
+      "id": "./node_modules/antd/lib/spin/style/index.less",
+      "file": "static/chunks/styles.js"
+    },
+    {
+      "id": 7,
+      "file": "static/chunks/styles.js"
+    },
+    {
+      "id": "./node_modules/antd/lib/dropdown/style/index.less",
+      "file": "static/chunks/styles.js"
+    },
+    {
+      "id": 8,
+      "file": "static/chunks/styles.js"
+    },
+    {
+      "id": "./node_modules/antd/lib/button/style/index.less",
       "file": "static/chunks/styles.js"
     },
     {
@@ -301,11 +265,59 @@
       "file": "static/chunks/styles.js"
     },
     {
-      "id": 19,
+      "id": "./node_modules/antd/lib/avatar/style/index.less",
       "file": "static/chunks/styles.js"
     },
     {
-      "id": "./src/components/GlobalFooter/index.less",
+      "id": 10,
+      "file": "static/chunks/styles.js"
+    },
+    {
+      "id": "./node_modules/antd/lib/popover/style/index.less",
+      "file": "static/chunks/styles.js"
+    },
+    {
+      "id": 11,
+      "file": "static/chunks/styles.js"
+    },
+    {
+      "id": "./node_modules/antd/lib/menu/style/index.less",
+      "file": "static/chunks/styles.js"
+    },
+    {
+      "id": 12,
+      "file": "static/chunks/styles.js"
+    },
+    {
+      "id": "./node_modules/antd/lib/tooltip/style/index.less",
+      "file": "static/chunks/styles.js"
+    },
+    {
+      "id": 13,
+      "file": "static/chunks/styles.js"
+    },
+    {
+      "id": "./node_modules/antd/lib/layout/style/index.less",
+      "file": "static/chunks/styles.js"
+    },
+    {
+      "id": 14,
+      "file": "static/chunks/styles.js"
+    },
+    {
+      "id": "./node_modules/antd/lib/modal/style/index.less",
+      "file": "static/chunks/styles.js"
+    },
+    {
+      "id": 15,
+      "file": "static/chunks/styles.js"
+    },
+    {
+      "id": "./node_modules/antd/lib/input/style/index.less",
+      "file": "static/chunks/styles.js"
+    },
+    {
+      "id": 16,
       "file": "static/chunks/styles.js"
     },
     {
@@ -313,11 +325,79 @@
       "file": "static/chunks/styles.js"
     },
     {
-      "id": "./src/layouts/UserLayout.less",
+      "id": 17,
+      "file": "static/chunks/styles.js"
+    },
+    {
+      "id": "./node_modules/antd/lib/table/style/index.less",
+      "file": "static/chunks/styles.js"
+    },
+    {
+      "id": 19,
+      "file": "static/chunks/styles.js"
+    },
+    {
+      "id": "./node_modules/antd/lib/empty/style/index.less",
+      "file": "static/chunks/styles.js"
+    },
+    {
+      "id": 20,
+      "file": "static/chunks/styles.js"
+    },
+    {
+      "id": "./node_modules/antd/lib/radio/style/index.less",
       "file": "static/chunks/styles.js"
     },
     {
       "id": 21,
+      "file": "static/chunks/styles.js"
+    },
+    {
+      "id": "./node_modules/antd/lib/checkbox/style/index.less",
+      "file": "static/chunks/styles.js"
+    },
+    {
+      "id": 22,
+      "file": "static/chunks/styles.js"
+    },
+    {
+      "id": "./node_modules/antd/lib/pagination/style/index.less",
+      "file": "static/chunks/styles.js"
+    },
+    {
+      "id": 23,
+      "file": "static/chunks/styles.js"
+    },
+    {
+      "id": "./node_modules/antd/lib/select/style/index.less",
+      "file": "static/chunks/styles.js"
+    },
+    {
+      "id": 24,
+      "file": "static/chunks/styles.js"
+    },
+    {
+      "id": "./src/pages/join/index.less",
+      "file": "static/chunks/styles.js"
+    },
+    {
+      "id": 18,
+      "file": "static/chunks/styles.js"
+    },
+    {
+      "id": "./node_modules/antd/lib/grid/style/index.less",
+      "file": "static/chunks/styles.js"
+    },
+    {
+      "id": 27,
+      "file": "static/chunks/styles.js"
+    },
+    {
+      "id": "./node_modules/antd/lib/auto-complete/style/index.less",
+      "file": "static/chunks/styles.js"
+    },
+    {
+      "id": 26,
       "file": "static/chunks/styles.js"
     },
     {

@@ -1,4 +1,3 @@
-import React from 'react';
 import * as SRD from '@projectstorm/react-diagrams';
 
 import { CustomNodeFactory } from './CustomNodeFactory';
@@ -10,7 +9,7 @@ import { CustomLinkFactory } from './CustomLinkFactory';
 // import db from '../../.firebase/firebase';
 import { CustomNodeModel } from './CustomNodeModel';
 import { useDispatch } from 'react-redux';
-import { DefaultDiagramState, DefaultLabelFactory } from '@projectstorm/react-diagrams';
+import { DefaultDiagramState } from '@projectstorm/react-diagrams';
 // import store from '../../store';
 // import * as action from '../../actions/node';
 // import * as sql from '../../actions/sql';
@@ -54,7 +53,7 @@ export class Application {
     //   });
     // this.diagramEngine.repaintCanvas();
   };
-  public toJson = () => {
+  public toDia = () => {
     let diagram = '';
     this.activeModel.getNodes().forEach(node => {
       let table = 'Table ' + node.getOptions().extras + ' {';
@@ -91,11 +90,12 @@ export class Application {
     localStorage.setItem('json-diagram', diagram);
     window.postMessage(diagram, '*');
   };
-  // public toJson = () => {
-  //   const text = localStorage.getItem('json-diagram');
-  //   const test = text.split('\n');
-  //   console.log(test);
-  // };
+
+  public toJson = () => {
+    const text = localStorage.getItem('json-diagram');
+    const test = text.split('\n');
+    console.log(test);
+  };
   public zoomToFit = () => {
     this.diagramEngine.zoomToFit();
   };
@@ -132,10 +132,10 @@ export class Application {
       state.dragNewLink.config.allowLooseLinks = false;
     }
     const node = new CustomNodeModel('employee');
-    const port1 = node.addCustomPort('quang', 'char', 'pk');
+    node.addCustomPort('quang', 'char', 'pk');
     node.addPort(new CustomPortModel('test', 'char', ''));
     const node2 = new CustomNodeModel('company');
-    const port2 = node2.addCustomPort('test', 'char', 'pk');
+    node2.addCustomPort('test', 'char', 'pk');
     node2.addPort(new CustomPortModel('test', 'char', ''));
     this.activeModel.addAll(node, node2);
 

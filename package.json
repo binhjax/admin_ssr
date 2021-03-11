@@ -81,6 +81,7 @@
     "uuid": "^3.3.2",
     "webpack": "4.6.0",
     "webpack-filter-warnings-plugin": "^1.2.1",
+    "yarn": "^1.22.10",
     "yarn-check": "^0.0.3"
   },
   "devDependencies": {
