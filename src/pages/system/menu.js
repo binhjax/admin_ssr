@@ -1,24 +1,16 @@
 import React, { PureComponent } from 'react';
 // React.useLayoutEffect = React.useEffect;
 
-import { Form } from '@ant-design/compatible';
 import '@ant-design/compatible/assets/index.css';
-import { Row, Col, Card, Input, Button, Table, Modal, Layout, Tree, Badge } from 'antd';
+import { Row, Col, Card, Input, Button, Table, Modal, Layout, Tree, Badge, Form } from 'antd';
 import PageHeaderLayout from '../../layouts/PageHeaderLayout';
 import PButton from '../../components/PermButton';
 import { formatDate } from '../../utils/utils';
 import MenuCard from '../../components/Menu/MenuCard';
-// import WithDva from '../../utils/store';
 import { connect } from 'dva';
 
 import styles from './menu.less';
 
-// @connect(({ menu, loading }) => ({
-//   menu,
-//   loading: loading.models.menu,
-// }))
-
-// @Form.create()
 class MenuList extends PureComponent {
   state = {
     selectedRowKeys: [],
@@ -195,6 +187,22 @@ class MenuList extends PureComponent {
   renderDataForm() {
     return <MenuCard onCancel={this.handleFormCancel} onSubmit={this.handleFormSubmit} />;
   }
+  getTreeNodes = data =>
+    data.map(item => {
+      if (item.children) {
+        return {
+          title: item.name,
+          key: item.id,
+          // dataRef: item,
+          children: this.getTreeNodes(item.children)
+        }
+      }
+      return {
+        title: item.name,
+        key: item.id,
+        // dataRef: item
+      };
+    });
 
   renderTreeNodes = data =>
     data.map(item => {
@@ -208,16 +216,14 @@ class MenuList extends PureComponent {
       return <Tree.TreeNode title={item.name} key={item.id} dataRef={item} />;
     });
 
+
   renderSearchForm() {
-    const {
-      form: { getFieldDecorator },
-    } = this.props;
     return (
       <Form onSubmit={this.onSearchFormSubmit}>
         <Row gutter={16}>
           <Col span={8}>
-            <Form.Item>
-              {getFieldDecorator('queryValue')(<Input placeholder="Please enter keyword" />)}
+            <Form.Item name='queryValue'>
+              <Input placeholder="Please enter keyword" />
             </Form.Item>
           </Col>
           <Col span={8}>
@@ -352,8 +358,10 @@ class MenuList extends PureComponent {
                   payload: keys,
                 });
               }}
+
+              treeData={this.getTreeNodes(treeData)}
             >
-              {this.renderTreeNodes(treeData)}
+              {/* {this.renderTreeNodes(treeData)} */}
             </Tree>
           </Layout.Sider>
           <Layout.Content>
@@ -423,5 +431,4 @@ class MenuList extends PureComponent {
 export default connect(({ menu, loading }) => ({
   menu,
   loading: loading.models.menu,
-}))(Form.create()(MenuList));
-// export default MenuList;
+}))(MenuList);

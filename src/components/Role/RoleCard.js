@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
-import { Form } from '@ant-design/compatible';
 import '@ant-design/compatible/assets/index.css';
-import { Input, Modal, message, Card, Row, Col, InputNumber } from 'antd';
+import { Input, Modal, message, Card, Row, Col, InputNumber, Form } from 'antd';
 
 import RoleMenu from './RoleMenu';
 // import WithDva from '../../utils/store';
@@ -47,7 +46,6 @@ class RoleCard extends PureComponent {
   render() {
     const {
       role: { formTitle, formVisible, formData, submitting },
-      form: { getFieldDecorator },
       onCancel,
     } = this.props;
 
@@ -82,45 +80,43 @@ class RoleCard extends PureComponent {
         style={{ top: 20 }}
         bodyStyle={{ maxHeight: 'calc( 100vh - 158px )', overflowY: 'auto' }}
       >
-        <Form>
+        <Form
+          initialValue={{
+            name: formData.name,
+            sequence: formData.sequence ? formData.sequence.toString() : '1000000',
+            memo: formData.memo,
+            role_menus: formData.role_menus,
+          }}
+        >
           <Row>
             <Col span={12}>
-              <Form.Item {...formItemLayout} label="Role Name">
-                {getFieldDecorator('name', {
-                  initialValue: formData.name,
-                  rules: [
-                    {
-                      required: true,
-                      message: 'Please enter the role name',
-                    },
-                  ],
-                })(<Input placeholder="Please enter the role name" />)}
+              <Form.Item {...formItemLayout} label="Role Name" name='name' rules={[
+                {
+                  required: true,
+                  message: 'Please enter the role name',
+                },
+              ]}
+              >
+                <Input placeholder="Please enter the role name" />
               </Form.Item>
             </Col>
             <Col span={12}>
-              <Form.Item {...formItemLayout} label="Sort value">
-                {getFieldDecorator('sequence', {
-                  initialValue: formData.sequence ? formData.sequence.toString() : '1000000',
-                  rules: [
-                    {
-                      required: true,
-                      message: 'Please enter a sort value',
-                    },
-                  ],
-                })(<InputNumber min={1} style={{ width: '100%' }} />)}
+              <Form.Item {...formItemLayout} label="Sort value" rules={[
+                {
+                  required: true,
+                  message: 'Please enter a sort value',
+                },
+              ]}>
+                <InputNumber min={1} style={{ width: '100%' }} />
               </Form.Item>
             </Col>
           </Row>
-          <Form.Item {...formItemLayout2} label="Remarks">
-            {getFieldDecorator('memo', {
-              initialValue: formData.memo,
-            })(<Input.TextArea rows={2} placeholder="Please enter a note" />)}
+          <Form.Item {...formItemLayout2} label="Remarks" name='memo'>
+            <Input.TextArea rows={2} placeholder="Please enter a note" />
           </Form.Item>
           <Form.Item>
-            <Card title="Select menu permissions" bordered={false}>
-              {getFieldDecorator('role_menus', {
-                initialValue: formData.role_menus,
-              })(<RoleMenu />)}
+            <Card title="Select menu permissions" bordered={false} name='role_menus'>
+              <RoleMenu />
             </Card>
           </Form.Item>
         </Form>
@@ -130,4 +126,4 @@ class RoleCard extends PureComponent {
 }
 export default connect(state => ({
   role: state.role,
-}))(Form.create()(RoleCard));
+}))(RoleCard);

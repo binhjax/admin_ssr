@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
-import { Form } from '@ant-design/compatible';
 import '@ant-design/compatible/assets/index.css';
-import { Row, Col, Card, Input, Button, Table, Modal, Badge } from 'antd';
+import { Row, Col, Card, Input, Button, Table, Modal, Badge, Form } from 'antd';
 import PageHeaderLayout from '../../layouts/PageHeaderLayout';
 import PButton from '../../components/PermButton';
 import { formatDate } from '../../utils/utils';
@@ -10,7 +9,6 @@ import { connect } from 'dva';
 
 import styles from './role.less';
 
-// @Form.create()
 class RoleList extends PureComponent {
   state = {
     selectedRowKeys: [],
@@ -163,18 +161,12 @@ class RoleList extends PureComponent {
   }
 
   renderSearchForm() {
-    const {
-      form: { getFieldDecorator },
-    } = this.props;
-
     return (
-      <Form onSubmit={this.handleSearchFormSubmit}>
+      <Form onSubmit={this.handleSearchFormSubmit} >
         <Row gutter={16}>
           <Col span={8}>
-            <Form.Item>
-              {getFieldDecorator('queryValue')(
-                <Input placeholder="Please enter the content to be queried" />
-              )}
+            <Form.Item name='queryValue'>
+              <Input placeholder="Please enter the content to be queried" />
             </Form.Item>
           </Col>
           <Col span={8}>
@@ -315,4 +307,4 @@ class RoleList extends PureComponent {
 export default connect(state => ({
   role: state.role,
   loading: state.loading.models.role,
-}))(Form.create()(RoleList));
+}))(RoleList);

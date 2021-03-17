@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Modal, Input, Card } from 'antd';
-import { Form } from '@ant-design/compatible';
+import { Modal, Input, Card, Form } from 'antd';
 import '@ant-design/compatible/assets/index.css';
 import MenuResource from './MenuResource';
 
@@ -23,7 +22,6 @@ class FormDialog extends PureComponent {
 
   render() {
     const { visible, formData, form } = this.props;
-    const { getFieldDecorator } = form;
 
     const formItemLayout = {
       labelCol: {
@@ -47,35 +45,32 @@ class FormDialog extends PureComponent {
         onCancel={this.handleCancel}
         style={{ top: 20 }}
         bodyStyle={{ maxHeight: 'calc( 100vh - 158px )', overflowY: 'auto' }}
+        initialValue={{
+          code: formData.code,
+          name: formData.name,
+          resources: formData.resources
+        }}
       >
         <Form>
-          <Form.Item {...formItemLayout} label="Action Number">
-            {getFieldDecorator('code', {
-              initialValue: formData.code,
-              rules: [
-                {
-                  required: true,
-                  message: 'Please enter the action number',
-                },
-              ],
-            })(<Input placeholder="please enter" />)}
+          <Form.Item {...formItemLayout} label="Action Number" name='code' rules={[
+            {
+              required: true,
+              message: 'Please enter the action number',
+            },
+          ]}>
+            <Input placeholder="please enter" />
           </Form.Item>
-          <Form.Item {...formItemLayout} label="Action name">
-            {getFieldDecorator('name', {
-              initialValue: formData.name,
-              rules: [
-                {
-                  required: true,
-                  message: 'Please enter the action name',
-                },
-              ],
-            })(<Input placeholder="please enter" />)}
+          <Form.Item {...formItemLayout} label="Action name" name='name' rules={[
+            {
+              required: true,
+              message: 'Please enter the action name',
+            },
+          ]} >
+            <Input placeholder="please enter" />
           </Form.Item>
           <Form.Item>
-            <Card title="Resource management (server interface mapping)" bordered={false}>
-              {getFieldDecorator('resources', {
-                initialValue: formData.resources,
-              })(<MenuResource />)}
+            <Card title="Resource management (server interface mapping)" bordered={false} name='resources'>
+              <MenuResource />
             </Card>
           </Form.Item>
         </Form>
@@ -84,4 +79,4 @@ class FormDialog extends PureComponent {
   }
 }
 
-export default Form.create()(FormDialog);
+export default FormDialog;

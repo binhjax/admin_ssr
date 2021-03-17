@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
-import { Form } from '@ant-design/compatible';
 import '@ant-design/compatible/assets/index.css';
-import { Input } from 'antd';
+import { Input, Form } from 'antd';
 
 const FormItem = Form.Item;
 const EditableContext = React.createContext();
@@ -12,7 +11,7 @@ const EditableRow = ({ form, index, ...props }) => (
   </EditableContext.Provider>
 );
 
-export const EditableFormRow = Form.create()(EditableRow);
+export const EditableFormRow = EditableRow;
 
 export class EditableCell extends PureComponent {
   save = () => {
@@ -34,23 +33,18 @@ export class EditableCell extends PureComponent {
             {form => {
               this.form = form;
               return (
-                <FormItem style={{ margin: 0 }}>
-                  {form.getFieldDecorator(dataIndex, {
-                    rules: [
-                      {
-                        required: true,
-                        message: `Please enter ${title}`,
-                      },
-                    ],
-                    initialValue: record[dataIndex],
-                  })(
-                    <Input
-                      onBlur={() => {
-                        this.save();
-                      }}
-                      style={{ width: '100%' }}
-                    />
-                  )}
+                <FormItem style={{ margin: 0 }} name={dataIndex} rules={[
+                  {
+                    required: true,
+                    message: `Please enter ${title}`,
+                  },
+                ]} initialValue={record[dataIndex]}>
+                  <Input
+                    onBlur={() => {
+                      this.save();
+                    }}
+                    style={{ width: '100%' }}
+                  />
                 </FormItem>
               );
             }}
@@ -62,5 +56,5 @@ export class EditableCell extends PureComponent {
     );
   }
 }
-const Test = () => {};
+const Test = () => { };
 export default Test;

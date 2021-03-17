@@ -1,5 +1,6 @@
 import React from 'react';
-// import { Icon as LegacyIcon } from '@ant-design/compatible';
+import AntdIcon from '@ant-design/icons-react';
+
 import {
   LockOutlined,
   LogoutOutlined,
@@ -7,6 +8,10 @@ import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
 } from '@ant-design/icons';
+
+import { MailOutlined, AppstoreOutlined, SettingOutlined } from '@ant-design/icons';
+
+
 import { Layout, Menu, Avatar, Dropdown, Spin } from 'antd';
 import { withRouter } from "react-router";
 
@@ -185,7 +190,6 @@ class AdminLayout extends React.PureComponent {
   handleUpdatePwdCancel = () => {
     this.setState({ updatePwdVisible: false });
   };
-
   renderNavMenuItems(menusData) {
     if (!menusData) {
       return [];
@@ -197,12 +201,16 @@ class AdminLayout extends React.PureComponent {
       }
 
       if (item.children && item.children.some(child => child.name && child.show_status === 1)) {
+
+        console.log("Binhnt.AdminLayout.RenderNavMenuItem: icon = ", item.icon)
         return (
           <SubMenu
             title={
               item.icon ? (
                 <span>
-                  {/* <LegacyIcon type={item.icon} /> */}
+                  {/* <LegacyIcon type={item.icon} /> */
+                    <AntdIcon type={item.icon} />
+                  }
                   <span>{item.name}</span>
                 </span>
               ) : (
@@ -340,6 +348,7 @@ class AdminLayout extends React.PureComponent {
             {this.renderNavMenuItems(menus)}
           </Menu>
         </Sider>
+
         <Layout>
           <Header
             className={classNames('header')}

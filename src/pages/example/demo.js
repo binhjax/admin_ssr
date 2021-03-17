@@ -1,9 +1,8 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'dva';
 
-import { Form } from '@ant-design/compatible';
 // import '../login/index.css';
-import { Row, Col, Card, Input, Button, Table, Modal, Badge } from 'antd';
+import { Row, Col, Card, Input, Button, Table, Modal, Badge, Form } from 'antd';
 import PageHeaderLayout from '../../layouts/PageHeaderLayout';
 import PButton from '../../components/PermButton';
 import { formatDate } from '../../utils/utils';
@@ -161,24 +160,21 @@ class DemoList extends PureComponent {
   }
 
   renderSearchForm() {
-    const {
-      form: { getFieldDecorator },
-    } = this.props;
     return (
       <Form onSubmit={this.onSearchFormSubmit}>
         <Row gutter={16}>
           <Col span={8}>
-            <Form.Item>
-              {getFieldDecorator('queryValue')(<Input placeholder="请输入需要查询的内容" />)}
+            <Form.Item name='queryValue'>
+              <Input placeholder="Key words" />
             </Form.Item>
           </Col>
           <Col span={8}>
             <div style={{ overflow: 'hidden', paddingTop: 4 }}>
               <Button type="primary" htmlType="submit">
-                查询
+                Search
               </Button>
               <Button style={{ marginLeft: 8 }} onClick={this.onResetFormClick}>
-                重置
+                Reset
               </Button>
             </div>
           </Col>
@@ -311,6 +307,4 @@ class DemoList extends PureComponent {
 export default connect(state => ({
   loading: state.loading.models.demo,
   demo: state.demo,
-}))(Form.create()(DemoList));
-
-// export default DemoList;
+}))(DemoList);

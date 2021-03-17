@@ -13,6 +13,8 @@ import history from '../../history'
 
 import { connect } from 'dva';
 
+
+
 class Login extends PureComponent {
   componentDidMount() {
     // window.addEventListener('token', this.handleToken);
@@ -43,22 +45,20 @@ class Login extends PureComponent {
     });
   };
 
-  handleSubmit = e => {
-    e.preventDefault();
+  handleSubmit = (values) => {
+    console.log("binhnt.login.handleSubmit: start submit")
 
-    const { form, dispatch, login } = this.props;
-    form.validateFields({ force: true }, (err, values) => {
-      if (!err) {
-        dispatch({
-          type: 'login/submit',
-          payload: {
-            user_name: values.user_name,
-            captcha_code: values.captcha_code,
-            captcha_id: login.captchaID,
-            password: md5Hash(values.password),
-          },
-        });
-      }
+    const { dispatch, login } = this.props;
+
+    console.log("binhnt.login.handleSubmit: login.captcha_code: " + values.captcha_code)
+    dispatch({
+      type: 'login/submit',
+      payload: {
+        user_name: values.user_name,
+        captcha_code: values.captcha_code,
+        captcha_id: login.captchaID,
+        password: md5Hash(values.password),
+      },
     });
   };
   handleClick = e => {
@@ -83,11 +83,43 @@ class Login extends PureComponent {
       login,
     } = this.props;
 
+    const CompactedInput = ({ value, onChange, reloadCaptcha }) => {
+      return (
+        <Input.Group compact
+          rules={[{
+            required: true,
+            message: 'Please enter verification code!',
+          }]}>
+          <Input
+            style={{ width: '50%', marginRight: 10 }}
+            size="large"
+            prefix={<CodeOutlined className={styles.prefixIcon} />}
+            placeholder="Please enter verification code!"
+            onChange={onChange}
+            value={value}
+          />
+          <div
+            style={{
+              width: 120,
+              height: 40,
+            }}
+          >
+            <img
+              style={{ maxWidth: '100%', maxHeight: '100%' }}
+              src={login.captcha}
+              alt="Verification Code"
+              onClick={reloadCaptcha}
+            />
+          </div>
+        </Input.Group>
+      );
+    }
+
     return (
       <Row type="flex" justify="center" align="middle" style={{ minHeight: '100vh' }}>
         <Col span={6}>
           <div className={styles.main}>
-            <Form onSubmit={this.handleSubmit} className="login-form">
+            <Form onFinish={this.handleSubmit} className="login-form">
               {login.status === 'FAIL' &&
                 login.submitting === false &&
                 this.renderMessage('warning', login.tip)}
@@ -116,7 +148,7 @@ class Login extends PureComponent {
                 },
               ]}>
 
-                <Input
+                <Input.Password
                   size="large"
                   prefix={<LockOutlined className={styles.prefixIcon} />}
                   type="password"
@@ -124,36 +156,8 @@ class Login extends PureComponent {
                 />
               </Form.Item>
 
-              <Form.Item name='captcha_code' rules={[
-                {
-                  required: true,
-                  message: 'Please enter verification code!',
-                },
-              ]} >
-                <Input.Group compact>
-
-                  <Input
-                    style={{ width: '50%', marginRight: 10 }}
-                    size="large"
-                    prefix={<CodeOutlined className={styles.prefixIcon} />}
-                    placeholder="Please enter verification code!"
-                  />
-                  <div
-                    style={{
-                      width: 120,
-                      height: 40,
-                    }}
-                  >
-                    <img
-                      style={{ maxWidth: '100%', maxHeight: '100%' }}
-                      src={login.captcha}
-                      alt="Verification Code"
-                      onClick={() => {
-                        this.reloadCaptcha();
-                      }}
-                    />
-                  </div>
-                </Input.Group>
+              <Form.Item name="captcha_code" >
+                <CompactedInput reloadCaptcha={this.reloadCaptcha} />
               </Form.Item>
               <Form.Item className={styles.additional}>
                 <Button

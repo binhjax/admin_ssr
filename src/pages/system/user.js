@@ -1,25 +1,16 @@
 import React, { PureComponent } from 'react';
 
-import { Form } from '@ant-design/compatible';
 import '@ant-design/compatible/assets/index.css';
-import { Row, Col, Card, Input, Button, Table, Modal, Badge } from 'antd';
+import { Row, Col, Card, Input, Button, Table, Modal, Badge, Form } from 'antd';
 import PButton from '../../components/PermButton';
 import PageHeaderLayout from '../../layouts/PageHeaderLayout';
 import UserCard from '../../components/User/UserCard';
 import RoleSelect from '../../components/User/RoleSelect';
 import { formatDate } from '../../utils/utils';
 
-// import WithDva from '../../utils/store';
 import { connect } from 'dva';
-
 import styles from './user.less';
 
-// @connect(state => ({
-//   loading: state.loading.models.user,
-//   user: state.user,
-// }))
-
-// @Form.create()
 class UserList extends PureComponent {
   state = {
     selectedRowKeys: [],
@@ -175,29 +166,30 @@ class UserList extends PureComponent {
   }
 
   renderSearchForm() {
-    const {
-      form: { getFieldDecorator },
-    } = this.props;
     return (
-      <Form onSubmit={this.onSearchFormSubmit}>
+      <Form onSubmit={this.onSearchFormSubmit}
+
+
+      >
         <Row gutter={16}>
           <Col span={8}>
-            <Form.Item label="Fuzzy query">
-              {getFieldDecorator('queryValue')(
-                <Input placeholder="Please enter the content to be queried" />
-              )}
+            <Form.Item label="Fuzzy query" name='queryValue'>
+              <Input placeholder="Please enter the content to be queried" />
             </Form.Item>
           </Col>
           <Col span={8}>
-            <Form.Item label="User Role">{getFieldDecorator('roleIDs')(<RoleSelect />)}</Form.Item>
+            <Form.Item label="User Role" name='roleIDs' >
+              <RoleSelect />
+
+            </Form.Item>
           </Col>
           <Col span={8}>
             <div style={{ overflow: 'hidden', paddingTop: 4 }}>
               <Button type="primary" htmlType="submit">
-                查询
+                Search
               </Button>
               <Button style={{ marginLeft: 8 }} onClick={this.onResetFormClick}>
-                重置
+                Reset
               </Button>
             </div>
           </Col>
@@ -341,5 +333,4 @@ class UserList extends PureComponent {
 export default connect(state => ({
   loading: state.loading.models.user,
   user: state.user,
-}))(Form.create()(UserList));
-// export default UserList;
+}))(UserList);

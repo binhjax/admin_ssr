@@ -1,12 +1,9 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'dva';
 
-
-import { Form } from '@ant-design/compatible';
 import '@ant-design/compatible/assets/index.css';
-import { Input, Modal, Radio } from 'antd';
+import { Input, Modal, Radio, Form } from 'antd';
 
-// @Form.create()
 class DemoCard extends PureComponent {
   onOKClick = () => {
     const { form, onSubmit } = this.props;
@@ -29,7 +26,6 @@ class DemoCard extends PureComponent {
     const {
       onCancel,
       demo: { formTitle, formVisible, formData, submitting },
-      form: { getFieldDecorator },
     } = this.props;
 
     const formItemLayout = {
@@ -55,50 +51,44 @@ class DemoCard extends PureComponent {
         onCancel={onCancel}
         style={{ top: 20 }}
         bodyStyle={{ maxHeight: 'calc( 100vh - 158px )', overflowY: 'auto' }}
+        initialValue={{
+          code: formData.code,
+          name: formData.name,
+          memo: formData.memo,
+          status: formData.status
+        }}
       >
         <Form>
-          <Form.Item {...formItemLayout} label="Code">
-            {getFieldDecorator('code', {
-              initialValue: formData.code,
-              rules: [
-                {
-                  required: true,
-                  message: 'Please enter the number',
-                },
-              ],
-            })(<Input placeholder="Please enter the number" />)}
+          <Form.Item {...formItemLayout} label="Code" name='code' rules={[
+            {
+              required: true,
+              message: 'Please enter the number',
+            },
+          ]} >
+            <Input placeholder="Please enter the number" />
           </Form.Item>
-          <Form.Item {...formItemLayout} label="Name">
-            {getFieldDecorator('name', {
-              initialValue: formData.name,
-              rules: [
-                {
-                  required: true,
-                  message: 'Please enter a name',
-                },
-              ],
-            })(<Input placeholder="Please enter a name" />)}
+          <Form.Item {...formItemLayout} label="Name" name='name' rules={[
+            {
+              required: true,
+              message: 'Please enter a name',
+            },
+          ]}>
+            <Input placeholder="Please enter a name" />
           </Form.Item>
-          <Form.Item {...formItemLayout} label="Menu">
-            {getFieldDecorator('memo', {
-              initialValue: formData.memo,
-            })(<Input.TextArea rows={2} placeholder="Please enter a name" />)}
+          <Form.Item {...formItemLayout} label="Menu" name='memo' >
+            <Input.TextArea rows={2} placeholder="Please enter a name" />
           </Form.Item>
-          <Form.Item {...formItemLayout} label="Status">
-            {getFieldDecorator('status', {
-              initialValue: formData.status ? formData.status.toString() : '1',
-            })(
-              <Radio.Group>
-                <Radio value="1">Active</Radio>
-                <Radio value="2">Deactive</Radio>
-              </Radio.Group>
-            )}
+          <Form.Item {...formItemLayout} label="Status" name='status' >
+            <Radio.Group>
+              <Radio value="1">Active</Radio>
+              <Radio value="2">Deactive</Radio>
+            </Radio.Group>
           </Form.Item>
         </Form>
-      </Modal>
+      </Modal >
     );
   }
 }
 export default connect(state => {
   return { demo: state.demo };
-})(Form.create()(DemoCard));
+})(DemoCard);

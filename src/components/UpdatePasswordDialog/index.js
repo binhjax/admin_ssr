@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 // import '../../pages/menu/MenuAction/index.css';
-import { Form } from '@ant-design/compatible';
-import { Input, Modal, message } from 'antd';
+import { Input, Modal, message, Form } from 'antd';
 import { updatePwd } from '../../services/login';
 import { md5Hash } from '../../utils/utils';
 
@@ -52,7 +51,6 @@ class UpdatePasswordDialog extends PureComponent {
   render() {
     const {
       visible,
-      form: { getFieldDecorator },
     } = this.props;
 
     const { submitting } = this.state;
@@ -80,35 +78,29 @@ class UpdatePasswordDialog extends PureComponent {
         bodyStyle={{ maxHeight: 'calc( 100vh - 158px )', overflowY: 'auto' }}
       >
         <Form>
-          <Form.Item {...formItemLayout} label="Old Password">
-            {getFieldDecorator('old_password', {
-              rules: [
-                {
-                  required: true,
-                  message: 'Please enter the old password',
-                },
-              ],
-            })(<Input type="password" placeholder="Please enter the old password" />)}
+          <Form.Item {...formItemLayout} label="Old Password" name='old_password' rules={[
+            {
+              required: true,
+              message: 'Please enter the old password',
+            },
+          ]}>
+            <Input type="password" placeholder="Please enter the old password" />
           </Form.Item>
-          <Form.Item {...formItemLayout} label="New Password">
-            {getFieldDecorator('new_password', {
-              rules: [
-                {
-                  required: true,
-                  message: 'Please enter a new password',
-                },
-              ],
-            })(<Input type="password" placeholder="Please" />)}
+          <Form.Item {...formItemLayout} label="New Password" name='new_password' rules={[
+            {
+              required: true,
+              message: 'Please enter a new password',
+            },
+          ]}>
+            <Input type="password" placeholder="Please" />)
           </Form.Item>
-          <Form.Item {...formItemLayout} label="Confirm the new password">
-            {getFieldDecorator('confirm_new_password', {
-              rules: [
-                {
-                  required: true,
-                  message: 'Please enter confirm new password',
-                },
-              ],
-            })(<Input type="password" placeholder="Please enter confirm new password" />)}
+          <Form.Item {...formItemLayout} label="Confirm the new password" name='confirm_new_password' rules={[
+            {
+              required: true,
+              message: 'Please enter confirm new password',
+            },
+          ]}>
+            <Input type="password" placeholder="Please enter confirm new password" />
           </Form.Item>
         </Form>
       </Modal>
@@ -116,4 +108,4 @@ class UpdatePasswordDialog extends PureComponent {
   }
 }
 
-export default Form.create()(UpdatePasswordDialog);
+export default UpdatePasswordDialog;

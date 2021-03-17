@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import { QuestionCircleOutlined } from '@ant-design/icons';
-import { Modal, Input, Row, Col, Tooltip } from 'antd';
-import { Form } from '@ant-design/compatible';
+import { Modal, Input, Row, Col, Tooltip, Form } from 'antd';
 import '@ant-design/compatible/assets/index.css';
 
 class TplDialog extends PureComponent {
@@ -23,7 +22,6 @@ class TplDialog extends PureComponent {
 
   render() {
     const { visible, form } = this.props;
-    const { getFieldDecorator } = form;
     const formItemLayout = {
       labelCol: {
         xs: { span: 24 },
@@ -47,19 +45,22 @@ class TplDialog extends PureComponent {
         style={{ top: 20 }}
         bodyStyle={{ maxHeight: 'calc( 100vh - 158px )', overflowY: 'auto' }}
       >
-        <Form>
-          <Form.Item label="Interface path" {...formItemLayout}>
+        <Form
+          initialValue={{
+            path: '/api/v1/',
+          }}
+        >
+          <Form.Item label="Interface path" {...formItemLayout} name='path' rules={
+            [
+              {
+                required: true,
+                message: 'Please enter the interface path',
+              },
+            ]
+          }>
             <Row>
               <Col span={20}>
-                {getFieldDecorator('path', {
-                  initialValue: '/api/v1/',
-                  rules: [
-                    {
-                      required: true,
-                      message: 'Please enter the interface path',
-                    },
-                  ],
-                })(<Input placeholder="please enter" />)}
+                <Input placeholder="please enter" />
               </Col>
               <Col span={4} style={{ textAlign: 'center' }}>
                 <Tooltip title="example: /api/v1/demos">
@@ -74,4 +75,4 @@ class TplDialog extends PureComponent {
   }
 }
 
-export default Form.create()(TplDialog);
+export default TplDialog;

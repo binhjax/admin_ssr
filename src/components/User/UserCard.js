@@ -1,8 +1,7 @@
 import React, { PureComponent } from 'react';
 
-import { Form } from '@ant-design/compatible';
 import '@ant-design/compatible/assets/index.css';
-import { Input, Modal, Radio } from 'antd';
+import { Input, Modal, Radio, Form } from 'antd';
 import { md5Hash } from '../../utils/utils';
 import RoleSelect from './RoleSelect';
 import { connect } from 'dva';
@@ -32,7 +31,6 @@ class UserCard extends PureComponent {
     const {
       onCancel,
       user: { formType, formTitle, formVisible, formData, submitting },
-      form: { getFieldDecorator },
     } = this.props;
 
     const formItemLayout = {
@@ -59,79 +57,69 @@ class UserCard extends PureComponent {
         style={{ top: 20 }}
         bodyStyle={{ maxHeight: 'calc( 100vh - 158px )', overflowY: 'auto' }}
       >
-        <Form>
-          <Form.Item {...formItemLayout} label="Username">
-            {getFieldDecorator('user_name', {
-              initialValue: formData.user_name,
-              rules: [
-                {
-                  required: true,
-                  message: 'please enter username',
-                },
-              ],
-            })(<Input placeholder="please enter username" />)}
+        <Form
+          initialValue={{
+            user_name: formData.user_name,
+            password: formData.password,
+            real_name: formData.real_name,
+            user_roles: formData.user_roles,
+            status: formData.status,
+            email: formData.email,
+            phone: formData.phone
+          }}
+        >
+          <Form.Item {...formItemLayout} label="Username" name='user_name' rules={[
+            {
+              required: true,
+              message: 'please enter username',
+            },
+          ]}>
+            <Input placeholder="please enter username" />
           </Form.Item>
-          <Form.Item {...formItemLayout} label="login password">
-            {getFieldDecorator('password', {
-              initialValue: formData.password,
-              rules: [
-                {
-                  required: formType === 'A',
-                  message: 'Please enter your password',
-                },
-              ],
-            })(
-              <Input
-                type="password"
-                placeholder={
-                  formType === 'A'
-                    ? 'Please enter your password'
-                    : 'Leave blank to not modify the login password'
-                }
-              />
-            )}
+          <Form.Item {...formItemLayout} label="login password" name='password' rules={[
+            {
+              required: formType === 'A',
+              message: 'Please enter your password',
+            },
+          ]}>
+            <Input
+              type="password"
+              placeholder={
+                formType === 'A'
+                  ? 'Please enter your password'
+                  : 'Leave blank to not modify the login password'
+              }
+            />
           </Form.Item>
-          <Form.Item {...formItemLayout} label="Actual Name">
-            {getFieldDecorator('real_name', {
-              initialValue: formData.real_name,
-              rules: [
-                {
-                  required: true,
-                  message: 'Please enter your name',
-                },
-              ],
-            })(<Input placeholder="enter your name" />)}
+          <Form.Item {...formItemLayout} label="Actual Name" name='real_name' rules={
+            [
+              {
+                required: true,
+                message: 'Please enter your name',
+              },
+            ]
+          }>
+            <Input placeholder="enter your name" />
           </Form.Item>
-          <Form.Item {...formItemLayout} label="User Role">
-            {getFieldDecorator('user_roles', {
-              initialValue: formData.user_roles,
-              rules: [
-                {
-                  required: true,
-                  message: 'Please select the role',
-                },
-              ],
-            })(<RoleSelect />)}
+          <Form.Item {...formItemLayout} label="User Role" name='user_roles' rules={[
+            {
+              required: true,
+              message: 'Please select the role',
+            },
+          ]}>
+            <RoleSelect />
           </Form.Item>
-          <Form.Item {...formItemLayout} label="User Status">
-            {getFieldDecorator('status', {
-              initialValue: formData.status ? formData.status.toString() : '1',
-            })(
-              <Radio.Group>
-                <Radio value="1">Normal</Radio>
-                <Radio value="2">Deactivate</Radio>
-              </Radio.Group>
-            )}
+          <Form.Item {...formItemLayout} label="User Status" name='status'>
+            <Radio.Group>
+              <Radio value="1">Normal</Radio>
+              <Radio value="2">Deactivate</Radio>
+            </Radio.Group>
           </Form.Item>
-          <Form.Item {...formItemLayout} label="Mailbox">
-            {getFieldDecorator('email', {
-              initialValue: formData.email,
-            })(<Input placeholder="Please input your email" />)}
+          <Form.Item {...formItemLayout} label="Mailbox" name='email'>
+            <Input placeholder="Please input your email" />
           </Form.Item>
-          <Form.Item {...formItemLayout} label="Phone Number">
-            {getFieldDecorator('phone', {
-              initialValue: formData.phone,
-            })(<Input placeholder="Please enter phone number" />)}
+          <Form.Item {...formItemLayout} label="Phone Number" name='phone'>
+            <Input placeholder="Please enter phone number" />
           </Form.Item>
         </Form>
       </Modal>
@@ -140,5 +128,4 @@ class UserCard extends PureComponent {
 }
 export default connect(state => ({
   user: state.user,
-}))(Form.create(UserCard));
-// export default UserCard;
+}))(UserCard);

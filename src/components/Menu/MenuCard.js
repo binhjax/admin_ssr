@@ -1,11 +1,9 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'dva';
 import { QuestionCircleOutlined } from '@ant-design/icons';
-import { Form } from '@ant-design/compatible';
 import '@ant-design/compatible/assets/index.css';
-import { Input, Card, Radio, Modal, TreeSelect, Tooltip, InputNumber, Row, Col } from 'antd';
+import { Input, Card, Radio, Modal, TreeSelect, Tooltip, InputNumber, Row, Col, Form } from 'antd';
 import MenuAction from './MenuAction';
-// import WithDva from '../../utils/store';
 
 class MenuCard extends PureComponent {
   onOKClick = () => {
@@ -44,7 +42,6 @@ class MenuCard extends PureComponent {
   render() {
     const {
       menu: { formVisible, formTitle, formData, submitting, treeData },
-      form: { getFieldDecorator },
       onCancel,
     } = this.props;
 
@@ -69,55 +66,55 @@ class MenuCard extends PureComponent {
         onCancel={onCancel}
         style={{ top: 20 }}
         bodyStyle={{ maxHeight: 'calc( 100vh - 158px )', overflowY: 'auto' }}
+        initialValue={{
+          name: formData.name,
+          parent_id: formData.parent_id,
+          router: formData.router,
+          icon: formData.icon,
+          show_status: formData.show_status ? formData.show_status.toString() : '1',
+          status: formData.status ? formData.status.toString() : '1',
+          sequence: formData.sequence ? formData.sequence.toString() : '1000000',
+          memo: formData.memo,
+          actions: formData.actions
+        }}
       >
         <Card bordered={false}>
           <Form>
             <Row>
               <Col span={12}>
-                <Form.Item {...formItemLayout} label="Menu name">
-                  {getFieldDecorator('name', {
-                    initialValue: formData.name,
-                    rules: [
-                      {
-                        required: true,
-                        message: 'Please enter the menu name',
-                      },
-                    ],
-                  })(<Input placeholder="please enter" />)}
+                <Form.Item {...formItemLayout} label="Menu name" name='name' rules={[
+                  {
+                    required: true,
+                    message: 'Please enter the menu name',
+                  },
+                ]} >
+                  <Input placeholder="please enter" />
                 </Form.Item>
               </Col>
               <Col span={12}>
-                <Form.Item {...formItemLayout} label="Upper menu">
-                  {getFieldDecorator('parent_id', {
-                    initialValue: formData.parent_id,
-                  })(
-                    <TreeSelect
-                      showSearch
-                      treeNodeFilterProp="title"
-                      style={{ width: '100%' }}
-                      dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
-                      treeData={this.toTreeSelect(treeData)}
-                      placeholder="please choose"
-                    />
-                  )}
+                <Form.Item {...formItemLayout} label="Upper menu" name='parent_id'>
+                  <TreeSelect
+                    showSearch
+                    treeNodeFilterProp="title"
+                    style={{ width: '100%' }}
+                    dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
+                    treeData={this.toTreeSelect(treeData)}
+                    placeholder="please choose"
+                  />
                 </Form.Item>
               </Col>
             </Row>
             <Row>
               <Col span={12}>
-                <Form.Item {...formItemLayout} label="Access path">
-                  {getFieldDecorator('router', {
-                    initialValue: formData.router,
-                  })(<Input placeholder="please enter" />)}
+                <Form.Item {...formItemLayout} label="Access path" name='router'>
+                  <Input placeholder="please enter" />
                 </Form.Item>
               </Col>
               <Col span={12}>
-                <Form.Item {...formItemLayout} label="Menu icon">
+                <Form.Item {...formItemLayout} label="Menu icon" name='icon'>
                   <Row>
                     <Col span={20}>
-                      {getFieldDecorator('icon', {
-                        initialValue: formData.icon,
-                      })(<Input placeholder="please enter" />)}
+                      <Input placeholder="please enter" />
                     </Col>
                     <Col span={4} style={{ textAlign: 'center' }}>
                       <Tooltip title="Icons only support official Icon icons">
@@ -130,58 +127,42 @@ class MenuCard extends PureComponent {
             </Row>
             <Row>
               <Col span={12}>
-                <Form.Item {...formItemLayout} label="Whether to show">
-                  {getFieldDecorator('show_status', {
-                    initialValue: formData.show_status ? formData.show_status.toString() : '1',
-                  })(
-                    <Radio.Group>
-                      <Radio value="1">display</Radio>
-                      <Radio value="2">hide</Radio>
-                    </Radio.Group>
-                  )}
+                <Form.Item {...formItemLayout} label="Whether to show" name='show_status'>
+                  <Radio.Group>
+                    <Radio value="1">display</Radio>
+                    <Radio value="2">hide</Radio>
+                  </Radio.Group>
                 </Form.Item>
               </Col>
               <Col span={12}>
-                <Form.Item {...formItemLayout} label="Status">
-                  {getFieldDecorator('status', {
-                    initialValue: formData.status ? formData.status.toString() : '1',
-                  })(
-                    <Radio.Group>
-                      <Radio value="1">Enable</Radio>
-                      <Radio value="2">Disable</Radio>
-                    </Radio.Group>
-                  )}
+                <Form.Item {...formItemLayout} label="Status" name='status'>
+                  <Radio.Group>
+                    <Radio value="1">Enable</Radio>
+                    <Radio value="2">Disable</Radio>
+                  </Radio.Group>
                 </Form.Item>
               </Col>
             </Row>
             <Row>
               <Col span={12}>
-                <Form.Item {...formItemLayout} label="Sort value">
-                  {getFieldDecorator('sequence', {
-                    initialValue: formData.sequence ? formData.sequence.toString() : '1000000',
-                    rules: [
-                      {
-                        required: true,
-                        message: 'Please enter a sort value',
-                      },
-                    ],
-                  })(<InputNumber min={1} style={{ width: '100%' }} />)}
+                <Form.Item {...formItemLayout} label="Sort value" name='sequence' rules={[
+                  {
+                    required: true,
+                    message: 'Please enter a sort value',
+                  }]} >
+                  <InputNumber min={1} style={{ width: '100%' }} />
                 </Form.Item>
               </Col>
               <Col span={12}>
-                <Form.Item {...formItemLayout} label="Remarks">
-                  {getFieldDecorator('memo', {
-                    initialValue: formData.memo,
-                  })(<Input placeholder="please enter" />)}
+                <Form.Item {...formItemLayout} label="Remarks" name='memo'>
+                  <Input placeholder="please enter" />
                 </Form.Item>
               </Col>
             </Row>
             <Row>
               <Col span={24}>
-                <Card title="Action (button) management" bordered={false}>
-                  {getFieldDecorator('actions', {
-                    initialValue: formData.actions,
-                  })(<MenuAction />)}
+                <Card title="Action (button) management" bordered={false} name='actions'>
+                  <MenuAction />
                 </Card>
               </Col>
             </Row>
@@ -193,5 +174,4 @@ class MenuCard extends PureComponent {
 }
 export default connect(({ menu }) => ({
   menu,
-}))(Form.create(MenuCard));
-// export default MenuCard;
+}))(MenuCard);
