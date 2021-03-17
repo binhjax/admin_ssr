@@ -90,11 +90,14 @@ export default {
       ];
 
       console.log("models.login: window.location.href =  ", window.location.href)
-      const params = parse(window.location.href.split('?')[1]);
+      const params = parse(window.location.href.split('#')[1]);
+      console.log("models.login: params=  ", params)
       const { redirect } = params;
       if (redirect) {
         window.location.href = redirect;
         return;
+      } else {
+        window.location.href = "/"
       }
       // history.replace('/');
     },
