@@ -8,27 +8,26 @@ import {
   MenuUnfoldOutlined,
 } from '@ant-design/icons';
 import { Layout, Menu, Avatar, Dropdown, Spin } from 'antd';
+import { withRouter } from "react-router";
 
 import DocumentTitle from 'react-document-title';
 
-// import { connect } from 'dva';
-import WithDva from '../utils/store';
-import { withRouter } from 'next/router';
-// import { useRouter } from 'next/router'
+import { connect } from 'dva';
+// import WithDva from '../utils/store';
 
 // eslint-disable-next-line import/no-extraneous-dependencies
 
-import Link from 'next/link';
+import { Link } from 'react-router-dom';
 
 import { ContainerQuery } from 'react-container-query';
 import classNames from 'classnames';
 import Debounce from 'lodash-decorators/debounce';
-import GlobalFooter from '@/components/GlobalFooter';
-import CopyRight from '@/components/CopyRight';
+import GlobalFooter from '../layouts/GlobalFooter';
+import CopyRight from '../layouts/CopyRight';
 
-import UpdatePasswordDialog from '@/components/UpdatePasswordDialog';
+import UpdatePasswordDialog from '../components/UpdatePasswordDialog';
 
-import context from '@/utils/context';
+import context from '../utils/context';
 
 import './AdminLayout.less';
 import logo from '../assets/logo.svg';
@@ -80,10 +79,10 @@ class AdminLayout extends React.PureComponent {
   };
 
   componentDidMount() {
-    // console.log('componentDidMount: ', this.props);
+    console.log('componentDidMount: ', this.props);
 
     const {
-      router: { pathname },
+      location: { pathname },
     } = this.props;
 
     this.dispatch({
@@ -171,7 +170,6 @@ class AdminLayout extends React.PureComponent {
     this.onTriggerResizeEvent();
   };
 
-  @Debounce(600)
   onTriggerResizeEvent = () => {
     const event = document.createEvent('HTMLEvents');
     event.initEvent('resize', true, false);
@@ -217,7 +215,7 @@ class AdminLayout extends React.PureComponent {
 
       // console.log("AdminLayout.renderNavMenuItems:  router = ", router);
       const {
-        router: { pathname },
+        location: { pathname },
       } = this.props;
 
       return (
@@ -228,7 +226,7 @@ class AdminLayout extends React.PureComponent {
               <span>{item.name}</span>
             </a>
           ) : (
-            <Link href={startURL + router} replace={router === pathname}>
+            <Link href={startURL + router} to={startURL + router} replace={router === pathname}>
               <div>
                 {/* {icon} */}
                 <span>{item.name}</span>
@@ -241,8 +239,9 @@ class AdminLayout extends React.PureComponent {
   }
 
   renderPageTitle() {
+    // console.log(this.props);
+    const pathname = this.props.location.pathname;
     const {
-      router: { pathname },
       menuPaths,
       title,
     } = this.props;
@@ -305,7 +304,7 @@ class AdminLayout extends React.PureComponent {
           className="sider"
         >
           <div className="logo">
-            <Link href={homePage}>
+            <Link href={homePage} to="/">
               <div>
                 <img src={logo} alt="logo" />
                 <h1>{title}</h1>
@@ -376,7 +375,7 @@ class AdminLayout extends React.PureComponent {
 }
 
 // export default AdminLayout;
-export default WithDva(state => ({
+export default connect(state => ({
   title: state.global.title,
   copyRight: state.global.copyRight,
   collapsed: state.global.collapsed,

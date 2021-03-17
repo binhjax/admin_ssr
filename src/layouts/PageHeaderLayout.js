@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 // React.useLayoutEffect = React.useEffect;
 
-import { Link } from 'next/link';
-import PageHeader from '@/components/PageHeader';
+import { Link } from 'react-router-dom';
+import PageHeader from './PageHeader';
 import styles from './PageHeaderLayout.less';
 
 export default ({ children, wrapperClassName, top, ...restProps }) => (

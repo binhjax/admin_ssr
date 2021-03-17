@@ -1,11 +1,10 @@
 import React, { PureComponent } from 'react';
-import { Form } from '@ant-design/compatible';
 // import '../../pages/menu/MenuAction/index.css';
+import { Form } from '@ant-design/compatible';
 import { Input, Modal, message } from 'antd';
-import { updatePwd } from '@/services/login';
+import { updatePwd } from '../../services/login';
 import { md5Hash } from '../../utils/utils';
 
-@Form.create()
 class UpdatePasswordDialog extends PureComponent {
   state = {
     submitting: false,
@@ -117,4 +116,4 @@ class UpdatePasswordDialog extends PureComponent {
   }
 }
 
-export default UpdatePasswordDialog;
+export default Form.create()(UpdatePasswordDialog);

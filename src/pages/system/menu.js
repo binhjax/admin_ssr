@@ -4,9 +4,9 @@ import React, { PureComponent } from 'react';
 import { Form } from '@ant-design/compatible';
 import '@ant-design/compatible/assets/index.css';
 import { Row, Col, Card, Input, Button, Table, Modal, Layout, Tree, Badge } from 'antd';
-import PageHeaderLayout from '@/layouts/PageHeaderLayout';
-import PButton from '@/components/PermButton';
-import { formatDate } from '@/utils/utils';
+import PageHeaderLayout from '../../layouts/PageHeaderLayout';
+import PButton from '../../components/PermButton';
+import { formatDate } from '../../utils/utils';
 import MenuCard from '../../components/Menu/MenuCard';
 import WithDva from '../../utils/store';
 

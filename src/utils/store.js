@@ -1,5 +1,6 @@
 import React from 'react';
-import dva from './dva-no-router';
+// import dva from './dva-no-router';
+import dva from 'dva';
 import { connect } from 'react-redux';
 
 import { Provider } from 'react-redux';
@@ -28,7 +29,7 @@ function createDvaStore(initialState) {
   } else {
     app.model(model);
   }
-  app.router(() => {});
+  app.router(() => { });
   app.use(createLoading({}));
   app.start();
   // console.log(app);
@@ -56,6 +57,7 @@ function getOrCreateStore(initialState) {
 
 export default function withDva(...args) {
   return function CreateNextPage(Component) {
+    //binhnt: Create ComponentWithDva from Component
     const ComponentWithDva = (props = {}) => {
       const { store, initialState, ...rest } = props;
       const ConnectedComponent = connect(...args)(Component);
@@ -67,6 +69,7 @@ export default function withDva(...args) {
         React.createElement(ConnectedComponent, rest)
       );
     };
+    //binhnt: Initilize  new component 
     ComponentWithDva.getInitialProps = async (props = {}) => {
       // console.log('get......');
       const isServer = checkServer();

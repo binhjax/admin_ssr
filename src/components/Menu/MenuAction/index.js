@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { Table, Button, Popconfirm, Divider } from 'antd';
-import { newUUID } from '@/utils/utils';
+import { newUUID } from '../../../utils/utils';
 import FormDialog from '../FormDialog';
 import TplDialog from '../TplDialog';
 import styles from './index.less';

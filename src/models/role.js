@@ -1,5 +1,5 @@
 import { message } from 'antd';
-import * as roleService from '@/services/role';
+import * as roleService from '../services/role';
 
 export default {
   namespace: 'role',

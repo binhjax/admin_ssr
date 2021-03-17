@@ -1,4 +1,4 @@
-import request, { methods, baseURL } from '@/utils/request';
+import request, { methods, baseURL } from '../utils/request';
 
 // 验证码ID
 export async function captchaID() {

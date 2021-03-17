@@ -1,7 +1,7 @@
 // import { history } from 'umi';
 import { parse } from 'qs';
-import { setToken, logout } from '@/utils/request';
-import * as loginService from '@/services/login';
+import { setToken, logout } from '../utils/request';
+import * as loginService from '../services/login';
 
 export default {
   namespace: 'login',

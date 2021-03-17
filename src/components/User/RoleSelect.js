@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 // React.useLayoutEffect = React.useEffect;
 
 import { Select } from 'antd';
-import { query } from '@/services/role';
+import { query } from '../../services/role';
 
 function parseValue(value) {
   if (!value) {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'dva';
-import GlobalFooter from '@/components/GlobalFooter';
-import CopyRight from '@/components/CopyRight';
+import GlobalFooter from './GlobalFooter';
+import CopyRight from './CopyRight';
 import styles from './UserLayout.less';
 import logo from '../assets/logo.svg';
 import WithDva from '../utils/store';
@@ -30,6 +30,6 @@ class UserLayout extends React.PureComponent {
 }
 
 // export default UserLayout;
-export default WithDva(state => ({
+export default connect(state => ({
   global: state.global,
 }))(UserLayout);

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import moment from 'moment';
-import { history } from 'next/link';
+import { history } from 'react-router-dom';
 import { stringify, parse } from 'qs';
 import { notification } from 'antd';
 

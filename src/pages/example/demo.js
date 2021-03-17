@@ -5,9 +5,9 @@ import WithDva from '../../utils/store';
 import { Form } from '@ant-design/compatible';
 // import '../login/index.css';
 import { Row, Col, Card, Input, Button, Table, Modal, Badge } from 'antd';
-import PageHeaderLayout from '@/layouts/PageHeaderLayout';
-import PButton from '@/components/PermButton';
-import { formatDate } from '@/utils/utils';
+import PageHeaderLayout from '../../layouts/PageHeaderLayout';
+import PButton from '../../components/PermButton';
+import { formatDate } from '../../utils/utils';
 import DemoCard from '../../components/Demo/DemoCard';
 
 import styles from './demo.less';

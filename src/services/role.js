@@ -1,4 +1,4 @@
-import request, { methods } from '@/utils/request';
+import request, { methods } from '../utils/request';
 
 const router = 'roles';
 

@@ -2,9 +2,9 @@ import React, { PureComponent } from 'react';
 import { Form } from '@ant-design/compatible';
 import '@ant-design/compatible/assets/index.css';
 import { Row, Col, Card, Input, Button, Table, Modal, Badge } from 'antd';
-import PageHeaderLayout from '@/layouts/PageHeaderLayout';
-import PButton from '@/components/PermButton';
-import { formatDate } from '@/utils/utils';
+import PageHeaderLayout from '../../layouts/PageHeaderLayout';
+import PButton from '../../components/PermButton';
+import { formatDate } from '../../utils/utils';
 import RoleCard from '../../components/Role/RoleCard';
 
 import WithDva from '../../utils/store';

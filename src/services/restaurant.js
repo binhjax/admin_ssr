@@ -1,4 +1,4 @@
-import request, { methods } from '@/utils/request_cms';
+import request, { methods } from '../utils/request_cms';
 
 const router = 'restaurants';
 

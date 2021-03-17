@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Button } from 'antd';
-import context from '@/utils/context';
+import context from '../../../utils/context';
 
 export default ({ code, children, ...rest }) => {
 

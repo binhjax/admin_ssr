@@ -1,4 +1,4 @@
-import * as loginService from '@/services/login';
+import * as loginService from '../services/login';
 
 export default {
   namespace: 'global',

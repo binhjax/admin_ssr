@@ -3,7 +3,7 @@ import React, { PureComponent } from 'react';
 import { Form } from '@ant-design/compatible';
 import '@ant-design/compatible/assets/index.css';
 import { Row, Col, Card, Input, Button, Table, Modal, Badge } from 'antd';
-import PButton from '@/components/PermButton';
+import PButton from '../../components/PermButton';
 import PageHeaderLayout from '../../layouts/PageHeaderLayout';
 import UserCard from '../../components/User/UserCard';
 import RoleSelect from '../../components/User/RoleSelect';

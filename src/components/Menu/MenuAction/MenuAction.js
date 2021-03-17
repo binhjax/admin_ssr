@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { Table, Button, Popconfirm } from 'antd';
-import { newUUID } from '@/utils/utils';
+import { newUUID } from '../../../utils/utils';
 import { EditableCell, EditableFormRow } from './EditableCell';
 
 import styles from './index.less';

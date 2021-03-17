@@ -1,1 +1,0 @@
-{"ast":null,"code":"var __jsx = React.createElement;\nimport React from 'react';\nimport { CopyrightOutlined } from '@ant-design/icons';\nexport default (({\n  title\n}) => __jsx(\"div\", null, \"Copyright \", __jsx(CopyrightOutlined, null), \" \", title));","map":null,"metadata":{},"sourceType":"module"}
