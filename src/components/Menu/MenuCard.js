@@ -5,13 +5,8 @@ import { Form } from '@ant-design/compatible';
 import '@ant-design/compatible/assets/index.css';
 import { Input, Card, Radio, Modal, TreeSelect, Tooltip, InputNumber, Row, Col } from 'antd';
 import MenuAction from './MenuAction';
+// import WithDva from '../../utils/store';
 
-import WithDva from '../../utils/store';
-
-// @connect(({ menu }) => ({
-//   menu,
-// }))
-@Form.create()
 class MenuCard extends PureComponent {
   onOKClick = () => {
     const { form, onSubmit } = this.props;
@@ -196,7 +191,7 @@ class MenuCard extends PureComponent {
     );
   }
 }
-export default WithDva(({ menu }) => ({
+export default connect(({ menu }) => ({
   menu,
-}))(MenuCard);
+}))(Form.create(MenuCard));
 // export default MenuCard;

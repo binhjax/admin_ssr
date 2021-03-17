@@ -1,11 +1,12 @@
 import React, { PureComponent } from 'react';
-import WithDva from '../../utils/store';
+import { connect } from 'dva';
+
 
 import { Form } from '@ant-design/compatible';
 import '@ant-design/compatible/assets/index.css';
 import { Input, Modal, Radio } from 'antd';
 
-@Form.create()
+// @Form.create()
 class DemoCard extends PureComponent {
   onOKClick = () => {
     const { form, onSubmit } = this.props;
@@ -98,6 +99,6 @@ class DemoCard extends PureComponent {
     );
   }
 }
-export default WithDva(state => {
+export default connect(state => {
   return { demo: state.demo };
-})(DemoCard);
+})(Form.create()(DemoCard));

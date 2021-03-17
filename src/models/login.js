@@ -89,13 +89,14 @@ export default {
         }),
       ];
 
+      console.log("models.login: window.location.href =  ", window.location.href)
       const params = parse(window.location.href.split('?')[1]);
       const { redirect } = params;
       if (redirect) {
         window.location.href = redirect;
         return;
       }
-      history.replace('/');
+      // history.replace('/');
     },
     *logout(_, { call }) {
       console.log('Model process logout');

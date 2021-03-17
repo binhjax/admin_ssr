@@ -6,11 +6,11 @@ import PageHeaderLayout from '../../layouts/PageHeaderLayout';
 import PButton from '../../components/PermButton';
 import { formatDate } from '../../utils/utils';
 import RoleCard from '../../components/Role/RoleCard';
+import { connect } from 'dva';
 
-import WithDva from '../../utils/store';
 import styles from './role.less';
 
-@Form.create()
+// @Form.create()
 class RoleList extends PureComponent {
   state = {
     selectedRowKeys: [],
@@ -312,7 +312,7 @@ class RoleList extends PureComponent {
     );
   }
 }
-export default WithDva(state => ({
+export default connect(state => ({
   role: state.role,
   loading: state.loading.models.role,
-}))(RoleList);
+}))(Form.create()(RoleList));

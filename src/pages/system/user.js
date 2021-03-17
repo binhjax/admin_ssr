@@ -9,7 +9,8 @@ import UserCard from '../../components/User/UserCard';
 import RoleSelect from '../../components/User/RoleSelect';
 import { formatDate } from '../../utils/utils';
 
-import WithDva from '../../utils/store';
+// import WithDva from '../../utils/store';
+import { connect } from 'dva';
 
 import styles from './user.less';
 
@@ -18,7 +19,7 @@ import styles from './user.less';
 //   user: state.user,
 // }))
 
-@Form.create()
+// @Form.create()
 class UserList extends PureComponent {
   state = {
     selectedRowKeys: [],
@@ -337,8 +338,8 @@ class UserList extends PureComponent {
     );
   }
 }
-export default WithDva(state => ({
+export default connect(state => ({
   loading: state.loading.models.user,
   user: state.user,
-}))(UserList);
+}))(Form.create()(UserList));
 // export default UserList;

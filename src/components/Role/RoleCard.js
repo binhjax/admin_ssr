@@ -4,9 +4,9 @@ import '@ant-design/compatible/assets/index.css';
 import { Input, Modal, message, Card, Row, Col, InputNumber } from 'antd';
 
 import RoleMenu from './RoleMenu';
-import WithDva from '../../utils/store';
+// import WithDva from '../../utils/store';
+import { connect } from 'dva';
 
-@Form.create()
 class RoleCard extends PureComponent {
   onOKClick = () => {
     const { form, onSubmit } = this.props;
@@ -128,6 +128,6 @@ class RoleCard extends PureComponent {
     );
   }
 }
-export default WithDva(state => ({
+export default connect(state => ({
   role: state.role,
-}))(RoleCard);
+}))(Form.create()(RoleCard));

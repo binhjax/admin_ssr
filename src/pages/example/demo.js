@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
-// import { connect } from 'dva';
-import WithDva from '../../utils/store';
+import { connect } from 'dva';
 
 import { Form } from '@ant-design/compatible';
 // import '../login/index.css';
@@ -12,11 +11,6 @@ import DemoCard from '../../components/Demo/DemoCard';
 
 import styles from './demo.less';
 
-// @connect(state => ({
-//   loading: state.loading.models.demo,
-//   demo: state.demo,
-// }))
-@Form.create()
 class DemoList extends PureComponent {
   state = {
     selectedRowKeys: [],
@@ -314,9 +308,9 @@ class DemoList extends PureComponent {
   }
 }
 
-export default WithDva(state => ({
+export default connect(state => ({
   loading: state.loading.models.demo,
   demo: state.demo,
-}))(DemoList);
+}))(Form.create()(DemoList));
 
 // export default DemoList;

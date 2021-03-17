@@ -40,7 +40,6 @@ export function getAccessToken() {
     return '';
   }
   return token.access_token;
-  return '';
 }
 
 // Wrap the URL with the token
@@ -62,16 +61,20 @@ export function logout() {
 
   //Remove AccessToken
   store.remove(storeKeys.AccessToken);
-  const { redirect } = parse(window.location.href.split('?')[1]);
-  if (window.location.pathname !== startURL + '/login' && !redirect) {
-    window.location = startURL + '/login';
-    // window.history.replace({
-    //   pathname: '/user/login',
-    //   search: stringify({
-    //     redirect: window.location.href,
-    //   }),
-    // });
-  }
+
+  window.location = '#/login'
+  // const { redirect } = parse(window.location.href.split('?')[1]);
+  console.log("binhnt.request.logout: redirect = ", startURL)
+  // if (window.location.pathname !== startURL + '/login' && !redirect) {
+  // window.location = startURL + '/login';
+  // window.history.replace({
+  //   pathname: '/user/login',
+  //   search: stringify({
+  //     redirect: window.location.href,
+  //   }),
+  // });
+  // }
+
 }
 
 // request 拦截器
@@ -93,11 +96,12 @@ function requestInterceptors(c) {
 export default function request(url, options = {}) {
   // console.log('AccessToken: ', storeKeys.AccessToken);
   const oldToken = store.get(storeKeys.AccessToken);
-  // console.log("oldToken: ", oldToken);
+  console.log("oldToken: ", oldToken);
   if (oldToken && oldToken.expires_at - lastAccessTime <= 0) {
     if (refreshTimeout) {
       clearTimeout(refreshTimeout);
     }
+    console.log("binhnt.request: out of access time ")
     logout();
     // eslint-disable-next-line compat/compat
     return Promise.reject(new Error('The token has expired'));
@@ -181,7 +185,8 @@ export function setToken(token) {
   jsCookie.set('token', token.access_token);
 
   //binhnt: 2. Add Token to access Backend
-  lastAccessTime = token.expires_at;
+  console.log("Set access token = ", token.expires_at)
+  lastAccessTime = moment().unix();
   store.set(storeKeys.AccessToken, token);
   if (refreshTimeout) {
     clearTimeout(refreshTimeout);

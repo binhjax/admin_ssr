@@ -13,6 +13,8 @@ import { withRouter } from "react-router";
 import DocumentTitle from 'react-document-title';
 
 import { connect } from 'dva';
+import { router } from 'dva';
+
 // import WithDva from '../utils/store';
 
 // eslint-disable-next-line import/no-extraneous-dependencies
@@ -28,6 +30,7 @@ import CopyRight from '../layouts/CopyRight';
 import UpdatePasswordDialog from '../components/UpdatePasswordDialog';
 
 import context from '../utils/context';
+import { getAccessToken } from '../utils/request'
 
 import './AdminLayout.less';
 import logo from '../assets/logo.svg';
@@ -58,32 +61,35 @@ const query = {
 };
 
 class AdminLayout extends React.PureComponent {
-  static async getInitialProps(props) {
-    // first time run in server side
-    // other times run in client side ( client side init with default props
-    // console.log('get init props', props);
-    const { pathname, query, isServer, store } = props;
-    // dispatch effects to fetch data here
-
-    return {
-      // dont use store as property name, it will confilct with initial store
-      pathname,
-      query,
-      isServer,
-      dvaStore: store,
-    };
-  }
+  // static async getInitialProps(props) {
+  //   // first time run in server side
+  //   // other times run in client side ( client side init with default props
+  //   // console.log('get init props', props);
+  //   const { pathname, query, isServer, store } = props;
+  //   // dispatch effects to fetch data here
+  //   console.log("Binhnt.AdminLayout: props = ", props)
+  //   return {
+  //     // dont use store as property name, it will confilct with initial store
+  //     pathname,
+  //     query,
+  //     isServer,
+  //     dvaStore: store,
+  //   };
+  // }
 
   state = {
     updatePwdVisible: false,
   };
 
   componentDidMount() {
-    console.log('componentDidMount: ', this.props);
+    // console.log('binhnt.AdminLayout: componentDidMount: ', this.props);
 
     const {
       location: { pathname },
     } = this.props;
+
+    console.log("Binhnt.AdminLayout: props = ", this.props)
+
 
     this.dispatch({
       type: 'global/fetchUser',
@@ -257,6 +263,16 @@ class AdminLayout extends React.PureComponent {
   }
 
   render() {
+
+    //Check login 
+    const access_token = getAccessToken()
+    if (access_token == '') {
+      //Redirect to login page 
+      const { Redirect } = router
+      return <Redirect to="/login" />
+    }
+
+
     const {
       children,
       user,
@@ -268,6 +284,8 @@ class AdminLayout extends React.PureComponent {
       selectedKeys,
       global,
     } = this.props;
+
+
 
     // console.log("AdminLayout.render: menus = ", menus);
     const { updatePwdVisible } = this.state;

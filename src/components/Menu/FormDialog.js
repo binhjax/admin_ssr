@@ -4,7 +4,6 @@ import { Form } from '@ant-design/compatible';
 import '@ant-design/compatible/assets/index.css';
 import MenuResource from './MenuResource';
 
-@Form.create()
 class FormDialog extends PureComponent {
   handleCancel = () => {
     const { onCancel } = this.props;
@@ -85,4 +84,4 @@ class FormDialog extends PureComponent {
   }
 }
 
-export default FormDialog;
+export default Form.create()(FormDialog);

@@ -3,9 +3,10 @@ import ReactDOM from 'react-dom';
 // import './index.css';
 
 import history from './history'
-import admin_routes from "./routes";
+import routes from "./routes";
 
 import AdminLayout from './layouts/AdminLayout'
+import UserLayout from './layouts/UserLayout'
 
 import createLoading from 'dva-loading';
 import dva, { connect } from 'dva';
@@ -28,20 +29,37 @@ if (isArray) {
 }
 app.use(createLoading({}));
 
+
+function RouteWithLayout({ layout, component, ...rest }) {
+  return (
+    <Route {...rest} render={(props) =>
+      React.createElement(layout, props, React.createElement(component, props))
+    } />
+  );
+}
+
 app.router(({ history }) => (
+
   <Router history={history} >
-    {
-      <AdminLayout>
-        <Switch>
-          {
-            admin_routes.map((route) => (
-              <Route {...route} key={route.path} />
-            ))
+    <Switch>
+      {
+        routes.map((route) => {
+          if (route.path == '/login') {
+            return <Route {...route} key={route.path} />
           }
-        </Switch>
-      </AdminLayout>
-    }
-  </Router>
+          else if (route.path != '*' && !route.path.startsWith('/user')) {
+            return <RouteWithLayout layout={AdminLayout} {...route} key={route.path} />
+          }
+          else if (route.path != '*' && !route.path.startsWith('/admin')) {
+            return <RouteWithLayout layout={UserLayout} {...route} key={route.path} />
+          }
+          else {
+            return <Route {...route} key={route.path} />
+          }
+        })
+      }
+    </Switch>
+  </Router >
 ));
 
 app.start('#root');

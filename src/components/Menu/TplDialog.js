@@ -4,7 +4,6 @@ import { Modal, Input, Row, Col, Tooltip } from 'antd';
 import { Form } from '@ant-design/compatible';
 import '@ant-design/compatible/assets/index.css';
 
-@Form.create()
 class TplDialog extends PureComponent {
   handleCancel = () => {
     const { onCancel } = this.props;
@@ -75,4 +74,4 @@ class TplDialog extends PureComponent {
   }
 }
 
-export default TplDialog;
+export default Form.create()(TplDialog);

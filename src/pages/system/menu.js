@@ -8,7 +8,8 @@ import PageHeaderLayout from '../../layouts/PageHeaderLayout';
 import PButton from '../../components/PermButton';
 import { formatDate } from '../../utils/utils';
 import MenuCard from '../../components/Menu/MenuCard';
-import WithDva from '../../utils/store';
+// import WithDva from '../../utils/store';
+import { connect } from 'dva';
 
 import styles from './menu.less';
 
@@ -17,7 +18,7 @@ import styles from './menu.less';
 //   loading: loading.models.menu,
 // }))
 
-@Form.create()
+// @Form.create()
 class MenuList extends PureComponent {
   state = {
     selectedRowKeys: [],
@@ -419,8 +420,8 @@ class MenuList extends PureComponent {
   }
 }
 
-export default WithDva(({ menu, loading }) => ({
+export default connect(({ menu, loading }) => ({
   menu,
   loading: loading.models.menu,
-}))(MenuList);
+}))(Form.create()(MenuList));
 // export default MenuList;

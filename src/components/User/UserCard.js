@@ -5,9 +5,8 @@ import '@ant-design/compatible/assets/index.css';
 import { Input, Modal, Radio } from 'antd';
 import { md5Hash } from '../../utils/utils';
 import RoleSelect from './RoleSelect';
-import WithDva from '../../utils/store';
+import { connect } from 'dva';
 
-@Form.create()
 class UserCard extends PureComponent {
   onOKClick = () => {
     const { form, onSubmit } = this.props;
@@ -139,7 +138,7 @@ class UserCard extends PureComponent {
     );
   }
 }
-export default WithDva(state => ({
+export default connect(state => ({
   user: state.user,
-}))(UserCard);
+}))(Form.create(UserCard));
 // export default UserCard;

@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
-import { Row, Col } from 'antd';
-import { Form } from '@ant-design/compatible';
+import { Row, Col, Form } from 'antd';
+
+// import { Form } from '@ant-design/compatible';
 import '@ant-design/compatible/assets/index.css';
 import { CodeOutlined, LockOutlined, UserOutlined } from '@ant-design/icons';
 
@@ -8,11 +9,10 @@ import { Input, Button, Alert } from 'antd';
 import { md5Hash } from '../../utils/utils';
 import { setToken } from '../../utils/request';
 import styles from './index.less';
+import history from '../../history'
 
-import WithDva from '../../utils/store';
-import Router from 'next/router';
+import { connect } from 'dva';
 
-@Form.create()
 class Login extends PureComponent {
   componentDidMount() {
     // window.addEventListener('token', this.handleToken);
@@ -32,7 +32,7 @@ class Login extends PureComponent {
     // alert(event.data);
     if (token != 'undefined' && token !== undefined && token != null) {
       setToken(token);
-      Router.back();
+      history.back()
     } else {
       console.log('Cannot find token ');
     }
@@ -80,7 +80,6 @@ class Login extends PureComponent {
 
   render() {
     const {
-      form: { getFieldDecorator },
       login,
     } = this.props;
 
@@ -97,58 +96,48 @@ class Login extends PureComponent {
                 login.submitting === false &&
                 this.renderMessage('error', login.tip)}
 
-              <Form.Item>
-                {getFieldDecorator('user_name', {
-                  rules: [
-                    {
-                      required: true,
-                      message: 'Please enter username',
-                    },
-                  ],
-                })(
-                  <Input
-                    size="large"
-                    prefix={<UserOutlined className={styles.prefixIcon} />}
-                    placeholder="Please enter username"
-                  />
-                )}
+              <Form.Item name='user_name' rules={[
+                {
+                  required: true,
+                  message: 'Please enter username',
+                },
+              ]} >
+                <Input
+                  size="large"
+                  prefix={<UserOutlined className={styles.prefixIcon} />}
+                  placeholder="Please enter username"
+                />
               </Form.Item>
 
-              <Form.Item>
-                {getFieldDecorator('password', {
-                  rules: [
-                    {
-                      required: true,
-                      message: 'Please enter password',
-                    },
-                  ],
-                })(
-                  <Input
-                    size="large"
-                    prefix={<LockOutlined className={styles.prefixIcon} />}
-                    type="password"
-                    placeholder="Please enter password"
-                  />
-                )}
+              <Form.Item name='password' rules={[
+                {
+                  required: true,
+                  message: 'Please enter password',
+                },
+              ]}>
+
+                <Input
+                  size="large"
+                  prefix={<LockOutlined className={styles.prefixIcon} />}
+                  type="password"
+                  placeholder="Please enter password"
+                />
               </Form.Item>
 
-              <Form.Item>
+              <Form.Item name='captcha_code' rules={[
+                {
+                  required: true,
+                  message: 'Please enter verification code!',
+                },
+              ]} >
                 <Input.Group compact>
-                  {getFieldDecorator('captcha_code', {
-                    rules: [
-                      {
-                        required: true,
-                        message: 'Please enter verification code!',
-                      },
-                    ],
-                  })(
-                    <Input
-                      style={{ width: '50%', marginRight: 10 }}
-                      size="large"
-                      prefix={<CodeOutlined className={styles.prefixIcon} />}
-                      placeholder="Please enter verification code!"
-                    />
-                  )}
+
+                  <Input
+                    style={{ width: '50%', marginRight: 10 }}
+                    size="large"
+                    prefix={<CodeOutlined className={styles.prefixIcon} />}
+                    placeholder="Please enter verification code!"
+                  />
                   <div
                     style={{
                       width: 120,
@@ -190,11 +179,11 @@ class Login extends PureComponent {
             </Form>
           </div>
         </Col>{' '}
-      </Row>
+      </Row >
     );
   }
 }
 
-export default WithDva(({ login }) => ({
+export default connect(({ login }) => ({
   login,
 }))(Login);
