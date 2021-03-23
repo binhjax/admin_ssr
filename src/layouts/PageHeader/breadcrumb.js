@@ -64,12 +64,12 @@ export default class BreadcrumbView extends PureComponent {
             <Breadcrumb.Item key={item.title}>
               {item.href
                 ? createElement(
-                    linkElement,
-                    {
-                      [linkElement === 'a' ? 'href' : 'to']: item.href,
-                    },
-                    title
-                  )
+                  linkElement,
+                  {
+                    [linkElement === 'a' ? 'href' : 'to']: item.href,
+                  },
+                  title
+                )
                 : title}
             </Breadcrumb.Item>
           );

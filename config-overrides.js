@@ -88,10 +88,28 @@ module.exports = {
             linkType: false,
         })),
         addWebpackModuleRule({
-            test: /\.css$/i,
+            test: /\.less$/i,
             use: [
                 // MiniCssExtractPlugin.loader, 
-                'css-loader'
+                {
+                    loader: "style-loader"
+                },
+                {
+                    loader: "css-loader",
+                    options: {
+                        sourceMap: true,
+                        modules: true,
+                        // localIdentName: "[local]___[hash:base64:5]"
+                    }
+                },
+                {
+                    loader: "less-loader",
+                    options: {
+                        strictMath: false,
+                        // noIeCompat: true,
+                        javascriptEnabled: true,
+                    }
+                }
             ],
         }),
         devWebpackConfig(),
