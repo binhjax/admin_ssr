@@ -1,73 +1,82 @@
 import Home from './pages/index';
 import Dashboard from './pages/dashboard/index';
 
-import Demo from './pages/example/demo'
-import Login from './pages/login'
+import Demo from './pages/example/demo';
+import Login from './pages/login';
 
-import Menu from './pages/system/menu'
-import Role from './pages/system/role'
-import User from './pages/system/user'
+import Menu from './pages/system/menu';
+import Role from './pages/system/role';
+import User from './pages/system/user';
 
-import Test from './pages/system/user'
-import NotFound from './pages/404'
+import Test from './pages/system/user';
+import NotFound from './pages/404';
+import Flow from './pages/flow/index.tsx';
 
 const routes = [
   {
-    path: "/login",
-    contentType: "Login",
+    path: '/login',
+    contentType: 'Login',
     exact: true,
-    screenName: "Login",
-    component: Login
+    screenName: 'Login',
+    component: Login,
   },
   {
-    path: "/",
-    contentType: "Home",
+    path: '/',
+    contentType: 'Home',
     exact: true,
-    screenName: "Home",
+    screenName: 'Home',
     component: Home,
   },
   {
-    path: "/example/demo",
-    contentType: "Demo",
+    path: '/example/demo',
+    contentType: 'Demo',
     exact: true,
-    screenName: "Demo",
+    screenName: 'Demo',
     component: Demo,
   },
   {
-    path: "/dashboard",
-    contentType: "Dashboard",
+    path: '/example/flow',
+    contentType: 'Flow',
     exact: true,
-    screenName: "Dashboard",
-    component: Dashboard,
+    screenName: 'Flow',
+    component: Flow,
   },
   {
-    path: "/system/menu",
-    contentType: "Menu",
+    path: '/dashboard',
+    contentType: 'Dashboard',
     exact: true,
-    screenName: "Menu",
+    screenName: 'Dashboard',
+    component: Flow,
+  },
+  {
+    path: '/system/menu',
+    contentType: 'Menu',
+    exact: true,
+    screenName: 'Menu',
     component: Menu,
-  }, {
-    path: "/system/role",
-    contentType: "Role",
+  },
+  {
+    path: '/system/role',
+    contentType: 'Role',
     exact: true,
-    screenName: "Role",
+    screenName: 'Role',
     component: Role,
   },
 
   {
-    path: "/system/user",
-    contentType: "User",
+    path: '/system/user',
+    contentType: 'User',
     exact: true,
-    screenName: "User",
+    screenName: 'User',
     component: User,
   },
   {
-    path: "*",
-    contentType: "NotFound",
+    path: '*',
+    contentType: 'NotFound',
     exact: true,
-    screenName: "NotFound",
+    screenName: 'NotFound',
     component: NotFound,
-  }
-]
+  },
+];
 
 export default routes;
